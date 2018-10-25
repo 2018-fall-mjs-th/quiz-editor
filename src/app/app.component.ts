@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'quiz-editor';
 
@@ -12,4 +13,12 @@ export class AppComponent {
 
   titleColorDanger = this.dumb === 'foo' ? true : false;
   titleBackgroundColorDanger = false;
+
+  headingTwoBackgroundColor = this.dumb === 'foo' ? 'Red' : 'Blue';
+
+  imageWidth: number = 300;
+
+  increaseImageWidth = () => this.imageWidth *= 1.5;
+
 }
+
