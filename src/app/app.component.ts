@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'quiz-editor';
+  dumb = 'foo';
+  dangerTime = true;
+  aDynamicClass = 'grey-text';
+
 }
