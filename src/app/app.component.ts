@@ -12,4 +12,12 @@ export class AppComponent {
 
   titleColorDanger = this.dumb === 'foo' ? true : false;
   titleBackgroundColorDanger = false;
+
+  headingTwoBackgroundColor = this.dumb === 'foo' ? 'Red' : 'Blue';
+
+  imageWidth: number = 100;
+  //imageWidth = '100px';
+
+  increaseImageWidth = () => this.imageWidth *= 1.5;
+
 }
