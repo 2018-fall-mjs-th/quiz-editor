@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'quiz-editor';
+
+  dumb: string = "foo123";
+
+  titleColorDanger = this.dumb === 'foo' ? true : false;
+  titleBackgroundColorDanger = true;
 }
