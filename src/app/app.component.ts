@@ -16,5 +16,7 @@ export class AppComponent {
 
   increaseImageWidth = () => this.imageWidth *= 1.5;
 
+  
+
 }
 
