@@ -10,7 +10,13 @@ export class AppComponent {
 
   dumb = "foo";
 
+  headingTwoBackgroundColor = this.dumb === 'foo' ? 'lightgray' : 'purple';
+
   titleColorDanger = true;
 
-  titleBackgroundColorSuccess = true;
+  titleBackgroundColorSuccess = this.dumb === 'foo' ? true : false;
+
+  imageWidth = 200;
+
+  increaseImageSize = () => this.imageWidth *= 1.5;
 }
