@@ -10,5 +10,16 @@ export class AppComponent {
   dumb = 'foo';
   dangerTime = true;
   aDynamicClass = 'grey-text';
+  lightgrey = 'lightgrey';
+  imageWidth = 300;
+  //titleColorDanger = this.dumb === 'foo' ? true : false;
+
+
+  increaseImageWidth = () => this.imageWidth *= 1.5
+  
+  
+
 
 }
+
+
