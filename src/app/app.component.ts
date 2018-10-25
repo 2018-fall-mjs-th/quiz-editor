@@ -10,4 +10,8 @@ export class AppComponent {
 
   titleColorDanger = true;
   titleBakcgroundDanger = false;
+
+  imageWidth: number = 200;
+
+  increaseWidth = () => this.imageWidth *= 1.1;
 }
