@@ -1,5 +1,6 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { getLocaleDateFormat, FormatWidth } from '@angular/common';
+import { QuizService } from './quiz.service';
 
 @Component({
   
@@ -10,6 +11,11 @@ import { getLocaleDateFormat, FormatWidth } from '@angular/common';
 
 })
 export class AppComponent {
+
+  constructor(private quizSvc: QuizService) { 
+    console.log(this.quizSvc.getQuizzes());
+  }
+
   title = 'quiz-editor';
 
   titleTextDanger = true;
