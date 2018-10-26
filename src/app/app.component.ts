@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { QuizService } from './quiz.service';
+
 
 @Component({
   selector: 'app-root',
@@ -6,6 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  
+  constructor (private quizSvc: QuizService) {
+    console.log(this.quizSvc.getQuizzes());
+  }
+
   title = 'quiz-editor';
 
   dumb: string = "foo";
@@ -17,4 +24,6 @@ export class AppComponent {
   imageWidth: number = 300;
 
    increaseImageWidth = () => { this.imageWidth *= 1.5};
+
+
 }
