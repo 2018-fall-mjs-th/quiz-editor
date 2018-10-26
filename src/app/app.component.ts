@@ -7,9 +7,10 @@ import { QuizService } from './quiz.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
+  quizzes = [];
   constructor (private quizSvc: QuizService) {
-    console.log(this.quizSvc.getQuizzes());
+    //console.log(this.quizSvc.getQuizzes());
+    this.quizzes = this.quizSvc.getQuizzes();
   }
   title = 'quiz-editor';
   dumb = 'foo';
