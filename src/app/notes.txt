@@ -1,0 +1,13 @@
+Interpolation: {{ }} 
+Event Binding: ng-onclick="" 
+Two-Way Binding: 1. {{ }}  2. myVariable = 10; 
+
+Some binding examples:
+Binding to a property: <h1 [innerHtml]='dumb'></h1> dumb = 'great';
+Apply a class: <h1 [class.text-danger]='true'></h1>
+
+Generating a service:
+
+=> ng generate service quiz
+
+
