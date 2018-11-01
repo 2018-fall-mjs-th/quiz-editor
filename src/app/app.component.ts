@@ -13,11 +13,13 @@ import { QuizService } from './quiz.service';
 export class AppComponent {
 
   quizzes = [];
-  constructor(private quizSvc: QuizService) { 
-    //console.log(this.quizSvc.getQuizzes());
-    this.quizzes = this.quizSvc.getQuizzes();
+  constructor(private quizSvc: QuizService) {
   }
 
+  ngOnInit() {
+      //console.log(this.quizSvc.getQuizzes());
+      this.quizzes = this.quizSvc.getQuizzes();
+  }
 
 
 
