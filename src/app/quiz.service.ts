@@ -11,7 +11,7 @@ export class QuizService {
   // returns an array of quiz objects
   getQuizzes() {
     
-    return this.buildInAngularHttpClient.get('https://modern-js.azurewebsites.net/api/HttpTriggerJS1?code=8XD3vN3ehHLdZacBQJQhgUnNst9202gdd5VM3kWCytDkz2nXhia6kA==&name=Mystery%20Quiz');
+    return this.buildInAngularHttpClient.get('https://modern-js.azurewebsites.net/api/HttpTriggerJS1?code=8XD3vN3ehHLdZacBQJQhgUnNst9202gdd5VM3kWCytDkz2nXhia6kA==&name=Mary%20Cummins');
   
 
     // not gonna hard code these anymore
