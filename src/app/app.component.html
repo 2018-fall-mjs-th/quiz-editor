@@ -1,16 +1,18 @@
 <div class="container">
-    <button class="btn btn-primary">Add New Quiz</button>
-    <div class="list-group">
-      <div class="list-group-item" *ngFor="let q of quizzes">
-        <!-- Quiz Name -->
-        {{ q.name }} 
+  <br>
+  <button class="btn btn-outline-primary">Add New Quiz</button>
+  <br><br>
+  <div class="list-group">
+    <div class="list-group-item" *ngFor="let q of quizzes">
+      <!-- Quiz Name -->
+      {{ q.name }} 
 
-        <!-- Quiz Question Count -->
-        <span class="badge badge-secondary" [class.bg-danger]="q.numberOfQuestions === 0">{{ q.numberOfQuestions }}</span>
-      
-      </div>
-
+      <!-- Quiz Question Count -->
+      <span class="badge badge-secondary" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
+    
     </div>
+
+  </div>
 </div>
 
 

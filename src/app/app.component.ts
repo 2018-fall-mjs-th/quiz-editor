@@ -8,14 +8,15 @@ import { QuizService } from './quiz.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  quizzes = [];
+  quizzes: any = [];
 
-  constructor (private quizSvc: QuizService) {
-    //this.quizzes = this.quizSvc.getQuizzes();
-  }
+  constructor (private quizSvc: QuizService) { }
 
   ngOnInit() {
-    this.quizzes = this.quizSvc.getQuizzes();
+    this.quizSvc.getQuizzes('Isaac').subscribe(data => {
+      console.log(data);
+      this.quizzes = data;
+    });
   }
 
   
