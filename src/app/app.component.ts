@@ -8,14 +8,16 @@ import { QuizService } from './quiz.service';
 })
 export class AppComponent {
 
-  quizzes = [];
+  quizzes: any = [];
 
   constructor (private quizSvc: QuizService) {
      
   }
 
   ngOnInit() {
-    this.quizzes = this.quizSvc.getQuizzes();
+    this.quizSvc.getQuizzes().subscribe(
+      data => this.quizzes = data
+    );
   }
 
   title = 'quiz-editor';
