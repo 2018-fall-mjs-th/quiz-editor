@@ -1,13 +1,23 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
   <br>
-  <button class="btn btn-outline-primary">Add New Quiz</button>
-  <br>
-  <br>
-  <div class="list-group">
-    <div class="list-group-item" *ngFor="let q of quizzes">
-        {{ q.name }}
-        <span class="badge badge-secondary" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
+  <div class="row" *ngIf="wasErrorLoadingQuizzes">
+    <div class="col-md-12">
+        <h4>We're sorry, there was an error loading quizzes : - (</h4>
+        <p>Please 'Refresh' the page to try again. If it still doesn't work, try again later. Thanks.</p>    
+    </div>
+  </div>
+  <div class="row" *ngIf="!wasErrorLoadingQuizzes">
+    <div class="col-md-12">
+        <button class="btn btn-outline-primary">Add New Quiz</button>
+        <br>
+        <br>
+        <div class="list-group">
+          <div class="list-group-item" *ngFor="let q of quizzes">
+              {{ q.name }}
+              <span class="badge badge-secondary" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
+          </div>
+        </div>    
     </div>
   </div>
 </div>
