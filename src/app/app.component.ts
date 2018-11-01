@@ -8,7 +8,7 @@ import { QuizService } from './quiz.service';
 })
 export class AppComponent {
 
-  quizzes = [];
+  quizzes: any = [];
 
   constructor (private quizSvc: QuizService) {
     //console.log(this.quizSvc.getQuizzes());
@@ -16,8 +16,8 @@ export class AppComponent {
   }
 
   ngOnInit(){
-    this.quizzes = this.quizSvc.getQuizzes().subscribe(
-      data => this.quizzes =data
+    this.quizSvc.getQuizzes().subscribe(
+      data => this.quizzes = data
     );
   }
 
