@@ -11,13 +11,14 @@ export class QuizService {
   // returns an array of quiz objects
   getQuizzes() {
     
-    // make asynchronous calls out to azure
-    // https://modern-js.azurewebsites.net/api/HttpTriggerJS1?code=8XD3vN3ehHLdZacBQJQhgUnNst9202gdd5VM3kWCytDkz2nXhia6kA==&name=Mystery%20Quiz
+    return this.buildInAngularHttpClient.get('https://modern-js.azurewebsites.net/api/HttpTriggerJS1?code=8XD3vN3ehHLdZacBQJQhgUnNst9202gdd5VM3kWCytDkz2nXhia6kA==&name=Mystery%20Quiz');
+  
 
-    return [
-      { name: "Quiz 1", numberOfQuestions: 6 }
-      , { name: "Quiz 2", numberOfQuestions: 0 }
-      , { name: "Quiz 3", numberOfQuestions: 16 }
-    ];
+    // not gonna hard code these anymore
+    // return [
+    //   { name: "Quiz 1", numberOfQuestions: 6 }
+    //   , { name: "Quiz 2", numberOfQuestions: 0 }
+    //   , { name: "Quiz 3", numberOfQuestions: 16 }
+    // ];
   }
 }
