@@ -14,13 +14,13 @@ export class QuizService {
 
   getQuizzes() {
 
+    return this.builtInAgularHttpClient.get('https://modern-js.azurewebsites.net/api/HttpTriggerJS1?code=8XD3vN3ehHLdZacBQJQhgUnNst9202gdd5VM3kWCytDkz2nXhia6kA==&name=Mystery%20Quiz');
 
-
-    return [
-      {name: "Quiz 1", numberOfQuestions: 6}
-      , {name: "Quiz 2", numberOfQuestions: 0}
-      , {name: "Quiz 3", numberOfQuestions: 10}
-    ]
+    // return [
+    //   {name: "Quiz 1", numberOfQuestions: 6}
+    //   , {name: "Quiz 2", numberOfQuestions: 0}
+    //   , {name: "Quiz 3", numberOfQuestions: 10}
+    // ]
   }
 }
 

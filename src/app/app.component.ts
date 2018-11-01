@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { QuizService } from './quiz.service';
+import { Subscriber } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -7,10 +8,12 @@ import { QuizService } from './quiz.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  quizzes = [];
+  quizzes: any = [];
   constructor (private quizSvc: QuizService) {
     // console.log(this.quizSvc.getQuizzes());
-    this.quizzes = this.quizSvc.getQuizzes();
+    this.quizSvc.getQuizzes().subscribe(
+      data => this.quizzes = data
+    );
   }
 
   title = 'quiz-editor';
