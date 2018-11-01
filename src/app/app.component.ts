@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { QuizService } from './quiz.service';
-import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-root',
@@ -9,11 +9,17 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
 
-  quizzes = [];
+  quizzes: any = [];
 
   constructor (private quizSvc: QuizService) {
     //console.log(this.quizSvc.getQuizzes());
-    this.quizzes = this.quizSvc.getQuizzes();
+    
+  }
+
+  ngOnInit() {
+    this.quizSvc.getQuizzes().subscribe(
+      data => this.quizzes = data
+    );
   }
 
   title = 'quiz-editor';
