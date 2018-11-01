@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { QuizService } from './quiz.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
