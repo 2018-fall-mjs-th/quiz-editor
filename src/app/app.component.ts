@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { QuizService } from './quiz.service';
-import { ConsoleReporter } from 'jasmine';
 
 @Component({
   selector: 'app-root',
@@ -71,6 +70,25 @@ export class AppComponent {
     }
     catch (error) {
       console.log(error);
+    }
+  }
+
+  async learningJsPromisesAwaitAll() {
+    try {        
+      let n = this.quizSvc.getNumberOfQuizzes(true);      
+      console.log("after n");
+      let n2 = this.quizSvc.getNumberOfQuizzes(true);      
+      console.log("after n2");
+
+      let results = await Promise.all([ n, n2 ]);
+      console.log("don't see this right away, it's after await ! ! !");
+      console.log(results[0]);
+      console.log(results[1]);
+
+      console.log("here2");  
+    }
+    catch (cat) {
+      console.log(cat);
     }
   }
 }
