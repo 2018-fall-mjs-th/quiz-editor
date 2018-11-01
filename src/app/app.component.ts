@@ -12,7 +12,13 @@ export class AppComponent {
 
   constructor (private quizSvc: QuizService) {
     //console.log(this.quizSvc.getQuizzes());
-    this.quizzes = this.quizSvc.getQuizzes();
+    //this.quizzes = this.quizSvc.getQuizzes();
+  }
+
+  ngOnInit(){
+    this.quizzes = this.quizSvc.getQuizzes().subscribe(
+      data => this.quizzes =data
+    );
   }
 
   title = 'quiz-editor';
@@ -27,7 +33,7 @@ export class AppComponent {
   imageWidth: number = 100;
   //imageWidth = '100px';
 
-  increaseImageWidth = () => this.imageWidth *= 1.5;
+  increaseImageWidth = () => https://modern-js.azurewebsites.net/api/HttpTriggerJS1?code=8XD3vN3ehHLdZacBQJQhgUnNst9202gdd5VM3kWCytDkz2nXhia6kA==&name=Mystery%20Quizthis.imageWidth *= 1.5;
 
 
 
