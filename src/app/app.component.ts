@@ -18,8 +18,9 @@ export class AppComponent {
 
   ngOnInit() {
     this.quizSvc.getQuizzes().subscribe(
-      data => this.quizzes = data
-    );
+      data => {this.quizzes = data;
+        console.log(data);
+      });
   }
 
   title = 'quiz-editor';
