@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuizService {
 
-  constructor() { }
+  constructor(private builtInAngularHttpClient: HttpClient) { }
 
   getQuizzes() {
     return [
