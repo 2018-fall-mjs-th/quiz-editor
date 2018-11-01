@@ -1,3 +1,5 @@
+10/25/2018:
+
 Interpolation: {{ }} 
 Event Binding: ng-onclick="" 
 Two-Way Binding: 1. {{ }}  2. myVariable = 10; 
@@ -11,3 +13,8 @@ Generating a service:
 => ng generate service quiz
 
 
+11/1/2018: 
+
+ngOnInit() => Once the component is loaded
+How's this different than using a constructor? 
+Components/Functions that take a while to execute would cause the page to hang as it initializes. 

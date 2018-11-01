@@ -11,6 +11,10 @@ export class AppComponent {
   quizzes = [];
 
   constructor (private quizSvc: QuizService) {
+    //this.quizzes = this.quizSvc.getQuizzes();
+  }
+
+  ngOnInit() {
     this.quizzes = this.quizSvc.getQuizzes();
   }
 
