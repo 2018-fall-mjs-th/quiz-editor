@@ -18,7 +18,11 @@ export class AppComponent {
 
   ngOnInit() {
       //console.log(this.quizSvc.getQuizzes());
-      this.quizzes = this.quizSvc.getQuizzes();
+      this.quizSvc.getQuizzes().subscribe(
+        data => {
+          this.quizzes = data;
+          console.log(data);
+      );
   }
 
 
