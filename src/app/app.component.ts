@@ -20,7 +20,7 @@ export class AppComponent {
         // data => {
         //   console.log(data)
         //   this.quizzes = data});
-        data => this.quizzes = data;
+        data => this.quizzes = data);
    }
 
   title = 'quiz-editor';
