@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { QuizService } from './quiz.service';
+import { ConsoleReporter } from 'jasmine';
 
 @Component({
   selector: 'app-root',
@@ -38,6 +39,38 @@ export class AppComponent {
 
   increaseImageWidth = () => this.imageWidth *= 1.5;
 
+  learningJsPromises() {
+    console.log('learningJsPromises');
 
+    let x = this.quizSvc.getNumberOfQuizzes(true);
+    console.log(x);
 
+    x.then(
+      data => console.log(data)
+    ).catch(
+      error => console.log(error)
+    );
+
+    let y = this.quizSvc.getNumberOfQuizzes(false);
+    console.log(y);
+    
+    y.then(
+      data => console.log(data)
+    ).catch(
+      error => console.log(error)
+    );  
+  }
+
+  async learningJsPromisesAsyncAwait() {
+    try {
+      let x = await this.quizSvc.getNumberOfQuizzes(true);
+      console.log(x);
+
+      let y = await this.quizSvc.getNumberOfQuizzes(false);
+      console.log(y);
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
 }
