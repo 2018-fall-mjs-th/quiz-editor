@@ -55,13 +55,28 @@ export class AppComponent {
     console.log("myAsyncAwait()");
 
     try {
-      let x = await this.quizSvc.getNumberOfQuizzes(true);
+      let x = await this.quizSvc.getNumberOfQuizzes(false);
       console.log(x);
 
       // Execution is paused until the above method completes
-
-      let y = await this.quizSvc.getNumberOfQuizzes(false);
+      let y = await this.quizSvc.getNumberOfQuizzes(true);
       console.log(y);
+
+    } catch (e) {
+      console.log(e);
+    }
+
+  }
+
+  public async myAsyncAwaitAll() {
+    console.log("myAsyncAwaitAll()");
+
+    try {
+      let x = this.quizSvc.getNumberOfQuizzes(true);
+      let y = this.quizSvc.getNumberOfQuizzes(false);
+    
+      let results = await Promise.all([x, y]); // Promise.race (first result) Promise.
+      console.log(results);
 
     } catch (e) {
       console.log(e);

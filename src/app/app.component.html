@@ -1,34 +1,61 @@
 <div class="container">
   <br>
-  <button class="btn btn-outline-primary" (click)="myAsyncAwait();">Add New Quiz</button>
-  <br><br>
+  <!-- START Buttons Header -->
+  <div class="row">
+      <div class="col-md-4">
+          <button class="btn btn-outline-primary" (click)="myAsyncAwaitAll();">Add New Quiz</button>
+      </div>
+      <div class="col-md-8">
+        <button class="btn btn-outline-success">Save</button>
+        <button class="btn btn-link">Cancel</button>
+      </div>
+  </div>
+  <!-- END Buttons Header -->
 
-  <!-- Response Errors -->
+  <br>
+
+  <!-- START Response Errors -->
   <div class="row" *ngIf="responseError">
     <div class="col-md-12">
       <h3>Can't load quizzes, please try again later!</h3>
     </div>
   </div>
-  <!-- Response Errors -->
+  <!-- END Response Errors -->
 
-  <!-- START Quiz List -->
   <div class="row" *ngIf="!responseError">
-    <div class="col-md-12">
 
+    <!-- START Quiz Selection -->
+    <div class="col-md-4">
       <div class="list-group">
         <div class="list-group-item" *ngFor="let q of quizzes">
-    
           <!-- Quiz Name -->
           {{ q.name }} 
-    
           <!-- Quiz Question Count -->
-          <span class="badge badge-secondary" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
-        
+          <span class="badge badge-secondary" [class.bg-danger]="q.numberQuestions === 0" style="float:right">{{ q.numberQuestions }}</span>
         </div>
       </div>
     </div>
+    <!-- END Quiz Selection -->
+
+    <div class="col-md-8">
+      <!-- START General Section -->
+      <div class="card">
+          <div class="card-header">General</div>
+          <div class="card-body">Coming Soon!</div>
+      </div>
+      <!-- END General Section -->
+
+      <br>
+
+      <!-- START Questions Section -->
+      <div class="card">
+          <div class="card-header">Questions</div>
+          <div class="card-body">Coming Soon!</div>
+      </div>
+      <!-- END Questions Section -->
+    </div>
+
   </div>
-   <!-- END Quiz List -->
 
 </div>
 
