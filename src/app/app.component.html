@@ -13,21 +13,35 @@
     </div>
 
     <div class="row" *ngIf="!wasErrorLoadingQuizzes">
-        <div class="col-md-3">
-            <br />
-            <button class="btn btn-outline-primary">Add New Quiz</button>
-            <br /><br />
-            <div class="list-group">
+        <div class="col-md-4">
+            <button class="btn btn-outline-primary mb-2" (click)="learningPromisesWithAsyncAwait()">Add New Quiz</button>
+            <div class="list-group mb-2">
                 <div class="list-group-item" *ngFor="let q of quizzes">
                     {{ q.name }}
                     <span class="badge badge-secondary float-right" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
                 </div>
             </div>
         </div>
-        <div class="col-md-9">
-            <div class="list-group">
-                <div class="list-group-item">
-                    Stuff
+        
+        <div class="col-md-8">
+            <button class="btn btn-outline-success mb-2">Save</button>
+            <button class="btn btn-link mb-2">Cancel</button>
+            <br />
+            <div class="card">
+                <div class="card-header">
+                    General
+                </div>
+                <div class="card-body">
+                    Coming soon!
+                </div>
+            </div>
+            <br />
+            <div class="card">
+                <div class="card-header">
+                    Questions
+                </div>
+                <div class="card-body">
+                    Coming soon!
                 </div>
             </div>
         </div>

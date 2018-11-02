@@ -20,4 +20,14 @@ export class QuizService {
     //   , { name: "Quiz 3", numberOfQuestions: 16 }
     // ];
   }
+
+  getNumberOfQuizzes(succeed: boolean): Promise<number> {
+
+    let p = new Promise<number>(
+      (resolve, reject) => succeed ? resolve(42) : reject("Failure")
+    );
+
+    return p;
+
+  }
 }
