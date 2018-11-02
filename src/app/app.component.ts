@@ -31,6 +31,42 @@ export class AppComponent {
     );
   }
 
+  learningPromises() {
+    console.log("learningPromises()");
+
+    let x = this.quizSvc.getNumberofQuizzes(true);
+    console.log(x);
+
+    x.then(
+      n => console.log(n)
+    ).catch( e => console.log(e)
+  );
+
+    let y = this.quizSvc.getNumberofQuizzes(false);
+    console.log(y);
+
+    y.then(
+      n => console.log(n)
+    ).catch(
+      e => console.log(e)
+    );
+
+  }
+
+  async learningPromisesWithAsyncAwait() {
+    console.log("I'm in learningPromissesWithAstncAwait");
+    try {
+      let x = await this.quizSvc.getNumberofQuizzes(true);
+      console.log(x)
+
+      let y = await this.quizSvc.getNumberofQuizzes(false);
+      console.log(y)
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+
   title = 'quiz-editor';
 
   dumb = 'foo';

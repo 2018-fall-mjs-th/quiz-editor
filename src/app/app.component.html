@@ -9,7 +9,7 @@
 
   <div class="row" *ngIf="!wasErrorLoadingQuizzes">
     <div class="col-md-12">
-     <button class="btn btn-outline-primary">Add New Quiz</button><br><br>
+     <button class="btn btn-outline-primary" (click)="learningPromisesWithAsyncAwait()">Add New Quiz</button><br><br>
       <div class="list-group">
         <div class="list-group-item" *ngFor="let q of quizzes">
         {{ q.name }}
