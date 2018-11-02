@@ -9,6 +9,7 @@ import { QuizService } from './quiz.service';
 export class AppComponent {
 
   quizzes: any = [];
+  wasErrorLoadingQuizzes: boolean = false;
 
   constructor (private quizSvc: QuizService) {
     //console.log(this.quizSvc.getQuizzes());
@@ -19,6 +20,7 @@ export class AppComponent {
     //console.log(this.quizSvc.getQuizzes());
     this.quizSvc.getQuizzes().subscribe(
       data => this.quizzes = data 
+      , error => this.wasErrorLoadingQuizzes = true
       // (data) => {
       //   console.log(data);
       //   this.quizzes = data
