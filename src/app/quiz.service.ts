@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { promise } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +20,16 @@ export class QuizService {
     //   , { name: "Quiz 2", numberOfQuestions: 0 }
     //   , { name: "Quiz 3", numberOfQuestions: 16 }
     // ];
+  }
+
+  getNumberOfQuizzes(succeed: boolean): Promise<number> {
+
+    let p = new Promise<number>(
+      (resolve, reject) => 
+        succeed ? resolve(42) : reject("Failed")
+      
+    );
+
+    return p;
   }
 }
