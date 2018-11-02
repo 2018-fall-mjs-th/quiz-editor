@@ -12,11 +12,21 @@ export class QuizService {
 
    getQuizzes() {
 
-    return this.builtInAngularHttpClient.get('https://modern-js.azurewebsites.net/api/HttpTriggerJS1?code=8XD3vN3ehHLdZacBQJQhgUnNst9202gdd5VM3kWCytDkz2nXhia6kA==&name=Mystery%20Quiz');
+    return this.builtInAngularHttpClient.get('https://modern-js.azurewebsites.net/api/HttpTriggerJS1?code=8XD3vN3ehHLdZacBQJQhgUnNst9202gdd5VM3kWCytDkz2nXhia6kA==&name=Ben%20Castro');
   //   return [
   //     { name: "Quiz 1", numberOfQuestions: 6 }
   //     , { name: "Quiz 2", numberOfQuestions: 0 }
   //     , { name: "Quiz 3", numberOfQuestions: 16 }
   //   ];
+  }
+
+  getNumberOfQuizzes(succeed:boolean): Promise<number> 
+  {
+    let p = new Promise<number>(
+      (resolve, reject) => succeed ? resolve(42) : reject("Failed To Keep Promise")
+    );
+
+    return p;
+    
   }
 }

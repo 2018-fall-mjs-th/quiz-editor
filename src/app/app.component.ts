@@ -9,6 +9,7 @@ import { QuizService } from './quiz.service';
 export class AppComponent {
 
   quizzes:any = [];
+  wasErrorLoadingQuizzes: boolean = false;
 
   constructor (private quizSvc: QuizService) {
 
@@ -20,8 +21,48 @@ export class AppComponent {
         // data => {
         //   console.log(data)
         //   this.quizzes = data});
-        data => this.quizzes = data);
+        data => this.quizzes = data
+        , error => this.wasErrorLoadingQuizzes = true
+      );
    }
+
+   learningPromises() {
+     //console.log("Learning Promises");
+
+     let x = this.quizSvc.getNumberOfQuizzes(true);
+     console.log(x);
+
+     x.then(
+       n => console.log(n)
+     ).catch(
+       e => console.log(e)
+     );
+
+     let y = this.quizSvc.getNumberOfQuizzes(false);
+     console.log(y);
+
+     y.then(
+       n => console.log(n)
+     ).catch(
+       e=> console.log(e)
+     );
+
+   }
+
+  async learningPromisesWithAsynchAwait() {
+    console.log("In Asych methods");
+
+    let x = await this.quizSvc.getNumberOfQuizzes(true);
+    console.log(x + "in await learn");
+    try {
+      let y = await this.quizSvc.getNumberOfQuizzes(false);
+      console.log(y + "in await learn");
+  
+    } catch (e) {
+      console.log(e);
+    }
+ 
+  }
 
   title = 'quiz-editor';
 
