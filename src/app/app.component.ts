@@ -13,6 +13,41 @@ export class AppComponent {
 
   constructor (private quizSvc: QuizService) {
   }
+  learningPromises() {
+    console.log("learning promises");
+    let x = this.quizSvc.getNumberOfQuizzes(true);
+    console.log(x);
+
+    x.then(
+      data => console.log(data)
+    ).catch(
+      e => console.log(e)
+    );
+
+    let y = this.quizSvc.getNumberOfQuizzes(false);
+    console.log(y);
+
+    y.then(
+      data => console.log(data)
+    ).catch(
+      e => console.log(e)
+    );
+  }
+
+  async learningPromisesWithAsyncAwait() {
+    console.log("in learningPromisesWithAsyncAwait");
+    try {
+      let x = await this.quizSvc.getNumberOfQuizzes(true);
+      console.log(x);
+
+      let y = await this.quizSvc.getNumberOfQuizzes(false);
+      console.log(y);
+    }
+    catch (e) {
+      console.log("failed with exception: " + e);
+    }
+    
+  }
 
   ngOnInit() {
     //console.log(this.quizSvc.getQuizzes());
