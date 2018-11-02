@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { reject } from 'q';
+import { resolve } from 'dns';
 
 
 @Injectable({
@@ -25,4 +27,11 @@ export class QuizService {
 		// ]
 	}
 
+	getNumberOfQuizzes(succeed: boolean): Promise<number> {
+		let p = new Promise<number>(
+			(resolve, reject) => succeed ? resolve(42) : reject("Failed!")
+		);
+
+		return p;
+	}
 }

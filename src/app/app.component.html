@@ -1,16 +1,26 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
-	<button class="btn btn-outline-primary">Add New Quize</button>
-	<br />
-	<br />
-	<br />
-	<div class="list-group">
-		<div class="list-group-item" *ngFor="let q of quizzes">
-			{{ q.name}}
-			<span class="badge badge-secondary" [class.bg-danger]="q.numberOfQuestions === 0">
-				{{q.numberOfQuestions}}
-			</span>
+
+	<div class="row" *ngIf="wasErrorLoadingQuizzes">
+		<div class="col-md-12">
+			<h3>Can't load quizzes, please try again later</h3>
+		</div>
+	</div>
+
+	<div class="row" *ngIf="!wasErrorLoadingQuizzes">
+		<div class="col-md-12">
+			<br />
+			<button class="btn btn-outline-primary" (click)="learningPromises(); learingPromisWithAsyncAwait()">Add New Quize</button>
+			<br />
+			<br />
+			<div class="list-group">
+				<div class="list-group-item" *ngFor="let q of quizzes">
+					{{ q.name}}
+					<span class="badge badge-secondary" [class.bg-danger]="q.numberQuestions === 0">
+						{{q.numberQuestions}}
+					</span>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
-

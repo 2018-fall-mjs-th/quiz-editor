@@ -12,6 +12,8 @@ export class AppComponent {
 
 	quizzes: any = [];
 
+	wasErrorLoadingQuizzes: boolean = false;
+
 	constructor (private quizSvc: QuizService) {
 
 
@@ -28,7 +30,45 @@ export class AppComponent {
 			// }
 
 			data => this.quizzes = data
+			, error => this.wasErrorLoadingQuizzes = true
 		);
+	}
+
+	learningPromises() {
+		console.log("learningPromises");
+
+		let x = this.quizSvc.getNumberOfQuizzes(true);
+		console.log(x);
+
+		x.then( 
+			n => console.log(n)
+		);
+
+		let y = this.quizSvc.getNumberOfQuizzes(true);
+		console.log(y);
+
+		y.then( 
+			n => console.log(n)
+		).catch(
+			e => console.log(e)
+		);
+	}
+
+	async learingPromisWithAsyncAwait() {
+	
+		console.log("learingPromisWithAsyncAwait");
+
+		try {
+			let x = await this.quizSvc.getNumberOfQuizzes(true);
+			console.log(x);
+
+			let y = await this.quizSvc.getNumberOfQuizzes(true);
+			console.log(y);
+		}
+
+		catch (e) {
+			console.log(e);
+		}
 	}
 
 	title = 'quiz-editor';
