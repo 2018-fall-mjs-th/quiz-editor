@@ -24,6 +24,21 @@ export class AppComponent {
     );
   }
 
+  async learningPromises() {
+    console.log("Pretty please");
+
+    try {
+      let x = await this.quizSvc.getNumberOfQuizzes(true);
+      console.log(x);
+
+      let y = await this.quizSvc.getNumberOfQuizzes(false);
+      console.log(y);
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
+
   title = 'quiz-editor';
 
   dumb: string = "foo123";
