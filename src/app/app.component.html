@@ -7,19 +7,56 @@
       </div>
     </div>
   
-    <div class="row" *ngIf="!wasErrorLoadingQuizzes">
-      <div class="col-md-12">
+    <div class="row col-md-12" *ngIf="!wasErrorLoadingQuizzes">
+      <div class="col-md-4">
           <br>
-          <button class="btn btn-outline-primary" (click)="learningPromisesWithAsyncAwait()">Add New Quiz</button>
+          <button class="btn btn-outline-primary" (click)="learningPromisesWithAwaitAll()">Add New Quiz</button>
           <br>
           <br>
           <div class="list-group">
             <div class="list-group-item" *ngFor="let q of quizzes">
-                {{ q.name }}
-                <span class="badge badge-secondary" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
-            </div>
+              <div class="row navbar navbar-expand-md ">
+               <div class="col-sm-10">{{ q.name }}</div>                         
+               <div class="col-sm-2"> <span class="badge badge-secondary" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span></div>
+              </div>
+              </div>
           </div>
       </div>
+
+
+      <div class="col-md-8">
+          <br>
+
+      <div class="row container">
+         <div ><button class="btn btn-outline-success" (click)="learningPromisesWithAwaitAll()">Save</button>
+          <button class="btn btn-light" (click)="learningPromisesWithAwaitAll()">Cancel</button></div>
+      </div>
+      <br />
+         <div class="container"></div>
+          <div class="card border-light mb-3" >
+              <div class="card-header">General</div>
+              <div class="card-body">
+                <p class="card-text">Coming soon!</p>
+              </div>
+            </div>
+            <div class="card border-light mb-3" >
+                <div class="card-header">Questions</div>
+                <div class="card-body">
+                  <p class="card-text">Coming soon!</p>
+                </div>
+              </div>
+      </div>
+      
+
+
+
+
+
+
+
+
+
+
     </div>
   </div>
   

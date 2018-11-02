@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { QuizService } from './quiz.service';
+import { truncate } from 'fs';
 
 @Component({
   selector: 'app-root',
@@ -22,18 +23,17 @@ export class AppComponent {
       , error => this.wasErrorLoadingQuizzes = true
     );
   }
-
-  learningPromises(){
-
-    console.log("learning promises");
+  learningPromises() {
+    console.log("learningPromises()");
 
     let x = this.quizSvc.getNumberOfQuizzes(true);
     console.log(x);
 
     x.then(
       n => console.log(n)
+    ).catch(
+      e => console.log(e)
     );
-
 
     let y = this.quizSvc.getNumberOfQuizzes(false);
     console.log(y);
@@ -41,9 +41,10 @@ export class AppComponent {
     y.then(
       n => console.log(n)
     ).catch(
-      e=> console.log(e)
+      e => console.log(e)
     );
-  }
+}
+  
 
   async learningPromisesWithAsyncAwait() {
 
@@ -59,6 +60,26 @@ export class AppComponent {
       console.log(e);
     }
   }
+
+  async learningPromisesWithAwaitAll() {
+
+    console.log("learningPromisesWithAwaitAll");
+
+    try {
+    let x = await this.quizSvc.getNumberOfQuizzes(true);
+    console.log(x);
+
+    let y = await this.quizSvc.getNumberOfQuizzes(true);
+    console.log(y);
+
+    let results = await Promise.all([x, y]);
+    console.log(results);
+    } 
+    catch (e) {
+      console.log(e);
+    }
+  }
+
 
   title = 'quiz-editor';
 
