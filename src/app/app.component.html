@@ -1,14 +1,21 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
   <div class="jumbotron h1">Quiz Thing</div>
-  <button class="btn btn-outline-primary">Add New Quiz</button>
-  <br>
-  <br>
-  <div class="list-group">
-    <div class="list-group-item" *ngFor="let q of quizzes">
-        {{ q.name }}
-        <span class="badge badge-secondary float-right" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
+
+  <div class="row" *ngIf="wasErrorLoadingQuizzes">
+    <div class="col alert alert-danger h3">Can't load quizzes, please try again later</div>
+  </div>
+  <div class="row" *ngIf="!wasErrorLoadingQuizzes">
+    <div class="col-4">
+        <button class="btn btn-outline-primary mb-3">Add New Quiz</button>
+        <div class="list-group">
+          <div class="list-group-item" *ngFor="let q of quizzes">
+              {{ q.name }}
+              <span class="badge badge-secondary float-right" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
+          </div>
+        </div>
     </div>
   </div>
+  
 </div>
 
