@@ -31,6 +31,44 @@ export class AppComponent {
     );
   }
 
+  learningPromises() {
+    console.log("working");
+
+    let x = this.quizSvc.getNumberOfQuizzes(true);
+    console.log(x);
+
+    x.then(
+      n => console.log(n)
+    ).catch(
+      e => console.log(e);
+
+    let y = this.quizSvc.getNumberOfQuizzes(false);
+    console.log(y);
+
+    y.then(
+      n => console.log(n)
+    ).catch(
+      e => console.log(e)
+    );
+  }
+
+  async learningPromisesWithAsyncAway() {
+   
+    //console.log("learningPromisesWithAsyncAwait()");
+
+    try {
+
+    let x = await this.quizSvc.getNumberOfQuizzes(true);
+    console.log(x);
+
+    let y = await this.quizSvc.getNumberOfQuizzes(false);
+    console.log(x);
+    }
+    catch(e) {
+      console.log(e);
+    }
+  }
+
   title = 'quiz-editor';
 
   dumb: string = "foo123";
