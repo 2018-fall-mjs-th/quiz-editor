@@ -49,6 +49,24 @@ export class AppComponent {
     
   }
 
+  async learningPromisesWithAsyncAwaitAll() {
+    console.log("in learningPromisesWithAsyncAwaitAll");
+    try {
+      let x = this.quizSvc.getNumberOfQuizzes(true);
+      console.log(x);
+
+      let y = this.quizSvc.getNumberOfQuizzes(false);
+      console.log(y);
+
+      let results = await Promise.all([x, y]);
+      console.log("await all: " + results); //unless they all succeed, the group fails
+    }
+    catch (e) {
+      console.log("failed with exception: " + e);
+    }
+    
+  }
+
   ngOnInit() {
     //console.log(this.quizSvc.getQuizzes());
     this.quizSvc.getQuizzes().subscribe(

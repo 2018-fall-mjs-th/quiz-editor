@@ -1,15 +1,13 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
-  <div class="jumbotron h1">Quiz Thing</div>
-
+  <div class="jumbotron bg-info text-light"><h1 class="display-4">Quiz Thing</h1></div>
   <div class="row" *ngIf="wasErrorLoadingQuizzes">
     <div class="col alert alert-danger h3">Can't load quizzes, please try again later</div>
   </div>
 
   <div class="row" *ngIf="!wasErrorLoadingQuizzes">
     <div class="col-md-4">
-        <button class="btn btn-outline-primary" (click)="learningPromisesWithAsyncAwait();">Add New Quiz</button>
-
+        <button class="btn btn-outline-primary" (click)="learningPromisesWithAsyncAwaitAll();">Add New Quiz</button>
         <div class="list-group my-4">
           <div class="list-group-item" *ngFor="let q of quizzes">
               {{ q.name }}
