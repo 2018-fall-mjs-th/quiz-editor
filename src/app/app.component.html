@@ -1,14 +1,14 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
   <div class="row" *ngIf="wasErrorLoadingQuizzes">
-    <div class="col12">
+    <div class="col-md-12">
       <H3>Can't load quizess, please try again later...</H3>
     </div>
   </div>
 
 
   <br>
-  <button class="btn btn-outline-primary">Add New Quiz</button>
+  <button class="btn btn-outline-primary" (click)="learningPromises(); learningPromisesWithAsyncAwait()">Add New Quiz</button>
   <br>
   <br>
   <div class="row" *ngIf="!wasErrorLoadingQuizzes">

@@ -28,6 +28,72 @@ export class AppComponent {
     );
   }
 
+  async learningPromisesWithAsyncAwait() {
+    console.log("learningPromisesWithAsyncAwait()");
+
+    let x = await this.quizSvc.getNumberOfQuizzes(true);
+    console.log(x);
+
+    let y = await this.quizSvc.getNumberOfQuizzes(false);
+    console.log(y);
+
+    let results = await Promise.all([x,y]);
+    console.log(results);
+
+  }
+
+  
+  learningPromises2() {
+    console.log("learningPromises()");
+
+    let x = this.quizSvc.getNumberOfQuizzes(true);
+    console.log(x);
+
+    x.then(
+      n => console.log(n)
+    ).catch(
+      e => console.log(e)
+    );
+
+    // and show fail
+    let y = this.quizSvc.getNumberOfQuizzes(false);
+    console.log(y);
+
+    y.then(
+      n => console.log(n)
+    ).catch(
+      e => console.log(e)
+    );
+
+  }
+
+
+  learningPromises() {
+    console.log("learningPromises()");
+
+    let x = this.quizSvc.getNumberOfQuizzes(true);
+    console.log(x);
+
+    x.then(
+      n => console.log(n)
+    ).catch(
+      e => console.log(e)
+    );
+
+    // and show fail
+    let y = this.quizSvc.getNumberOfQuizzes(false);
+    console.log(y);
+
+    y.then(
+      n => console.log(n)
+    ).catch(
+      e => console.log(e)
+    );
+
+  }
+
+
+
   title = 'quiz-editor';
 
   dumb: string = "foo123";
