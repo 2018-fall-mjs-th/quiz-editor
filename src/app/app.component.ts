@@ -27,17 +27,20 @@ export class AppComponent {
     console.log(x);
 
     x.then(
-      data => console.log(data)
+      data => {
+        console.log(data);
+        let y = this.quizSvc.getNumberOfQuizzes(false);
+        console.log(y);
+
+        y.then(
+          data => console.log(data)
+          ).catch(
+          error => console.log(error)
+        );
+      }
     );
 
-    let y = this.quizSvc.getNumberOfQuizzes(false);
-    console.log(y);
-
-    y.then(
-      data => console.log(data)
-    ).catch(
-      error => console.log(error)
-    );
+    
   }
 
   async learningPromisesWithAsyncAwait() {
@@ -49,6 +52,26 @@ export class AppComponent {
 
       let y = await this.quizSvc.getNumberOfQuizzes(false);
       console.log(y);
+    }
+
+    catch (e) {
+      console.log(e)
+    }
+
+  }
+
+  async learningPromisesWithAwaitAll() {
+    console.log("in learningPromisesWithAwaitAll method");
+
+    try {
+      let x = this.quizSvc.getNumberOfQuizzes(true);
+      console.log(x);
+
+      let y = this.quizSvc.getNumberOfQuizzes(false);
+      console.log(y);
+
+      let results = await Promise.all([x,y]);
+      console.log(results);
     }
 
     catch (e) {
