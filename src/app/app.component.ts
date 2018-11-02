@@ -71,6 +71,22 @@ export class AppComponent {
 		}
 	}
 
+	async learningPromisesWithAwaitAll() {
+		console.log("learingPromisWithAsyncAwait");
+
+		try {
+			let x = this.quizSvc.getNumberOfQuizzes(true);
+			console.log(x);
+
+			let y = this.quizSvc.getNumberOfQuizzes(true);
+			console.log(y)
+		}
+		
+		catch (e) {
+			console.log(e);
+		}
+	}
+
 	title = 'quiz-editor';
 
 	dumb: string = "foo123";
