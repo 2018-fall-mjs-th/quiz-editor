@@ -40,16 +40,17 @@ export class AppComponent {
       n => console.log(n)
     ).catch(
       e => console.log(e)
-  })
+    )
+  }
 
   async learningPromisesWithAsyncAwait() {
     console.log("aysncAwait")
     try {
       let x = await this.quizSvc.getNumberOfQuizzes(true)
-      console.log(x)
+    console.log(x)
 
-      let y = await this.quizSvc.getNumberOfQuizzes(false)
-      console.log(y)
+    let y = await this.quizSvc.getNumberOfQuizzes(false)
+    console.log(y)
     }
     
     catch (e) {
