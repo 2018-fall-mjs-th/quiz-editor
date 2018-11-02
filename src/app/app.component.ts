@@ -10,6 +10,8 @@ export class AppComponent {
 
   quizzes: any = [];
 
+  wasErrorLoadingQuizzes: boolean = false;
+
   constructor(private quizSvc: QuizService) {
     // this.quizzes = this.quizSvc.getQuizzes();
   }
@@ -20,6 +22,7 @@ export class AppComponent {
     
       // a shorter way
       data => this.quizzes = data
+      , error => this.wasErrorLoadingQuizzes = true
 
       //   data => {
       //    console.log(data);
