@@ -33,11 +33,8 @@ export class AppComponent {
      console.log(x);
 
      x.then(
-       n => console.log(n)
-     ).catch(
-       e => console.log(e)
-     );
-
+       n => {console.log(n)
+        
      let y = this.quizSvc.getNumberOfQuizzes(false);
      console.log(y);
 
@@ -46,6 +43,10 @@ export class AppComponent {
      ).catch(
        e=> console.log(e)
      );
+       }).catch(
+       e => console.log(e)
+     );
+
 
    }
 
@@ -58,6 +59,27 @@ export class AppComponent {
       let y = await this.quizSvc.getNumberOfQuizzes(false);
       console.log(y + "in await learn");
   
+    } catch (e) {
+      console.log(e);
+    }
+ 
+  }
+
+  async learningPromisesWithAsynchAwaitAll() {
+    console.log("In Asych methods");
+
+    
+    try {
+
+      let x =  this.quizSvc.getNumberOfQuizzes(true);
+      console.log(x + "in await learn");
+
+      let y =  this.quizSvc.getNumberOfQuizzes(false);
+      console.log(y + "in await learn");
+  
+      let results = await Promise.all([x,y]);
+
+      console.log(results);
     } catch (e) {
       console.log(e);
     }
