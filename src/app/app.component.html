@@ -1,6 +1,15 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
-  <br>
+
+  <div class="row" *ngIf="wasErrorLoadingQuizzes">
+    <div class="col-12-md">
+      <h3>Can't load quizzes, please try again later :^( </h3>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!wasErrorLoadingQuizzes">
+    <div class="col-md-12">
+        <br>
   <button class="btn btn-outline-primary">Add New Quiz</button>
   <br>
   <br>

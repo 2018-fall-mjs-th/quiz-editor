@@ -10,6 +10,9 @@ export class AppComponent {
 
   quizzes: any = [];
 
+  wasErrorLoadingQuizzes: boolean = false;
+  
+  
   constructor (private quizSvc: QuizService) {
     //console.log(this.quizSvc.getQuizzes());
     //Moved this.quizzes to ngOnInit() 
@@ -17,11 +20,14 @@ export class AppComponent {
 
   ngOnInit() {
     this.quizSvc.getQuizzes().subscribe(
-      //data => this.quizzes = data        <--the more modern way of writing it
-      (data) => {
-        console.log(data);
-        this.quizzes = data;
-      }
+      data => this.quizzes = data       // <--the more modern way of writing it
+      , error => this.wasErrorLoadingQuizzes = true
+      //(data) => {
+      //  console.log(data);
+      //  this.quizzes = data
+        
+        
+      //}
     );
   }
 
