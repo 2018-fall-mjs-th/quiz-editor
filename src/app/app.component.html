@@ -1,6 +1,16 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
-  <br>
+
+  <div class="row" *ngIf="waserrorLoadngQuizzes">
+    <div class="col-md-12">
+      <h3>can't load quizzes</h3>
+      </div>
+  </div>
+  
+
+  <div class="row" *ngIf="!waserrorLoadngQuizzes">
+    <div class="col-md-12">    
+     <br>
   <button class="btn btn-outline-primary">Add New Quiz</button>
   <br>
   <br>
@@ -10,5 +20,6 @@
         <span class="badge badge-secondary" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
     </div>
   </div>
+</div>
 </div>
 

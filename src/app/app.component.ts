@@ -9,6 +9,7 @@ import { QuizService } from './quiz.service';
 export class AppComponent {
 
   quizzes: any = [];
+  waserrorLoadingquizzes: boolean = false;
 
   constructor (private quizSvc: QuizService) {
   
@@ -21,6 +22,7 @@ export class AppComponent {
       //    this.quizzes = data
       //}
       data => this.quizzes = data
+      , error => this.waserrorLoadingquizzes = true
     );
    
   }
