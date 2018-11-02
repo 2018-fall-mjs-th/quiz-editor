@@ -7,15 +7,28 @@
 </div>
 
 <div class = "row" *ngIf="!wasErrorLoadingQuizzes">
-  <div class = "col-md-12">
+
+  <div class = "col-md-4 float-left">
     <button class = "btn btn-outline-primary" (click) = "learningPromises(); learningPromisesAsyncAwait()">Add New Quiz</button>
     <br /><br />
       <div class="list-group">
         <div class="list-group-item" *ngFor="let q of quizzes">
-            {{q.name}}
-            <span class="badge badge-secondary" [class.bg-danger]="q.numberQuestions === 0">{{q.numberQuestions}}</span>    
+            <div class = "col-md-11 float-left">
+              {{q.name}}
+            </div>
+            <div class = "col-md-1 text-right">
+              <span class="badge badge-secondary" [class.bg-danger]="q.numberQuestions === 0">{{q.numberQuestions}}</span>    
+            </div>
         </div>
       </div>
     </div>
   </div>
+
+<div class = "col-md-8 margin-none">
+  <button class = "btn btn-outline-success">
+Ok
+  </button>
+
+</div>
+
 </div>
