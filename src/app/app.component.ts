@@ -58,11 +58,33 @@ export class AppComponent {
       let y = await this.quizSvc.getNumberOfQuizzes(false);
       console.log(y);
     } 
-    
+
     catch (e) {
       console.log(e);
     }
   }
+
+
+  async learningPromisesWithAwaitAll() {
+    console.log("learningPromisesWithAwaitAll()");
+
+    try {
+      let x = await this.quizSvc.getNumberOfQuizzes(true);
+      console.log(x);
+
+      let y = await this.quizSvc.getNumberOfQuizzes(true);
+      console.log(y);
+
+      let results = await Promise.all([x, y]);
+      // let results = await Promise.race([x, y]);
+      console.log(results);
+    } 
+
+    catch (e) {
+      console.log(e);
+    }
+  }
+
 
   title = 'quiz-editor';
 
