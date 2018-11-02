@@ -24,4 +24,21 @@ Adding HttpClient
 -----------------
 Added: HttpClientModule under app.module.ts
 
+Observable Examples:
 
+this.quizSvc.getQuizzes('Isaac').subscribe(
+    data => this.quizzes = data
+    , err => console.log(err)
+)
+
+this.quizSvc.getQuizzes('Isaac').subscribe(data => {
+        this.quizzes = data;
+    }, err => {
+        console.log(err);
+})
+
+----------------------------------------------
+Async
+-----------------
+
+async (label) has to be Added

@@ -15,4 +15,11 @@ export class QuizService {
   public getQuizzes(name: string) {
     return this.http.get(`https://modern-js.azurewebsites.net/api/HttpTriggerJS1?code=8XD3vN3ehHLdZacBQJQhgUnNst9202gdd5VM3kWCytDkz2nXhia6kA==&name=${name}`);
   }  
+
+  public getNumberOfQuizzes(succeed: boolean): Promise<number> {
+    let p = new Promise<number>(
+      (resolve, reject) => succeed ? resolve(42) : reject('Failed :(')
+    );
+    return p;
+  }
 }

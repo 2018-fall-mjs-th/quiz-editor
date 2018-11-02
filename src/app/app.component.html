@@ -1,18 +1,35 @@
 <div class="container">
   <br>
-  <button class="btn btn-outline-primary">Add New Quiz</button>
+  <button class="btn btn-outline-primary" (click)="myAsyncAwait();">Add New Quiz</button>
   <br><br>
-  <div class="list-group">
-    <div class="list-group-item" *ngFor="let q of quizzes">
-      <!-- Quiz Name -->
-      {{ q.name }} 
 
-      <!-- Quiz Question Count -->
-      <span class="badge badge-secondary" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
-    
+  <!-- Response Errors -->
+  <div class="row" *ngIf="responseError">
+    <div class="col-md-12">
+      <h3>Can't load quizzes, please try again later!</h3>
     </div>
-
   </div>
+  <!-- Response Errors -->
+
+  <!-- START Quiz List -->
+  <div class="row" *ngIf="!responseError">
+    <div class="col-md-12">
+
+      <div class="list-group">
+        <div class="list-group-item" *ngFor="let q of quizzes">
+    
+          <!-- Quiz Name -->
+          {{ q.name }} 
+    
+          <!-- Quiz Question Count -->
+          <span class="badge badge-secondary" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+   <!-- END Quiz List -->
+
 </div>
 
 
