@@ -72,7 +72,7 @@ export class AppComponent {
 	}
 
 	async learningPromisesWithAwaitAll() {
-		console.log("learingPromisWithAsyncAwait");
+		console.log("learningPromisesWithAwaitAll");
 
 		try {
 			let x = this.quizSvc.getNumberOfQuizzes(true);
@@ -80,6 +80,10 @@ export class AppComponent {
 
 			let y = this.quizSvc.getNumberOfQuizzes(true);
 			console.log(y)
+
+			//let results await Promise.
+			let results = await Promise.all([x, y]);
+			console.log(results);
 		}
 		
 		catch (e) {
