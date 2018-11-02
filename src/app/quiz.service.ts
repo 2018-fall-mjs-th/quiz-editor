@@ -2,16 +2,24 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class QuizService {
 
-  constructor(private builtInAngularHTTClient: HttpClient) { }
+    constructor(private builtInAngularHTTClient: HttpClient) { }
 
-  getQuizzes() {
+    getQuizzes() {
 
-    let url = "https://modern-js.azurewebsites.net/api/HttpTriggerJS1?code=8XD3vN3ehHLdZacBQJQhgUnNst9202gdd5VM3kWCytDkz2nXhia6kA==&name=Yo%20Adrianne!";
+      let url = "https://modern-js.azurewebsites.net/api/HttpTriggerJS1?code=8XD3vN3ehHLdZacBQJQhgUnNst9202gdd5VM3kWCytDkz2nXhia6kA==&name=Yo%20Adrianne!";
 
-    return this.builtInAngularHTTClient.get(url);
-}
+      return this.builtInAngularHTTClient.get(url);
+  }
+
+  getNumberOfQuizzes(succeed: boolean): Promise<number> {
+    let p = new Promise<number>(
+      (resolve, reject) => succeed ? resolve(42) : reject("Phaled!")
+    );
+
+    return p;
+  }
 }
