@@ -9,6 +9,7 @@ import { QuizService } from './quiz.service';
 export class AppComponent {
 
   quizzes: any = [];
+  wasErrorLoadingQuizzes: boolean = false;
 
   constructor (private quizSvc: QuizService) {
      
@@ -17,6 +18,7 @@ export class AppComponent {
   ngOnInit() {
     this.quizSvc.getQuizzes().subscribe(
       data => this.quizzes = data
+      , error => this.wasErrorLoadingQuizzes = true
     );
   }
 
