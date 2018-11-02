@@ -93,7 +93,7 @@ export class AppComponent {
   imageWidth: number = 100;
   //imageWidth = '100px';
 
-  increaseImageWidth = () => https://modern-js.azurewebsites.net/api/HttpTriggerJS1?code=8XD3vN3ehHLdZacBQJQhgUnNst9202gdd5VM3kWCytDkz2nXhia6kA==&name=Mystery%20Quizthis.imageWidth *= 1.5;
+  increaseImageWidth = () => this.imageWidth *= 1.5;
 
 
 
