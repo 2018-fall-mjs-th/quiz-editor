@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { promise } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuizService {
 
-  constructor(private localClient: HttpClient) { }
+  constructor(private builtInAngularHttpClient: HttpClient) { }
 
   getQuizzes() {
 
-    return this.localClient.get("https://modern-js.azurewebsites.net/api/HttpTriggerJS1?code=8XD3vN3ehHLdZacBQJQhgUnNst9202gdd5VM3kWCytDkz2nXhia6kA==&name=Mystery%20Quiz");
+    return this.builtInAngularHttpClient.get('https://modern-js.azurewebsites.net/api/HttpTriggerJS1?code=8XD3vN3ehHLdZacBQJQhgUnNst9202gdd5VM3kWCytDkz2nXhia6kA==&name=Mystery%20Quiz');
 
     // https://modern-js.azurewebsites.net/api/HttpTriggerJS1?code=8XD3vN3ehHLdZacBQJQhgUnNst9202gdd5VM3kWCytDkz2nXhia6kA==&name=Mystery%20Quiz
 
@@ -25,9 +24,7 @@ export class QuizService {
   getNumberOfQuizzes(succeed: boolean): Promise<number> {
 
     let p = new Promise<number>(
-      (resolve, reject) => 
-        succeed ? resolve(42) : reject("Failed")
-      
+      (resolve, reject) => succeed ? resolve(42) : reject("Failed!")
     );
 
     return p;

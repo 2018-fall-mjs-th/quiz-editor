@@ -10,22 +10,52 @@ import { QuizService } from './quiz.service';
 export class AppComponent {
 
   quizzes: any = [];
-  quizLoadingError: boolean = false;
+  wasErrorLoadingQuizzes: boolean = false;
 
   constructor (private quizSvc: QuizService) {
-    //console.log(this.quizSvc.getQuizzes());
-    
   }
 
   ngOnInit() {
+    //console.log(this.quizSvc.getQuizzes());
     this.quizSvc.getQuizzes().subscribe(
+      // (data) => {
+      //   console.log(data);
+      //   this.quizzes = data
+      // }
       data => this.quizzes = data
-      , error => this.quizLoadingError = true
+      , error => this.wasErrorLoadingQuizzes = true
     );
   }
 
-  async learningPromises() {
-    console.log("Pretty please");
+  learningPromises() {
+    console.log("learningPromises()");
+
+    let x = this.quizSvc.getNumberOfQuizzes(true);
+    console.log(x);
+
+    x.then(
+      n => {
+        console.log(n);
+
+        let y = this.quizSvc.getNumberOfQuizzes(false);
+        console.log(y);
+    
+        y.then(
+          n => console.log(n)
+        ).catch(
+          e => console.log(e)
+        );              
+      }
+      
+    ).catch(
+      e => console.log(e)
+    );
+
+
+  }
+
+  async learningPromisesWithAsyncAwait() {
+    console.log("learningPromisesWithAsyncAwait()");
 
     try {
       let x = await this.quizSvc.getNumberOfQuizzes(true);
@@ -34,8 +64,29 @@ export class AppComponent {
       let y = await this.quizSvc.getNumberOfQuizzes(false);
       console.log(y);
     }
-    catch (err) {
-      console.log(err);
+
+    catch (e) {
+      console.log(e);
+    }
+  }
+
+  async learningPromisesWithAwaitAll() {
+    console.log("learningPromisesWithAsyncAwait()");
+
+    try {
+      let x = this.quizSvc.getNumberOfQuizzes(true);
+      console.log(x);
+
+      let y = this.quizSvc.getNumberOfQuizzes(true);
+      console.log(y);
+
+      //let results = await Promise.race([x, y]);
+      let results = await Promise.all([x, y]);
+      console.log(results);
+    }
+
+    catch (e) {
+      console.log(e);
     }
   }
 

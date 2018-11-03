@@ -1,9 +1,24 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
 
-  <div class="row" *ngIf="quizLoadingError">
+  <div class="row" *ngIf="wasErrorLoadingQuizzes">
     <div class="col-md-12">
-      <h3>Can't load the quizzes. Please try again later.</h3>
+      <h3>Can't load quizzes, please try again later : - (</h3>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!wasErrorLoadingQuizzes">
+    <div class="col-md-12">
+        <br>
+        <button class="btn btn-outline-primary" (click)="learningPromisesWithAwaitAll()">Add New Quiz</button>
+        <br>
+        <br>
+        <div class="list-group">
+          <div class="list-group-item" *ngFor="let q of quizzes">
+              {{ q.name }}
+              <span class="badge badge-secondary" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
+          </div>
+        </div>
     </div>
   </div>
 
