@@ -8,11 +8,8 @@
   </div>
 
   <div class="row" *ngIf="!quizLoadingError">
-    <div class="col-md-12">
-        <br>
+    <div class="col-sm-4">
         <button class="btn btn-outline-primary" (click)="learningPromises()">Add New Quiz</button>
-        <br>
-        <br>
         <div class="list-group">
           <div class="list-group-item" *ngFor="let q of quizzes">
               {{ q.name }}
@@ -20,7 +17,30 @@
           </div>
         </div>
     </div>
-  </div>
+
+    <div class="col-sm-8">
+
+      <div class="card">
+        <div class="card-header">
+          General
+        </div>
+        <div class="card-body">
+          Coming Soon
+        </div>
+      </div>
+      
+      <div class="card">
+          <div class="card-header">
+            General
+          </div>
+          <div class="card-body">
+            Coming Soon
+          </div>
+        </div>
+              
+    </div>
+
+  </div> <!-- row -->
 
 </div>
 
