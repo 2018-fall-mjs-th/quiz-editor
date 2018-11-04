@@ -34,11 +34,13 @@ export class AppComponent {
     console.log(x);
 
     x.then(
-        n => console.log(n);
+        n => console.log('n')
+        
+        )
 
         let y = this.quizSvc.getNumberOfQuizzes(false);
             console.log(y);
-
+    
          y.then(
 
       n => console.log(n)

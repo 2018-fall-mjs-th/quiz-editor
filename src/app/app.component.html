@@ -1,6 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
 
+    <div class="jumbotron bg-success"><h2 class="display-4">Quiz Editor</h2></div>
+
   <div class="row" *ngIf="waserrorLoadngQuizzes">
     <div class="col-md-12">
       <h3>can't load quizzes</h3>
@@ -11,15 +13,32 @@
   <div class="row" *ngIf="!waserrorLoadngQuizzes">
     <div class="col-md-4">    
      <br>
-  <button class="btn btn-outline-primary" (click) = "learningPromises(); learningPromisesWithAsyncAwaitAll()" >Add New Quiz</button>
-  <br>
-  <br>
+        <button class="btn btn-outline-primary" (click) = "learningPromises(); learningPromisesWithAsyncAwaitAll()" >Add New Quiz</button>
+        
+  <br><br>
   <div class="list-group">
     <div class="list-group-item" *ngFor="let q of quizzes">
         {{ q.name }}
-        <span class="badge badge-secondary" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
-    </div>
+        <span class="badge badge-secondary float-right" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
+       
+      </div>
   </div>
 </div>
+
+<div class="col-md-8">
+      <button class="btn btn-outline-success">Save</button>
+      <button class="btn btn-outline-primary border-0 ml-3">Cancel</button>
+       <br><br>
+      <div class="card">
+      <div class="card-header">Genaral</div>
+      <div class="card-body">Coming Soon!</div>        
+</div>
+<br><br>
+<div class="card">
+      <div class="card-header">Question</div>
+      <div class="card-body">Coming Soon!</div>  
+      </div>
+    </div>
+  </div>
 </div>
 
