@@ -4,21 +4,52 @@
     <div class="col-md-12">
       <h3>Can't load quizzes, please try again later</h3>
     </div>
-  </div> 
+  </div>
+
+<div class="glow">
+      <h1 class="quizzyboi">Quizzy Boi</h1>
+</div><br><br>
+
+<div class="container">
+
+  <div class="row" *ngIf="wasErrorLoadingQuizzes">
+      <div class="col-md-12">
+          <h3>Can't load quizzes, please try again later.</h3>
+      </div>
+  </div>
 
   <div class="row" *ngIf="!wasErrorLoadingQuizzes">
-      <div class="col-md-12">
-      <br>
-      <button class="btn btn-outline-primary" (click)="learningPromisesWithAwaitAll()">Add New Quiz</button>
-      <br>
-      <br>
-      <div class="list-group">
-        <div class="list-group-item" *ngFor="let q of quizzes">
-            {{ q.name }}
-            <span class="badge badge-secondary" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
-        </div>
+      <div class="col-md-4">
+          <button class="btn btn-outline-primary mb-2" (click)="learningPromisesWithAwaitAll()">Add New Quiz</button>
+          <div class="list-group mb-2">
+              <div class="list-group-item" *ngFor="let q of quizzes">
+                  {{ q.name }}
+                  <span class="badge badge-secondary float-right" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
+              </div>
+          </div>
       </div>
-    </div>
+      
+      <div class="col-md-8">
+          <button class="btn btn-outline-success mb-2">Save</button>
+          <button class="btn btn-link mb-2">Cancel</button>
+          <br />
+          <div class="card">
+              <div class="card-header">
+                  General
+              </div>
+              <div class="card-body">
+                  Coming soon!
+              </div>
+          </div>
+          <br />
+          <div class="card">
+              <div class="card-header">
+                  Questions
+              </div>
+              <div class="card-body">
+                  Coming soon!
+              </div>
+          </div>
+      </div>
   </div>
 </div>
-
