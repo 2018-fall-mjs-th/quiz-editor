@@ -1,7 +1,7 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
   <div class="page-header">
-    <h1 style="text-align: center">(╯°□°）╯ b ︵ quiz Editor</h1>
+    <h1 style="text-align: center">乁(ツ)ㄏ Quiz Editor 乁(ツ)ㄏ</h1>
   </div>
   <div class="row" *ngIf="wasErrorLoadingQuizzes">
     <div class="col-md-4">
@@ -18,14 +18,14 @@
         <div class="list-group">
           <div class="list-group-item" *ngFor="let q of quizzes">
               {{ q.name }}
-              <span class="badge badge-secondary" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
+              <span class="badge badge-secondary float=right" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
           </div>
         </div>
     </div>
 
     <div class="col-md-8">
       <br>
-      <button class="btn btn-outline-success" (click)="()">Save</button>
+      <button class="btn btn-outline-success" (click)="quizSave()">Save</button>
       <button type="button" class="btn btn-link">Cancel</button>
       <br>
       <br>
