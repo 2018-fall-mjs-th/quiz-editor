@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { QuizService } from './quiz.service';
-import { truncate } from 'fs';
+
 
 @Component({
   selector: 'app-root',
