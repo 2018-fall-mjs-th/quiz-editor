@@ -1,23 +1,48 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
-
+  <div class="jumbotron bg-success">
+    <h1>Super Quiz Collector</h1>
+  </div>
+</div>
+<div class="container">
   <div class="row" *ngIf="wasErrorLoadingQuizzes">
-    <div class="col-12-md">
+    <div class="col-md-12">
       <h3>Can't load quizzes, please try again later :^( </h3>
     </div>
   </div>
 
   <div class="row" *ngIf="!wasErrorLoadingQuizzes">
-    <div class="col-md-12">
-        <br>
-  <button class="btn btn-outline-primary" (click)="learningPromisesWithAsyncAway()">Add New Quiz</button>
-  <br>
-  <br>
+    <div class="col-md-4">
+      
+  <button class="btn btn-outline-primary md-2" (click)="learningPromisesWithAsyncAway()">Add New Quiz</button><br/><br/>
   <div class="list-group">
     <div class="list-group-item" *ngFor="let q of quizzes">
         {{ q.name }}
-        <span class="badge badge-secondary" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
+        <span class="badge badge-secondary float-right" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
     </div>
   </div>
+</div>
+  <div class="class col-md-8">
+    <button class="btn btn-outline-success md-2">Save</button>
+    <button class="btn btn-link md-2">Cancel</button>
+    <br/><br/>
+    <div class="card">
+      <div class="card-header">
+        General
+      </div>
+      <div class="card-body">Coming Soong!
+      </div>
+    </div>
+    <br />
+    <div class="card">
+      <div class="card-header">
+        Questions
+      </div>
+      <div class="card-body">
+        Coming soon!
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 
