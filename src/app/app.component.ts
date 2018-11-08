@@ -40,7 +40,8 @@ export class AppComponent {
     x.then(
       n => console.log(n)
     ).catch(
-      e => console.log(e);
+      e => console.log(e)
+      );
 
     let y = this.quizSvc.getNumberOfQuizzes(false);
     console.log(y);
