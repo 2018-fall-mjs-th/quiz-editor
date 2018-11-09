@@ -22,27 +22,45 @@
     </div>
 
     <div class="col-md-8 mobileMargin">
-      <button class="btn btn-outline-success">Save</button>
-      <button class="btn btn-link">Cancel</button>
-      <br><br>
-      <div class="card">
-        <div class="card-header">
-          General
+      <div *ngIf="selectedQuiz">
+          <button class="btn btn-outline-success">Save</button>
+          <button class="btn btn-link">Cancel</button>
+          <br><br>
+          <div class="card">
+            <div class="card-header">
+              General
+            </div>
+            <div class="card-body">
+              <p class="card-text">
+                {{ selectedQuiz.name }}
+    
+              </p>
+            </div>
+          </div>
+          <br>
+          <div class="card">
+            <div class="card-header">
+              Questions
+            </div>
+            <div class="card-body">
+              <p class="card-text">Coming soon!</p>
+            </div>
+          </div>
         </div>
-        <div class="card-body">
-          <p class="card-text">Coming soon!</p>
+
+        <div *ngIf="!selectedQuiz">
+          <br><br><br>
+          <div class="card">
+            <div class="card-body">
+              <h3>No quiz selected</h3>
+              <p>Select or add a new quiz.</p>
+            </div>
+          </div>
         </div>
+
       </div>
-      <br>
-      <div class="card">
-        <div class="card-header">
-          Questions
-        </div>
-        <div class="card-body">
-          <p class="card-text">Coming soon!</p>
-        </div>
-      </div>
-    </div>
+
+      
 
   </div>
   
