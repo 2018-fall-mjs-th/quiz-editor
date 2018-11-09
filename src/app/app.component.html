@@ -48,10 +48,10 @@
           </div>
           <div class="card-body">
             <div class="list-group">
-              <div *ngFor="let questions of selectedQuiz.questions; let i = index">
-                Question #{{ i + 1 }}: {{ questions.name }}
+              <div *ngFor="let question of selectedQuiz.questions; let i = index">
+                Question #{{ i + 1 }}: {{ question.name }}
                 <span class="float-right">
-                  <button (click)="removeQuestion(questions)" class="btn btn-link mb-2">Remove</button>
+                  <button (click)="removeQuestion(question)" class="btn btn-link mb-2">Remove</button>
                 </span>
               </div>
             </div>
