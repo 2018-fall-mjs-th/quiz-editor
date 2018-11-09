@@ -105,6 +105,21 @@ export class AppComponent {
     this.selectQuiz(q);
   }
 
+  newQuestion = undefined;
+
+  addNewQuestion() {
+    // console.log(this.newQuestion);
+
+    this.selectedQuiz.questions = [...this.selectedQuiz.questions, {name: this.newQuestion}];
+    this.selectedQuiz.numberQuestions = this.selectedQuiz.questions.length;
+    console.log(this.selectedQuiz);
+    this.newQuestion = "";
+  }
+
+  removeQuestion() {
+
+  }
+
   title = 'quiz-editor';
 
   dumb: string = "foo123";
