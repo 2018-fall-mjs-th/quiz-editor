@@ -95,7 +95,7 @@ export class AppComponent {
   selectedQuiz = undefined;
   selectQuiz(q) 
   {
-    // console.log(q);
+    console.log(q);
     this.selectedQuiz = q;
   }
 
