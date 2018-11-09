@@ -41,14 +41,14 @@ export class AppComponent {
   addNewQuiz() {
     
     let q = { name: "New Untitled Quiz", numberQuestions: 0, questions: []};
-    this.quizzes = [... this.quizzes, q]
+    this.quizzes = [... this.quizzes, q];
     this.selectQuiz(q);
   }
 
   addNewQuestion() {
-    this.selectedQuiz.questions = [... this.selectedQuiz.questions, "New Untitled Question"];
+    this.selectedQuiz.questions = [... this.selectedQuiz.questions, {statement: "New Untitled Question"}];
     this.selectedQuiz.numberQuestions += 1;
-    console.log(this.selectedQuiz)
+    console.log(this.selectedQuiz.questions)
     this.selectQuiz(this.selectedQuiz);
   }
 
