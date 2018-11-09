@@ -6,7 +6,7 @@
 
 <div class="container">
   <br>
-  <!-- START Buttons Header -->
+<!-- START Buttons Header -->
   <div class="row">
       <div class="col-md-4">
           <button class="btn btn-outline-primary" (click)="addNewQuiz();">Add New Quiz</button>
@@ -16,21 +16,21 @@
         <button class="btn btn-link">Cancel</button>
       </div>
   </div>
-  <!-- END Buttons Header -->
+<!-- END Buttons Header -->
 
   <br>
 
-  <!-- START Response Errors -->
+<!-- START Response Errors -->
   <div class="row" *ngIf="responseError">
     <div class="col-md-12">
       <h3>Can't load quizzes, please try again later!</h3>
     </div>
   </div>
-  <!-- END Response Errors -->
+<!-- END Response Errors -->
 
   <div class="row" *ngIf="!responseError">
 
-    <!-- START Quiz Selection -->
+<!-- START Quiz Selection Section -->
     <div class="col-md-4">
       <div class="list-group">
         <div 
@@ -45,70 +45,61 @@
         </div>
       </div>
     </div>
-    <!-- END Quiz Selection -->
+<!-- END Quiz Selection Section -->
 
     <div class="col-md-8">
 
-      <!-- When No Quiz is Selected -->
+<!-- Default No Quiz Selected On-Load -->
       <div class="card" *ngIf="!selectedQuiz">
           <div class="card-body">
             <h3>No quiz selected</h3>
             Select or add a new quiz
           </div>
       </div>
+<!-- Default No Quiz Selected On-Load -->
 
-      <!-- START General Section -->
+<!-- START General Section -->
       <div class="card" *ngIf="selectedQuiz">
           <div class="card-header">General</div>
           <div class="card-body">
-            {{ selectedQuiz.name }}
+            <div class="container"><div class="row"><div class="col-md-4">
+                <input type="text" class="form-control" value="{{ selectedQuiz.name }}"/>
+            </div></div></div> 
           </div>
       </div>
-      <!-- END General Section -->
+<!-- END General Section -->
 
       <br>
 
-      <!-- START Questions Section -->
+<!-- START Questions Section -->
       <div class="card" *ngIf="selectedQuiz">
-          <div class="card-header">Questions <button>Test</button></div>
+          <div class="card-header">Questions</div>
           <div class="card-body">
-            <div *ngFor="let aQuestion of selectedQuiz.questions">
+            <button class="btn btn-outline-success" (click)="addNewQuestion();">Add New Question</button><br><br>
+            <div *ngFor="let aQuestion of selectedQuiz.questions; let i = index">
               <div class="container">
-                <div class="row">
-                  <div class="col-md-4">{{ aQuestion.name }}</div>
-                  <div class="col-md-4">
-                    <button class="btn btn-danger" (click)="deleteQuestion(aQuestion)" style="font-size:7pt;">Remove</button>
+                <div class="row align-items-center">
+                  <div class="col-md-10">
+                    <div class="form-group">
+                      <label for="comment">Question: {{ i+1 }}</label>
+                      <textarea class="form-control" rows="2">{{ aQuestion.name }}</textarea>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <button class="btn btn-link" (click)="deleteQuestion(aQuestion)" style="font-size:8pt;">Remove</button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
       </div>
-      <!-- END Questions Section -->
+<!-- END Questions Section -->
     </div>
 
   </div>
 
 </div>
 
-<div class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>Modal body text goes here.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
+
 
 

@@ -7,6 +7,10 @@ interface quizDisplay {
   questions: [];
 }
 
+interface questionDisplay {
+  name: string;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -21,7 +25,7 @@ export class AppComponent {
 
   ngOnInit() {
 
-    /*
+    
     this.quizSvc.getQuizzes('Isaac').subscribe(data => {
       console.log(data);
       this.quizzes = <quizDisplay[]> data;
@@ -30,8 +34,9 @@ export class AppComponent {
       console.log(err);
       this.responseError = true;
     })
-    */
-    this.quizSvc.getQuizzes('Isaac').subscribe(data => this.quizzes = <quizDisplay[]> data)
+    
+    //this.quizSvc.getQuizzes('Isaac').subscribe(data => this.quizzes = <quizDisplay[]> data);
+    
     
   }
 
@@ -40,12 +45,14 @@ export class AppComponent {
   }
 
   public addNewQuiz() {
-    let newQuiz = {
-      name: '',
-      numberQuestions: 0,
-      questions: new Array()
-    };
-    this.quizzes = [...this.quizzes, { name: '', numberQuestions: 0, questions: [] }];
+    let newQuiz = <quizDisplay> { name: '', numberQuestions: 0, questions: [] };
+    this.quizzes = [...this.quizzes, newQuiz];
+    this.selectedQuiz = newQuiz;
+  }
+
+  public addNewQuestion() {
+    let newQuestion = <questionDisplay> { name: "New Question" };
+    this.selectedQuiz.questions = [...this.selectedQuiz.questions, newQuestion];
   }
 
   public deleteQuestion(questionToRemove) {
