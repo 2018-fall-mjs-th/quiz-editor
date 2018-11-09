@@ -41,9 +41,15 @@
   
         <div class="card">
           <div class="card-header">
-            General
+            Add Questions
           </div>
           <div class="card-body">
+            <div class="list-group">
+              <div *ngFor="let questions of selectedQuiz.questions">
+                {{ questions.name }}
+              </div>
+            </div>
+
             Coming Soon
           </div>
         </div>
