@@ -50,8 +50,6 @@ export class AppComponent {
     ).catch(
       e => console.log(e)
     );
-
-
   }
 
   async learningPromisesWithAsyncAwait() {
@@ -88,6 +86,11 @@ export class AppComponent {
     catch (e) {
       console.log(e);
     }
+  }
+
+  selectQuiz(q) 
+  {
+    console.log(q);
   }
 
   title = 'quiz-editor';
