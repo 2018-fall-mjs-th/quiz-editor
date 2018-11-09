@@ -23,20 +23,14 @@
 
     <div class="col-md-8">
 
-      <button class="btn btn-outline-success mr-3">Save</button>
+      <div [class.hiddenButtons]="!selectedQuiz">
+        <button class="btn btn-outline-success mr-3">Save</button>
 
-      <button class="btn btn-link">Cancel</button>
-
-      <div class="card">
-        <div class="card-header">
-          General
-        </div>
-        <div class="card-body">
-          Coming Soon
-        </div>
+        <button class="btn btn-link">Cancel</button>
       </div>
 
-      <div class="card">
+      <div *ngIf="selectedQuiz">
+        <div class="card">
           <div class="card-header">
             General
           </div>
@@ -44,8 +38,26 @@
             Coming Soon
           </div>
         </div>
-              
-    </div>
+  
+        <div class="card">
+          <div class="card-header">
+            General
+          </div>
+          <div class="card-body">
+            Coming Soon
+          </div>
+        </div>
+                
+      </div>
+
+      <div *ngIf="!selectedQuiz">
+        <div class="card p-4">
+          <h3>There is no active quiz</h3>
+          <p>Please select a quiz from the list.</p>
+        </div>
+      </div>
+
+    </div> <!--  col 8 -->
 
   </div> <!-- row -->
 

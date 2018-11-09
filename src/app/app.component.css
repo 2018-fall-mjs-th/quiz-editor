@@ -1,3 +1,7 @@
 .card, .btn, .list-group {
     margin-bottom: 2rem;
 }
+
+.hiddenButtons {
+    visibility: hidden;
+}
