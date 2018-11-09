@@ -11,7 +11,8 @@
     <div class="col-md-4">
         <button class="btn btn-outline-primary" (click)="learningPromises()">Add New Quiz</button>
         <div class="list-group">
-          <div (click)="selectQuiz(q)" 
+          <div [class.active]="q === selectedQuiz" 
+              (click)="selectQuiz(q)" 
               class="list-group-item list-group-item-action" 
               *ngFor="let q of quizzes">
               {{ q.name }}
