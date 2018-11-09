@@ -11,7 +11,7 @@
       <div class="col-md-4">
           <button class="btn btn-outline-primary" (click)="myAsyncAwaitAll();">Add New Quiz</button>
       </div>
-      <div class="col-md-8">
+      <div class="col-md-8" *ngIf="selectedQuiz != undefined">
         <button class="btn btn-outline-success">Save</button>
         <button class="btn btn-link">Cancel</button>
       </div>
@@ -37,8 +37,7 @@
           [class.active]="q === selectedQuiz" 
           class="list-group-item d-flex justify-content-between align-items-center list-group-item list-group-item-action" 
           *ngFor="let q of quizzes" 
-          (click)="selectQuiz(q);"
-        >
+          (click)="selectQuiz(q);">
           <!-- Quiz Name -->
           {{ q.name }} 
           <!-- Quiz Question Count -->
@@ -50,16 +49,25 @@
 
     <div class="col-md-8">
       <!-- START General Section -->
-      <div class="card">
+      <div class="card" *ngIf="selectedQuiz != undefined">
           <div class="card-header">General</div>
-          <div class="card-body">Coming Soon!</div>
+          <div class="card-body">
+            {{ selectedQuiz.name }}
+          </div>
       </div>
       <!-- END General Section -->
+
+      <div class="card" *ngIf="selectedQuiz == undefined">
+          <div class="card-body">
+            <h3>No quiz selected</h3>
+            Select or add a new quiz
+          </div>
+      </div>
 
       <br>
 
       <!-- START Questions Section -->
-      <div class="card">
+      <div class="card" *ngIf="selectedQuiz != undefined">
           <div class="card-header">Questions</div>
           <div class="card-body">Coming Soon!</div>
       </div>
