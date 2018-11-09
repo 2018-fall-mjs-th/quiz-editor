@@ -1,10 +1,13 @@
+<div class="container">
+
 <div class="jumbotron">
+
     <div class="page-header">
-        <h1 class="text-center">Quiz Editor</h1>
+        <h1 class="text-center">Bob Ross' Happy Little Quizzes</h1>
     </div>
 </div>
 
-<div class="container">
+
 
     <div class="row" *ngIf="wasErrorLoadingQuizzes">
         <div class="col-md-12">
@@ -16,7 +19,10 @@
         <div class="col-md-4">
             <button class="btn btn-outline-primary mb-2" (click)="learningPromisesWithAwaitAll()">Add New Quiz</button>
             <div class="list-group mb-2">
-                <div class="list-group-item" *ngFor="let q of quizzes">
+                <div        
+                    [class.active] = "q===selectedQuiz" 
+                    (click)="selectQuize(q)" class="list-group-item list-group-item-action"
+                    *ngFor="let q of quizzes">
                     {{ q.name }}
                     <span class="badge badge-secondary float-right" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
                 </div>
@@ -24,6 +30,8 @@
         </div>
         
         <div class="col-md-8">
+        <div *ngIf = "selectedQuiz">
+
             <button class="btn btn-outline-success mb-2">Save</button>
             <button class="btn btn-link mb-2">Cancel</button>
             <br />
@@ -45,6 +53,12 @@
                 </div>
             </div>
         </div>
+        <div *ngIf = "!selectedQuiz">
+            <div class = "card">
+                <div class = "card-body">
+                    Thhhhere are no quizzes in America!
+                </div>
+            </div>
+        </div>
     </div>
-
 </div>
