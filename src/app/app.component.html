@@ -28,6 +28,8 @@
         </div>
         
         <div class="col-md-8">
+          <div *ngIf="selectedQuiz">
+          <div></div>
             <button class="btn btn-outline-success mb-2">Save</button>
             <button class="btn btn-link mb-2">Cancel</button>
             <br />
@@ -36,7 +38,7 @@
                     General
                 </div>
                 <div class="card-body">
-                    Coming soon!
+                    {{selectedQuiz.name}}
                 </div>
             </div>
             <br />
@@ -48,6 +50,15 @@
                     Coming soon!
                 </div>
             </div>
+          </div>
+          <div *ngIf="!selectedQuiz">
+            <div class="card">
+              <div class="card-body">
+                <h3>No quiz selected</h3>
+                <p>Select or add new quiz</p>
+              </div>
+            </div>
+          </div>
         </div>
     </div>
 
