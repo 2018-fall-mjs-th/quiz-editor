@@ -26,6 +26,13 @@ export class AppComponent {
     );
   }
 
+  selectedQuiz = undefined;
+
+  selectQuiz(q) {
+    console.log(q);
+    this.selectedQuiz = q;
+  }
+
   learningPromises() {
     console.log("learningPromises()");
 
