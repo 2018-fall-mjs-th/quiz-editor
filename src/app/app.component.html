@@ -14,7 +14,7 @@
     
     <div class="row" *ngIf="!wasErrorLoadingQuizzes">
         <div class="col-md-4">
-            <button class="btn btn-outline-primary mb-2" (click)="learningPromisesWithAwaitAll()">Add New Quiz</button>
+            <button class="btn btn-outline-primary mb-2" (click)="addNewQuiz()">Add New Quiz</button>
             <div class="list-group mb-2">
                 <div 
                     [class.active]="q===selectedQuiz" (click)="selectQuiz(q)" 
