@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { QuizService } from './quiz.service';
 
+interface quizDisplay {
+  name: string;
+  numberOfQuestions: number;
+  questions: string[];
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,10 +14,10 @@ import { QuizService } from './quiz.service';
 })
 export class AppComponent {
 
-  quizzes: any = [];
+  quizzes: quizDisplay[] = [];
   wasErrorLoadingQuizzes: boolean = false;
 
-  constructor (private quizSvc: QuizService) {
+  constructor(private quizSvc: QuizService) {
   }
 
   ngOnInit() {
@@ -21,17 +27,27 @@ export class AppComponent {
       //   console.log(data);
       //   this.quizzes = data
       // }
-      data => this.quizzes = data
+      data => this.quizzes = <quizDisplay[]>data
       , error => this.wasErrorLoadingQuizzes = true
     );
   }
 
-  
-activeQuiz = undefined;
 
-  selectQuiz(q){
+  activeQuiz = undefined;
+
+  selectQuiz(q) {
     this.activeQuiz = q;
     console.log('activeQuiz', this.activeQuiz);
+  }
+  
+  addNewQuiz() {
+    let quiz = {
+      name: "New Quiz",
+      numberOfQuestions: 0,
+      questions: []
+    };
+    this.quizzes = [...this.quizzes, quiz];
+    this.selectQuiz(quiz)
   }
 
   learningPromises() {
@@ -46,14 +62,14 @@ activeQuiz = undefined;
 
         let y = this.quizSvc.getNumberOfQuizzes(false);
         console.log(y);
-    
+
         y.then(
           n => console.log(n)
         ).catch(
           e => console.log(e)
-        );              
+        );
       }
-      
+
     ).catch(
       e => console.log(e)
     );
