@@ -45,12 +45,12 @@
           </div>
           <div class="card-body">
             <div class="list-group">
-              <div *ngFor="let questions of selectedQuiz.questions">
-                {{ questions.name }}
+              <div *ngFor="let questions of selectedQuiz.questions; let i = index">
+                Question #{{ i + 1 }}: {{ questions.name }}
               </div>
             </div>
 
-            Coming Soon
+            <input type="text" id="newQuestion">
           </div>
         </div>
                 
