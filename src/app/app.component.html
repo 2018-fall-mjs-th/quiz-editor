@@ -18,18 +18,16 @@
     <div class="list-group">
       <div class="list-group-item" *ngFor="let q of quizzes">
           {{ q.name }}
-          <span class="badge badge-secondary" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
+          <span class="badge badge-secondary float-right" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
       </div>
     </div>
   </div>
     <div class="col-md-8">
       <br> 
       <div class="btn-group">
-        <button class="btn btn-outline-success" type="button">Save</button>
-        <button class="btn btn-link" type="button">Cancel</button>
+        <button class="btn btn-outline-success mb-2" type="button">Save</button>
+        <button class="btn btn-link mb-2" type="button">Cancel</button>
       </div>
-    </div>
-  </div>
       <div class="card">
         <div class="card-header">
           General
@@ -37,7 +35,6 @@
       <div class="card-body">
         <p>Coming Soon</p>
       </div>
-  </div>
       <div class="card">
         <div class="card-header">
           Questions
