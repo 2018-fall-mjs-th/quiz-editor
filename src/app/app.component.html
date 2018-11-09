@@ -36,6 +36,9 @@
           </div>
           <div class="card-body">
             <input type="text" [(ngModel)]="selectedQuiz.name">
+            <span class="float-right">
+                <button (click)="removeQuiz(selectedQuiz)" class="btn btn-link mb-2">Remove</button>
+              </span>
           </div>
         </div>
   

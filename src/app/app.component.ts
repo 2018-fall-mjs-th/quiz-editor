@@ -106,13 +106,17 @@ export class AppComponent {
   }
 
   newQuestion = undefined;
-
   addNewQuestion() {
     // console.log(this.newQuestion);
     this.selectedQuiz.questions = [...this.selectedQuiz.questions, {name: this.newQuestion}];
     this.updateQuizLength();
     // console.log(this.selectedQuiz);
     this.newQuestion = "";
+  }
+
+  removeQuiz(deletion) {
+    this.quizzes = this.quizzes.filter(x => x !== deletion);
+    this.selectedQuiz = undefined;
   }
 
   removeQuestion(deletion) {
