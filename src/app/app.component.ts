@@ -27,7 +27,11 @@ export class AppComponent {
       //   console.log(data);
       //   this.quizzes = data
       // }
-      data => this.quizzes = <quizDisplay[]> data
+      data => this.quizzes = (<quizDisplay[]> data).map(x => ({ 
+          name: x.name
+          , numberQuestions: x.numberQuestions
+          , questions: x.questions.map(y => ({ statement: y.name })) 
+        }))
       , error => this.wasErrorLoadingQuizzes = true
     );
   }
