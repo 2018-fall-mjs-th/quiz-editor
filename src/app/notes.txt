@@ -42,3 +42,11 @@ Async
 -----------------
 
 async (label) has to be Added
+
+----------------------------------------------
+11-08-2018: Goals of project: #1. Make a selectable #2. Load a quiz
+
+Added a "selectQuiz" function that takes a quiz (JSON object)
+Added a dynamic class: [class.active]="q === selectedQuiz"
+
+ 

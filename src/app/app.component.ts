@@ -28,6 +28,14 @@ export class AppComponent {
     
   }
 
+  selectedQuiz = undefined;
+  
+  public selectQuiz(q) {
+    this.selectedQuiz = q;
+    
+
+  }
+
   public myPromise() {
     console.log(this.quizSvc.getNumberOfQuizzes);
     let x = this.quizSvc.getNumberOfQuizzes(true);
