@@ -1,14 +1,20 @@
 import { Component } from '@angular/core';
 import { QuizService } from './quiz.service';
 
+interface quizDisplay {
+  name: string;
+  numberQuestions: number;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
 
-  quizzes: any = [];
+  quizzes: quizDisplay[] = [];
   wasErrorLoadingQuizzes: boolean = false;
 
   constructor (private quizSvc: QuizService) {
@@ -21,10 +27,16 @@ export class AppComponent {
       //   console.log(data);
       //   this.quizzes = data
       // }
-      data => this.quizzes = data
+      data => this.quizzes = <quizDisplay[]>data
       , error => this.wasErrorLoadingQuizzes = true
     );
   }
+
+addNewQuiz() {
+  this.quizzes = [...this.quizzes, {name: "New Quiz", numberQuestions: 0 }];
+  this.quizzes = [...this.quizzes];
+  this.selectQuize;
+}
 
   selectedQuiz = undefined;
   selectQuize(q) {
