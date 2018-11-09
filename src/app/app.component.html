@@ -11,7 +11,7 @@
 
   <div class="row" *ngIf="!wasErrorLoadingQuizzes">
     <div class="col-md-4">
-     <button class="btn btn-outline-primary" (click)="learningPromisesWithAsyncAwait()">Add New Quiz</button><br><br>
+     <button class="btn btn-outline-primary" (click)="addNewQuiz()">Add New Quiz</button><br><br>
       <div class="list-group">
         <div [class.active]="q === selectedQuiz" (click)="selectQuiz(q)" class="list-group-item list-group-item-action" *ngFor="let q of quizzes">
         {{ q.name }}
@@ -31,10 +31,7 @@
               General
             </div>
             <div class="card-body">
-              <p class="card-text">
-                {{ selectedQuiz.name }}
-    
-              </p>
+              <input [(ngModel)]="selectedQuiz.name">
             </div>
           </div>
           <br>
