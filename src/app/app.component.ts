@@ -40,7 +40,9 @@ selectQuiz(q) {
 }
 
 addNewQuiz() {
-  this.quizzes = [...this.quizzes, { name: "New Untitled Quiz", numberQuestions: 0 }]
+  let q = { name: "New Untitled Quiz", numberQuestions: 0 }
+  this.quizzes = [...this.quizzes, q]
+  this.selectQuiz(q);
 }
 
   learningPromises() {
