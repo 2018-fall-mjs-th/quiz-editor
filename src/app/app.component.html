@@ -14,7 +14,7 @@
 
     <div class="row" *ngIf="!wasErrorLoadingQuizzes">
         <div class="col-md-4">
-            <button class="btn btn-outline-primary mb-2" (click)="learningPromisesWithAwaitAll()">Add New Quiz</button>
+            <button class="btn btn-outline-primary mb-2" (click)="addNewQuiz()">Add New Quiz</button>
             <div class="list-group mb-2">
                 <div 
                     [class.active]="q === selectedQuiz" 
@@ -28,27 +28,54 @@
         </div>
         
         <div class="col-md-8">
-            <button class="btn btn-outline-success mb-2">Save</button>
-            <button class="btn btn-link mb-2">Cancel</button>
-            <br />
-            <div class="card">
-                <div class="card-header">
-                    General
+            <div *ngIf="selectedQuiz">
+                <button class="btn btn-outline-success mb-2">Save</button>
+                <button class="btn btn-link mb-2">Cancel</button>
+                <br />
+                <div class="card">
+                    <div class="card-header">
+                        General
+                    </div>
+                    <div class="card-body">
+                        <h6>Name</h6>
+                        <input type="text" class="form-control" value="{{ selectedQuiz.name }}"/>
+                    </div>
                 </div>
-                <div class="card-body">
-                    Coming soon!
+                <br />
+                <div class="card">
+                    <div class="card-header">
+                        Questions
+                    </div>
+                    <div class="card-body">
+                        <button class="btn btn-outline-success mb-2" (click)="addNewQuestion()">ADD NEW QUESTION</button>
+                        <br />
+                        <br />
+                        <div *ngIf = "selectedQuiz.numberQuestions > 0"> 
+                            <div class="row" *ngFor="let q of selectedQuiz.questions; let i = index" >
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" value="{{ q }}" />
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-link mb-2" (click)="removeQuestion(  i  )">Remove</button>
+                                </div>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <br />
-            <div class="card">
-                <div class="card-header">
-                    Questions
-                </div>
-                <div class="card-body">
-                    Coming soon!
+            <div *ngIf="!selectedQuiz" >
+                <br />
+                <br />
+                <div class="card">
+                    <div class="card-body">
+                        <h3>No quiz selected</h3>
+                        <p>Select or add a new quiz</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 
 </div>
