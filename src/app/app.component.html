@@ -9,7 +9,7 @@
 
   <div class="row" *ngIf="!quizLoadingError">
     <div class="col-md-4">
-        <button class="btn btn-outline-primary" (click)="learningPromises()">Add New Quiz</button>
+        <button class="btn btn-outline-primary" (click)="addNewQuiz()">Add New Quiz</button>
         <div class="list-group">
           <div [class.active]="q === selectedQuiz" 
               (click)="selectQuiz(q)" 
