@@ -25,6 +25,11 @@ export class AppComponent {
       , error => this.wasErrorLoadingQuizzes = true
     );
   }
+  selectedQuiz = undefined;
+  selectQuiz(q) {
+    console.log(q)
+    this.selectedQuiz = q;
+  }
 
   learningPromises() {
     console.log("learningPromises()");
