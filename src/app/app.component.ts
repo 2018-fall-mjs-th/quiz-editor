@@ -42,6 +42,7 @@ export class AppComponent {
 
 
   learningPromises() {
+    
     console.log("learningPromises()");
 
     let x = this.quizSvc.getNumberOfQuizzes(true);
