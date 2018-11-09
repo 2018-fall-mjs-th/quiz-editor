@@ -95,12 +95,12 @@ export class AppComponent {
   selectedQuiz = undefined;
   selectQuiz(q) 
   {
-    console.log(q);
+    // console.log(q);
     this.selectedQuiz = q;
   }
 
   addNewQuiz() {
-    let q = { name: "New Blank Quiz", numberQuestions: 2};
+    let q = { name: "New Blank Quiz", numberQuestions: 0, questions: []};
     this.quizzes = [...this.quizzes, q];
     this.selectQuiz(q);
   }
