@@ -45,7 +45,17 @@
                         Questions
                     </div>
                     <div class="card-body">
-                        Coming soon!
+                        <div class="input-group">
+                                <button class="btn btn-outline-primary" (click)="addNewQuestion(selectedQuiz)">Add</button>
+                        </div>
+                        <div *ngFor="let question of selectedQuiz.questions">
+                            <div class="input-group my-1">
+                                <input type="text" [(ngModel)]="question.name" class="form-control" placeholder="Add New Question" aria-label="Add New Question" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-danger float-right" type="button">Delete</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
