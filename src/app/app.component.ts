@@ -44,6 +44,14 @@ export class AppComponent {
     this.selectQuiz(q);
   }
 
+  newQuestion = undefined;
+
+  addNewQuestion() {
+    let q = { name: this.newQuestion}
+    this.selectedQuiz.questions = [...this.selectedQuiz.questions, q];
+    this.newQuestion = "";
+  }
+
   learningPromises() {
     console.log("learningPromises()");
 
