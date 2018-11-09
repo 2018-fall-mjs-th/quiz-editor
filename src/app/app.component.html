@@ -22,7 +22,7 @@
                     class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" 
                     *ngFor="let q of quizzes">
                         {{ q.name }}
-                        <span class="badge badge-secondary" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
+                        <span class="badge badge-secondary" [class.bg-danger]="q.questions.length === 0">{{ q.questions.length }}</span>
                 </div>
             </div>
         </div>
@@ -35,10 +35,10 @@
                     <br />
                     <div class="card">
                         <div class="card-header">
-                            General
+                            {{ selectedQuiz.name }}
                         </div>
                         <div class="card-body">
-                            Coming soon!
+                            <input type="text" class="form-control" [(ngModel)]="selectedQuiz.name">
                         </div>
                     </div>
                     <br />
@@ -47,7 +47,15 @@
                             Questions
                         </div>
                         <div class="card-body">
-                            Coming soon!
+                            <button class="btn btn-outline-success mb-2" (click)="addNewQuestion(selectedQuiz)">Add New Question</button>
+                            <div class="row" *ngFor="let question of selectedQuiz.questions">
+                                <div class="col-9">
+                                    <input type="text" class="form-control" [(ngModel)]="question.name">
+                                </div>
+                                <div class="col-3">
+                                    <button class="btn btn-outline-danger mb-2" (click)="removeQuestion(selectedQuiz, question)">Remove</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
             </div>
