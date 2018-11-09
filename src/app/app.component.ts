@@ -100,7 +100,9 @@ export class AppComponent {
   }
 
   addNewQuiz() {
-    this.quizzes = [...this.quizzes, { name: "New Blank Quiz", numberQuestions: 2}];
+    let q = { name: "New Blank Quiz", numberQuestions: 2};
+    this.quizzes = [...this.quizzes, q];
+    this.selectQuiz(q);
   }
 
   title = 'quiz-editor';
