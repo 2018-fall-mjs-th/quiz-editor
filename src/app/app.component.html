@@ -32,10 +32,10 @@
       <div *ngIf="selectedQuiz">
         <div class="card">
           <div class="card-header">
-            General
+            Quiz name
           </div>
           <div class="card-body">
-            {{ q.name }}}
+            <input type="text" [(ngModel)]="selectedQuiz.name">
           </div>
         </div>
   
