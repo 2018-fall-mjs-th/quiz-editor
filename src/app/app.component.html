@@ -16,8 +16,11 @@
         <div class="col-md-4">
             <button class="btn btn-outline-primary mb-2" (click)="learningPromisesWithAwaitAll()">Add New Quiz</button>
             <div class="list-group mb-2">
-                <div class="list-group-item" *ngFor="let q of quizzes">
-                    {{ q.name }}
+                <div [class.active]="q === selectedQuiz" 
+                    (click)="selectQuiz(q)" 
+                    class="list-group-item" 
+                    *ngFor="let q of quizzes">
+                        {{ q.name }}
                     <span class="badge badge-secondary float-right" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
                 </div>
             </div>
