@@ -16,6 +16,7 @@ export class AppComponent {
 
   quizzes: quizDisplay[] = [];
   wasErrorLoadingQuizzes: boolean = false;
+  questions = [];
 
   constructor (private quizSvc: QuizService) {
   }
@@ -40,7 +41,16 @@ export class AppComponent {
   }
 
   addNewQuiz() {
-    this.quizzes = [...this.quizzes, {name: "New Untitled Quiz", numberQuestions: 0}]
+    let q = {name: "New Untitled Quiz", numberQuestions: 0}
+    this.quizzes = [...this.quizzes, q]
+    this.selectQuiz(q);
+  }
+
+  // newQuestion = undefined;
+
+  addNewQuestion() {
+    // this.newQuestion = question;
+    this.questions = [...this.questions, que];
   }
 
   learningPromises() {
