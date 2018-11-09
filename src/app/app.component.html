@@ -27,26 +27,46 @@
         </div>
         
         <div class="col-md-8">
-            <button class="btn btn-outline-success mb-2">Save</button>
-            <button class="btn btn-link mb-2">Cancel</button>
-            <br />
-            <div class="card">
-                <div class="card-header">
-                    General
-                </div>
-                <div class="card-body">
-                    Coming soon!
-                </div>
+            <div *ngIf="selectedQuiz">
+                    <button class="btn btn-outline-success mb-2">Save</button>
+                    <button class="btn btn-link mb-2">Cancel</button>
+                    <br />
+                    <div class="card">
+                        <div class="card-header">
+                            General
+                        </div>
+                        <div class="card-body">
+                            {{selectedQuiz.name}}
+                        </div>
+                    </div>
+                    <br />
+                    <div class="card">
+                        <div class="card-header">
+                            Questions
+                        </div>
+                        <div class="card-body">
+                            Coming soon!
+                        </div>
+                    </div>
             </div>
-            <br />
-            <div class="card">
-                <div class="card-header">
-                    Questions
+
+            <div *ngIf="!selectedQuiz">
+                    <br>
+                    <br>
+                <div class="card">
+                    <div class="card-body">
+                           
+                           <h3>
+                                No quiz selected
+                           </h3> 
+                           <p>
+                               select or add new quiz
+                           </p>
+                    </div>
                 </div>
-                <div class="card-body">
-                    Coming soon!
-                </div>
+                
             </div>
+            
         </div>
     </div>
 
