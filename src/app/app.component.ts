@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
 import { QuizService } from './quiz.service';
 
+interface quizDisplay {
+  name: string;
+  numberQuestions: number;
 
+}
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,7 +13,7 @@ import { QuizService } from './quiz.service';
 })
 export class AppComponent {
 
-  quizzes: any = [];
+  quizzes: quizDisplay[] = [];
   wasErrorLoadingQuizzes: boolean = false;
 
   constructor (private quizSvc: QuizService) {
@@ -19,10 +23,23 @@ export class AppComponent {
 
   ngOnInit(){
     this.quizSvc.getQuizzes().subscribe(
-      data => this.quizzes = data
+      data => this.quizzes = <quizDisplay[]>data
       , error => this.wasErrorLoadingQuizzes = true
     );
   }
+
+  selectedQuiz = undefined;
+  selectQuiz(q){
+    console.log(q);
+    this.selectedQuiz = q;
+  }
+
+  addNewQuiz(){
+    this.quizzes = [...this.quizzes, {name:"New Untitled Quiz", numberQuestions: 0}];
+
+  }
+
+
   learningPromises() {
     console.log("learningPromises()");
 
