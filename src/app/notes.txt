@@ -47,6 +47,12 @@ async (label) has to be Added
 11-08-2018: Goals of project: #1. Make a selectable #2. Load a quiz
 
 Added a "selectQuiz" function that takes a quiz (JSON object)
-Added a dynamic class: [class.active]="q === selectedQuiz"
+Added a dynamic class:                                          [class.active]="q === selectedQuiz"
+Added a few dynamically set classes if selectedQuiz is blank:   *ngIf="selectedQuiz != undefined"
+interface: a "contract". Defines a method shape.
+"Casting" in typescript: this.quizzes = <quizDisplay[]> data; <ObjectType>
 
+
+Week 10 pt. 1 todo: Create a text-box for entering a new quiz. 
+        pt. 2 implement the "add a question" questions section 
  

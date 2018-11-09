@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { QuizService } from './quiz.service';
 
+interface quizDisplay {
+  name: string;
+  numberQuestions: number;
+  questions: [];
+}
 
 @Component({
   selector: 'app-root',
@@ -8,32 +13,45 @@ import { QuizService } from './quiz.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  quizzes: any = [];
+  quizzes: quizDisplay[] = [];
   responseError: boolean = false;
+  selectedQuiz = undefined;
 
   constructor (private quizSvc: QuizService) { }
 
   ngOnInit() {
 
+    /*
     this.quizSvc.getQuizzes('Isaac').subscribe(data => {
       console.log(data);
-      this.quizzes = data;
+      this.quizzes = <quizDisplay[]> data;
     }, err => {
       console.log('There was an error with the request');
       console.log(err);
       this.responseError = true;
     })
-
-    this.quizSvc.getQuizzes('Isaac').subscribe(data => this.quizzes = data)
+    */
+    this.quizSvc.getQuizzes('Isaac').subscribe(data => this.quizzes = <quizDisplay[]> data)
     
   }
 
-  selectedQuiz = undefined;
-  
   public selectQuiz(q) {
     this.selectedQuiz = q;
-    
+  }
 
+  public addNewQuiz() {
+    let newQuiz = {
+      name: '',
+      numberQuestions: 0,
+      questions: new Array()
+    };
+    this.quizzes = [...this.quizzes, { name: '', numberQuestions: 0, questions: [] }];
+  }
+
+  public deleteQuestion(questionToRemove) {
+    this.selectedQuiz.questions = this.selectedQuiz.questions.filter(aQuestion => {
+      return questionToRemove != aQuestion;
+    });
   }
 
   public myPromise() {

@@ -9,7 +9,7 @@
   <!-- START Buttons Header -->
   <div class="row">
       <div class="col-md-4">
-          <button class="btn btn-outline-primary" (click)="myAsyncAwaitAll();">Add New Quiz</button>
+          <button class="btn btn-outline-primary" (click)="addNewQuiz();">Add New Quiz</button>
       </div>
       <div class="col-md-8" *ngIf="selectedQuiz != undefined">
         <button class="btn btn-outline-success">Save</button>
@@ -48,8 +48,17 @@
     <!-- END Quiz Selection -->
 
     <div class="col-md-8">
+
+      <!-- When No Quiz is Selected -->
+      <div class="card" *ngIf="!selectedQuiz">
+          <div class="card-body">
+            <h3>No quiz selected</h3>
+            Select or add a new quiz
+          </div>
+      </div>
+
       <!-- START General Section -->
-      <div class="card" *ngIf="selectedQuiz != undefined">
+      <div class="card" *ngIf="selectedQuiz">
           <div class="card-header">General</div>
           <div class="card-body">
             {{ selectedQuiz.name }}
@@ -57,19 +66,23 @@
       </div>
       <!-- END General Section -->
 
-      <div class="card" *ngIf="selectedQuiz == undefined">
-          <div class="card-body">
-            <h3>No quiz selected</h3>
-            Select or add a new quiz
-          </div>
-      </div>
-
       <br>
 
       <!-- START Questions Section -->
-      <div class="card" *ngIf="selectedQuiz != undefined">
-          <div class="card-header">Questions</div>
-          <div class="card-body">Coming Soon!</div>
+      <div class="card" *ngIf="selectedQuiz">
+          <div class="card-header">Questions <button>Test</button></div>
+          <div class="card-body">
+            <div *ngFor="let aQuestion of selectedQuiz.questions">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-4">{{ aQuestion.name }}</div>
+                  <div class="col-md-4">
+                    <button class="btn btn-danger" (click)="deleteQuestion(aQuestion)" style="font-size:7pt;">Remove</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
       </div>
       <!-- END Questions Section -->
     </div>
@@ -77,5 +90,25 @@
   </div>
 
 </div>
+
+<div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
