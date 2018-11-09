@@ -47,6 +47,9 @@
             <div class="list-group">
               <div *ngFor="let questions of selectedQuiz.questions; let i = index">
                 Question #{{ i + 1 }}: {{ questions.name }}
+                <span class="float-right">
+                  <button (click)="removeQuestion(questions)">Remove</button>
+                </span>
               </div>
             </div>
 

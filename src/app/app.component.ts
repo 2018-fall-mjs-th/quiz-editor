@@ -109,15 +109,20 @@ export class AppComponent {
 
   addNewQuestion() {
     // console.log(this.newQuestion);
-
     this.selectedQuiz.questions = [...this.selectedQuiz.questions, {name: this.newQuestion}];
-    this.selectedQuiz.numberQuestions = this.selectedQuiz.questions.length;
-    console.log(this.selectedQuiz);
+    this.updateQuizLength();
+    // console.log(this.selectedQuiz);
     this.newQuestion = "";
   }
 
-  removeQuestion() {
+  removeQuestion(deletion) {
+    // console.log("Kick me " + ndx);
+    this.selectedQuiz.questions = this.selectedQuiz.questions.filter(x => x !== deletion);
+    this.updateQuizLength();
+  }
 
+  updateQuizLength() {
+    this.selectedQuiz.numberQuestions = this.selectedQuiz.questions.length;
   }
 
   title = 'quiz-editor';
