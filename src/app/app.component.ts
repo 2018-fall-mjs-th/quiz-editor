@@ -103,6 +103,11 @@ export class AppComponent {
 
   increaseImageWidth = () => this.imageWidth *= 1.5;
 
+  selectedQuiz = undefined;
 
+  selectQuiz(q) {
+    this.selectedQuiz = q;
+  }
 
 }
+
