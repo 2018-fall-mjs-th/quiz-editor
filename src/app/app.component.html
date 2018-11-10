@@ -28,11 +28,12 @@
         </div>
         
         <div class="col-md-8" [@detailsFromLeft]="detailsFromLeftState" (@detailsFromLeft.done)="detailsFromLeftAnimationComplete()" style1="opacity: 0.1;">
-
+        <!-- <div class="col-md-8"> -->
             <div *ngIf="selectedQuiz">
-                    <button class="btn btn-outline-success mb-2">Save</button>
-                    <button class="btn btn-link mb-2">Cancel</button>
-                    <br />
+                    <div [@pulseSaveCancelButtons]="pulseButtonsState" (@pulseSaveCancelButtons.done)="donePulsingButtons()">
+                        <button class="btn mb-2" [class.btn-success]="pulseButtonsState === 'somethingToSave'" [class.btn-outline-success]="pulseButtonsState === 'nothingToSave'">Save</button>
+                        <button class="btn btn-link mb-2">Cancel</button>
+                    </div>
                     <div class="card">
                         <div class="card-header">
                             {{ selectedQuiz.name }}

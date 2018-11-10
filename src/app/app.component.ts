@@ -7,12 +7,11 @@ import {
   animate,
   transition,
   keyframes
-  // ...
 } from '@angular/animations';
 
 interface quizDisplay {
   name: string;
-  numberQuestions: number;
+  //numberQuestions: number;
   questions: any;
 }
 
@@ -23,7 +22,7 @@ interface quizDisplay {
   animations: [
     trigger('detailsFromLeft', [
       transition('leftPosition => finalPosition', [
-        animate('300ms',  keyframes([
+        animate('300ms', keyframes([
           style({ left: '-30px', offset: 0.0 }),
           style({ left: '-20px', offset: 0.25 }),
           style({ left: '-10px', offset: 0.5 }),
@@ -32,14 +31,23 @@ interface quizDisplay {
         ]))
       ]),
     ]),
-  ],
+    trigger('pulseSaveCancelButtons', [
+      transition('nothingToSave => somethingToSave', [
+        animate('400ms', keyframes([
+          style({ transform: 'scale(1.0)', 'transform-origin': 'top left', offset: 0.0 }),
+          style({ transform: 'scale(1.2)', 'transform-origin': 'top left', offset: 0.5 }),
+          style({ transform: 'scale(1.0)', 'transform-origin': 'top left', offset: 1.0 })
+        ]))
+      ])
+    ])
+  ]
 })
 export class AppComponent {
 
   quizzes: quizDisplay[] = [];
   wasErrorLoadingQuizzes: boolean = false;
 
-  constructor (private quizSvc: QuizService) {
+  constructor(private quizSvc: QuizService) {
   }
 
   ngOnInit() {
@@ -49,7 +57,7 @@ export class AppComponent {
       //   console.log(data);
       //   this.quizzes = data
       // }
-      data => this.quizzes = <quizDisplay[]> data
+      data => this.quizzes = <quizDisplay[]>data
       , error => this.wasErrorLoadingQuizzes = true
     );
   }
@@ -57,6 +65,7 @@ export class AppComponent {
   selectedQuiz = undefined;
 
   detailsFromLeftState = 'leftPosition';
+  pulseButtonsState = "nothingToSave";
 
   selectQuiz(q) {
     //console.log(q);
@@ -67,23 +76,30 @@ export class AppComponent {
   }
 
   addNewQuiz() {
-    let q = { name: "New Untitled Quiz", numberQuestions: 0, questions: []};
+    let q = { name: "New Untitled Quiz", numberQuestions: 0, questions: [] };
     this.quizzes = [...this.quizzes, q];
     this.selectQuiz(q);
   }
 
   addNewQuestion(selectedQuiz) {
-    selectedQuiz.questions = [...selectedQuiz.questions, {"name": "New untitled question"}];
-    selectedQuiz.numberQuestions = selectedQuiz.questions.length;
+    selectedQuiz.questions = [...selectedQuiz.questions, { "name": "New untitled question" }];
+    //selectedQuiz.numberQuestions = selectedQuiz.questions.length;
+    this.pulseButtonsState = "somethingToSave";
+  
   }
 
   removeQuestion(selectedQuiz, selectedQuestion) {
     selectedQuiz.questions = selectedQuiz.questions.filter(n => n != selectedQuestion);
-    selectedQuiz.numberQuestions = selectedQuiz.questions.length;
+    //selectedQuiz.numberQuestions = selectedQuiz.questions.length;
   }
 
   detailsFromLeftAnimationComplete() {
     this.detailsFromLeftState = 'leftPosition';
+  }
+
+  donePulsingButtons() {
+    console.log("donePulsingButtons");
+    this.pulseButtonsState = "nothingToSave";
   }
 
   learningPromises() {
@@ -98,14 +114,14 @@ export class AppComponent {
 
         let y = this.quizSvc.getNumberOfQuizzes(false);
         console.log(y);
-    
+
         y.then(
           n => console.log(n)
         ).catch(
           e => console.log(e)
-        );              
+        );
       }
-      
+
     ).catch(
       e => console.log(e)
     );
