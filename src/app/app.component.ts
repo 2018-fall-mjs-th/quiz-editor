@@ -11,8 +11,10 @@ import {
 
 interface quizDisplay {
   name: string;
+  originalName: string;
   //numberQuestions: number;
   questions: any;
+  questionsNaiveChecksum: string;
 }
 
 @Component({
@@ -57,7 +59,15 @@ export class AppComponent {
       //   console.log(data);
       //   this.quizzes = data
       // }
-      data => this.quizzes = <quizDisplay[]>data
+      data => {
+        this.quizzes = (<quizDisplay[]> data).map(x => ({
+          //...data
+          name: x.name
+          , originalName: x.name
+          , questions: x.questions
+          , questionsNaiveChecksum: x.questions.map(x => x.name).join('~')
+        }))
+      }
       , error => this.wasErrorLoadingQuizzes = true
     );
   }
@@ -76,7 +86,13 @@ export class AppComponent {
   }
 
   addNewQuiz() {
-    let q = { name: "New Untitled Quiz", numberQuestions: 0, questions: [] };
+    let q = { 
+      name: "New Untitled Quiz"
+      , originalName: "New Untitled Quiz"
+      , numberQuestions: 0
+      , questions: [] 
+      , questionsNaiveChecksum: ""
+    };
     this.quizzes = [...this.quizzes, q];
     this.selectQuiz(q);
   }
@@ -85,12 +101,25 @@ export class AppComponent {
     selectedQuiz.questions = [...selectedQuiz.questions, { "name": "New untitled question" }];
     //selectedQuiz.numberQuestions = selectedQuiz.questions.length;
     this.pulseButtonsState = "somethingToSave";
+    //this.numberOfChangedQuizzes += 1;
   
   }
 
   removeQuestion(selectedQuiz, selectedQuestion) {
     selectedQuiz.questions = selectedQuiz.questions.filter(n => n != selectedQuestion);
     //selectedQuiz.numberQuestions = selectedQuiz.questions.length;
+  }
+
+  //numberOfChangedQuizzes: number = 5;
+  get numberOfChangedQuizzes() {
+    //return this.quizzes.length;
+
+    let changedQuizzes = this.quizzes.filter(x => 
+      x.name !== x.originalName
+      || x.originalName === 'New Untitled Quiz'  
+      || x.questionsNaiveChecksum !== x.questions.map(x => x.name).join('~')
+    );
+    return changedQuizzes.length;
   }
 
   detailsFromLeftAnimationComplete() {
