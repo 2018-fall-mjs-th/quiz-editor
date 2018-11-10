@@ -54,28 +54,30 @@ export class AppComponent {
 
   ngOnInit() {
     //console.log(this.quizSvc.getQuizzes());
-    this.quizSvc.getQuizzes().subscribe(
-      // (data) => {
-      //   console.log(data);
-      //   this.quizzes = data
-      // }
-      data => {
-        this.quizzes = (<quizDisplay[]> data).map(x => ({
-          //...data
-          name: x.name
-          , originalName: x.name
-          , questions: x.questions
-          , questionsNaiveChecksum: x.questions.map(x => x.name).join('~')
-        }))
-      }
-      , error => this.wasErrorLoadingQuizzes = true
-    );
+    this.loadQuizzes();
   }
 
   selectedQuiz = undefined;
 
   detailsFromLeftState = 'leftPosition';
   pulseButtonsState = "nothingToSave";
+
+  private loadQuizzes() {
+    this.quizSvc.getQuizzes().subscribe(
+      // (data) => {
+      //   console.log(data);
+      //   this.quizzes = data
+      // }
+      data => {
+        this.quizzes = (<quizDisplay[]>data).map(x => ({
+          //...data
+          name: x.name,
+          originalName: x.name,
+          questions: x.questions,
+          questionsNaiveChecksum: x.questions.map(x => x.name).join('~')
+        }));
+      }, error => this.wasErrorLoadingQuizzes = true);
+  }
 
   selectQuiz(q) {
     //console.log(q);
@@ -120,6 +122,11 @@ export class AppComponent {
       || x.questionsNaiveChecksum !== x.questions.map(x => x.name).join('~')
     );
     return changedQuizzes.length;
+  }
+
+  cancelAllChanges() {
+    this.loadQuizzes();
+    this.selectedQuiz = undefined;
   }
 
   detailsFromLeftAnimationComplete() {

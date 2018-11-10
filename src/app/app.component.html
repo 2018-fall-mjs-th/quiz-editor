@@ -32,7 +32,7 @@
             <div *ngIf="selectedQuiz">
                     <div [@pulseSaveCancelButtons]="numberOfChangedQuizzes === 0 ? 'nothingToSave' : 'somethingToSave' " (@pulseSaveCancelButtons.done)="donePulsingButtons()">
                         <button class="btn mb-2" [class.btn-success]="numberOfChangedQuizzes > 0" [class.btn-outline-success]="numberOfChangedQuizzes === 0">Save Quizzes ({{numberOfChangedQuizzes}})</button>
-                        <button class="btn btn-link mb-2">Cancel</button>
+                        <button class="btn btn-link mb-2" (click)="cancelAllChanges()">Cancel</button>
                     </div>
                     <div class="card">
                         <div class="card-header">
