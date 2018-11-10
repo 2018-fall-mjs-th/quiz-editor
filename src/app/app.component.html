@@ -18,7 +18,8 @@
             <div class="list-group mb-2">
                 <div [class.active]="q === selectedQuiz" (click)="selectQuiz(q)" class="list-group-item list-group-item-action " *ngFor="let q of quizzes">
                        {{ q.name }}
-                    <span class="badge badge-secondary float-right" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
+                    <span class="badge badge-secondary float-right"
+                     [class.bg-danger]="q.questions.length === 0">{{ q.questions.length }}</span>
                 </div>
             </div>
         </div>
@@ -33,7 +34,8 @@
                             General
                         </div>
                         <div class="card-body">
-                          {{ selectedQuiz.name }}
+                            <label>Name</label>
+                            <input class="form-control" [(ngModel)]="selectedQuiz.name">
                         </div>
                     </div>
                     <br />
@@ -41,17 +43,23 @@
                         <div class="card-header">
                             Questions
                         </div>
-                        <div class="card-body">
-                            Coming soon!
+                        <br />
+        
+                        <button class="btn btn-outline-success mb-2"  (click)="addNewQuestion()">ADD NEW QUESTION</button><br>
+                        <div *ngFor="let question of selectedQuiz.questions;">
+                            <div class="input-group">
+                            <input class="form-control" [(ngModel)]="question.name">
+                            <div class="input-group-append"><button class="btn btn-link" (click)="removeQuestion(question)">Remove</button></div>
+                          </div><br>
                         </div>
+                      </div> 
                     </div>
-                    </div>
-            </div>
+                  
                 <div *ngIf="!selectedQuiz">
                     <br>
                     <br>
                     <div class="card">
-                        <div class="body">
+                        <div class="card-body">
                             <h3>No quiz selected</h3>
                            <p>select or updated new quiz</p>
                     
