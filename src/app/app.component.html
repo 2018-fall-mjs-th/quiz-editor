@@ -22,6 +22,7 @@
                     class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" 
                     *ngFor="let q of quizzes">
                         {{ q.name }}
+                        
                         <span class="badge badge-secondary" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
                 </div>
             </div>
@@ -38,7 +39,8 @@
                         General
                     </div>
                     <div class="card-body">
-                        {{ selectedQuiz.name }}
+                        <h4>Name</h4>
+                        <input [(ngModel)]="selectedQuiz.name"/>
                     </div>
                 </div>
                 <br />
@@ -47,8 +49,16 @@
                         Questions
                     </div>
                     <div class="card-body">
+                            <button class="btn btn-outline-success mb-2" (click)="addNewQuestion(selectedQuiz)">Add New Question</button>
                         Coming soon!
                     </div>
+                    <div class="list-group mb-2">
+                            <div
+                            class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" 
+                                *ngFor="let question of selectedQuiz.questions">
+                                <div> <input bindon-ngModel="question"></div>
+                                    
+                            </div>
                 </div>
             </div>
 
