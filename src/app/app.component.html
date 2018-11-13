@@ -50,13 +50,15 @@
                     </div>
                     <div class="card-body">
                             <button class="btn btn-outline-success mb-2" (click)="addNewQuestion(selectedQuiz)">Add New Question</button>
-                        Coming soon!
                     </div>
                     <div class="list-group mb-2">
                             <div
                             class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" 
                                 *ngFor="let nextQuest of selectedQuiz.questions">
-                                <div> <input bindon-ngModel="nextQuest.name"></div>
+                                <div> <input size="40" bindon-ngModel="nextQuest.name"/>
+                                    <button class="btn btn-link" (click)="removeQuestion(nextQuest)">Remove</button>
+                                
+                                </div>
                                     
                             </div>
                 </div>

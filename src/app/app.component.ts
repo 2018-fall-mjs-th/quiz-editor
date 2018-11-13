@@ -51,7 +51,7 @@ export class AppComponent {
 
 
   addNewQuiz(){
-    let q = {name:"New Untitled Quiz", numberQuestions: 0, questions:[{name:"New Untitled Question"}]};
+    let q = {name:"New Untitled Quiz", numberQuestions: 0, questions:[]};
     this.quizzes = [...this.quizzes, q];
     this.selectQuiz(q);
   }
@@ -66,6 +66,20 @@ export class AppComponent {
     this.selectedQuiz.numberQuestions = this.selectedQuiz.questions.length;
     console.log("after addNewQuestion \n", this.selectedQuiz.questions[1]);
   }
+
+  removeQuestion(deleted){
+    this.selectedQuiz.questions = this.arrayRemove(this.selectedQuiz.questions, deleted);
+    this.selectedQuiz.numberQuestions = this.selectedQuiz.questions.length;
+  }
+
+   arrayRemove (arr, value) {
+
+    return arr.filter(function(ele){
+        return ele != value;
+    });
+ 
+ }
+ 
 
 
 
