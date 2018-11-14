@@ -41,7 +41,7 @@ selectQuiz(q) {
 }
 
 addNewQuiz() {
-  let q = { name: "New Untitled Quiz", numberQuestions: 0 }
+  let q = { name: "New Untitled Quiz", numberQuestions: 0, questions: [] }
   this.quizzes = [...this.quizzes, q]
   this.selectQuiz(q);
 }
