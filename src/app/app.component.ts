@@ -46,7 +46,7 @@ addNewQuiz() {
   this.selectQuiz(q);
 }
 
-addNewQuestsion() {
+addNewQuestion() {
   if (this.selectedQuiz.questions) {
     this.selectedQuiz.questions = [...this.selectedQuiz.questions, {name: "New Question"}];
 

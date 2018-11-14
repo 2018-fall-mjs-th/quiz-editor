@@ -51,7 +51,7 @@
                     <div class="card-body">
                       <button class="btn btn-outline-success mb-2" click="addNewQuestion()">Add A Question</button>
                         <br><br>
-                        <div ngFor="let question of selectedQuiz.questions; let i = index">
+                        <div *ngFor="let question of selectedQuiz.questions; let i = index">
                           <label>Question {{i +1}}</label>
                           <div class="input-group">
                             <input class="form-control" [(ngModel)]="question.name">
