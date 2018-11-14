@@ -45,15 +45,14 @@
                     </div>
                     <br />
                     <div class="card">
-                        <div class="card-header">
-                            Questions
-                        </div>
+                        <div class="card-header">Questions</div>
                         <div class="card-body">
                                 <button (click)="addNewQuestion();" class="btn btn-outline-success mb-2">Add New Question</button>
-                                <div *ngFor="let que of selectedQuiz.questions; let i = index" class="input-group mb-3" >
-                                    <input type="text" class="form-control" placeholder="Your Question Here">
+                                <div *ngFor="let question of selectedQuiz.questions; let i = index" class="input-group mb-3">
+                                    <label class="mr-2">Question {{ i + 1 }}</label>
+                                    <input type="text" class="form-control" placeholder="Your Question Here" >
                                     <div class="input-group-append">
-                                      <span class="btn btn-primary">Remove</span>
+                                      <span (click)="removeQuestion();" class="btn btn-primary">Remove</span>
                                     </div>
                                 </div>   
                         </div>

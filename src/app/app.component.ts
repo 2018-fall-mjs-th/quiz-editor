@@ -46,11 +46,17 @@ export class AppComponent {
     this.selectQuiz(q);
   }
 
-  // newQuestion = undefined;
 
   addNewQuestion() {
-    // this.newQuestion = question;
-    this.questions = [...this.questions, que];
+    if (this.selectedQuiz.questions) {
+      this.selectedQuiz.questions = [...this.selectedQuiz.questions, { name: "New Question" } ];
+    } else {
+    this.selectedQuiz.questions = [ { name: "New Question" } ];
+    }
+  }
+
+  removeQuestion(question) {
+    this.selectedQuiz.questions = this.selectedQuiz.questions.filter(x => x !== question);
   }
 
   learningPromises() {
