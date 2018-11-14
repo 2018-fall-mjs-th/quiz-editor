@@ -3,20 +3,26 @@
     -webkit-border-radius: 10px;
     border-radius: 10px;
     border: none;
-    color: yellow;
+    color: rgb(248, 248, 245);
     cursor: pointer;
     display: inline-block;
     font-family: Arial;
     font-size: 20px;
-    margin-left: 300px;
+    margin-left: 700px;
     margin-top: 30px;
-    padding: 5px 10px;
+    margin-bottom: 30px;
+    margin-right: 30px;
+    padding: 5px 100px;
     text-align: center;
     text-decoration: none;
     -webkit-animation: glowing 20000ms infinite;
     -moz-animation: glowing 20000ms infinite;
     -o-animation: glowing 20000ms infinite;
     animation: glowing 20000ms infinite;
+}
+
+.card {
+    margin-bottom: 30px;
 }
 
 .quizzyboi {

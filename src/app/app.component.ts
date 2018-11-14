@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { QuizService } from './quiz.service';
 
+interface quizDisplay {
+  name: string;
+  numberQuestions: number;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,21 +13,21 @@ import { QuizService } from './quiz.service';
 })
 export class AppComponent {
 
-  quizzes: any = [];
-
-  wasErrorLoadingQuizzes: boolean = false;
+  quizzes: quizDisplay[] = [];
+  quizLoadingError: boolean = false;
 
   constructor (private quizSvc: QuizService) {
   }
 
   ngOnInit() {
+    //console.log(this.quizSvc.getQuizzes());
     this.quizSvc.getQuizzes().subscribe(
       // (data) => {
       //   console.log(data);
-      //   this.quizzes = data;
+      //   this.quizzes = data
       // }
-      data => this.quizzes = data
-      , error => this.wasErrorLoadingQuizzes = true
+      data => this.quizzes = <quizDisplay[]> data
+      , error => this.quizLoadingError = true
     );
   }
 
@@ -33,16 +38,19 @@ export class AppComponent {
     console.log(x);
 
     x.then(
-      n => console.log(n)
-    ).catch(
-      e => console.log(e)
-    );
+      n => {
+        console.log(n);
 
-    let y = this.quizSvc.getNumberOfQuizzes(false);
-    console.log(y);
-
-    y.then(
-      n => console.log(n)
+        let y = this.quizSvc.getNumberOfQuizzes(false);
+        console.log(y);
+    
+        y.then(
+          n => console.log(n)
+        ).catch(
+          e => console.log(e)
+        );              
+      }
+      
     ).catch(
       e => console.log(e)
     );
@@ -57,34 +65,69 @@ export class AppComponent {
 
       let y = await this.quizSvc.getNumberOfQuizzes(false);
       console.log(y);
-    } 
+    }
 
     catch (e) {
       console.log(e);
     }
   }
-
 
   async learningPromisesWithAwaitAll() {
-    console.log("learningPromisesWithAwaitAll()");
+    console.log("learningPromisesWithAsyncAwait()");
 
     try {
-      let x = await this.quizSvc.getNumberOfQuizzes(true);
+      let x = this.quizSvc.getNumberOfQuizzes(true);
       console.log(x);
 
-      let y = await this.quizSvc.getNumberOfQuizzes(true);
+      let y = this.quizSvc.getNumberOfQuizzes(true);
       console.log(y);
 
+      //let results = await Promise.race([x, y]);
       let results = await Promise.all([x, y]);
-      // let results = await Promise.race([x, y]);
       console.log(results);
-    } 
+    }
 
     catch (e) {
       console.log(e);
     }
   }
 
+  selectedQuiz = undefined;
+  selectQuiz(q) 
+  {
+    console.log(q);
+    this.selectedQuiz = q;
+  }
+
+  addNewQuiz() {
+    let q = { name: "New Blank Quiz", numberQuestions: 0, questions: []};
+    this.quizzes = [...this.quizzes, q];
+    this.selectQuiz(q);
+  }
+  
+  newQuestion = undefined;
+  addNewQuestion() {
+    // console.log(this.newQuestion);
+    this.selectedQuiz.questions = [...this.selectedQuiz.questions, {name: this.newQuestion}];
+    this.updateQuizLength();
+    // console.log(this.selectedQuiz);
+    this.newQuestion = "";
+  }
+
+  removeQuiz(deletion) {
+    this.quizzes = this.quizzes.filter(x => x !== deletion);
+    this.selectedQuiz = undefined;
+  }
+
+  removeQuestion(deletion) {
+    // console.log("Kick me " + ndx);
+    this.selectedQuiz.questions = this.selectedQuiz.questions.filter(x => x !== deletion);
+    this.updateQuizLength();
+  }
+
+  updateQuizLength() {
+    this.selectedQuiz.numberQuestions = this.selectedQuiz.questions.length;
+  }
 
   title = 'quiz-editor';
 
@@ -99,7 +142,4 @@ export class AppComponent {
   //imageWidth = '100px';
 
   increaseImageWidth = () => this.imageWidth *= 1.5;
-
-
-
 }

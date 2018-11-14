@@ -1,55 +1,76 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div class="container">
-  <div class="row" *ngIf="wasErrorLoadingQuizzes">
-    <div class="col-md-12">
-      <h3>Can't load quizzes, please try again later</h3>
+<div class="jumbotron" class="glow">
+    <div class="page-header">
+        <h1 class="quizzyboi">Quiz Maker</h1>
     </div>
-  </div>
-
-<div class="glow">
-      <h1 class="quizzyboi">Quizzy Boi</h1>
-</div><br><br>
-
+</div>
 <div class="container">
+    <div class="row" *ngIf="quizLoadingError">
+        <div class="col-md-12">
+            <h3>Can't load quizzes, please try again</h3>
+        </div>
+    </div>
+    <div class="row" *ngIf="!quizLoadingError">
+        <div class="col-md-4">
+            <button class="btn btn-outline-primary" (click)="addNewQuiz()">Add New Quiz</button>
+            <br>
+            <br>
+            <div class="list-group">
+            <div [class.active]="q === selectedQuiz" 
+                (click)="selectQuiz(q)" 
+                class="list-group-item list-group-item-action" 
+                *ngFor="let q of quizzes">
+                {{ q.name }}
+                <span class="badge badge-secondary float-right" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div [class.hiddenButtons]="!selectedQuiz">
+                <button class="btn btn-outline-success mr-3">Save</button>
 
-  <div class="row" *ngIf="wasErrorLoadingQuizzes">
-      <div class="col-md-12">
-          <h3>Can't load quizzes, please try again later.</h3>
-      </div>
-  </div>
-
-  <div class="row" *ngIf="!wasErrorLoadingQuizzes">
-      <div class="col-md-4">
-          <button class="btn btn-outline-primary mb-2" (click)="learningPromisesWithAwaitAll()">Add New Quiz</button>
-          <div class="list-group mb-2">
-              <div class="list-group-item" *ngFor="let q of quizzes">
-                  {{ q.name }}
-                  <span class="badge badge-secondary float-right" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
-              </div>
-          </div>
-      </div>
-      
-      <div class="col-md-8">
-          <button class="btn btn-outline-success mb-2">Save</button>
-          <button class="btn btn-link mb-2">Cancel</button>
-          <br />
-          <div class="card">
-              <div class="card-header">
-                  General
-              </div>
-              <div class="card-body">
-                  Coming soon!
-              </div>
-          </div>
-          <br />
-          <div class="card">
-              <div class="card-header">
-                  Questions
-              </div>
-              <div class="card-body">
-                  Coming soon!
-              </div>
-          </div>
-      </div>
-  </div>
+                <button class="btn btn-danger">Cancel</button>
+                <br>
+                <br>
+            </div>
+            <div *ngIf="selectedQuiz">
+                <div class="card">
+                    <div class="card-header">
+                        General
+                    </div>
+                    <br>&nbsp;
+                    Name
+                    <div class="card-body">
+                        <input type="text" [(ngModel)]="selectedQuiz.name">
+                        <span class="float-right">
+                            <button (click)="removeQuiz(selectedQuiz)" class="btn btn-danger mb-2">Remove</button>
+                        </span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        Add Questions
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <div *ngFor="let question of selectedQuiz.questions; let i = index">
+                                Question #{{ i + 1 }}: {{ question.name }}
+                                <span class="float-right">
+                                <button (click)="removeQuestion(question)" class="btn btn-danger mb-2">Remove</button>
+                                </span>
+                            </div>
+                        </div>
+                        <input type="text" id="newQuestion" [(ngModel)]="newQuestion">&nbsp;&nbsp;
+                        <button (click)="addNewQuestion()" class="btn btn-success">Add</button>
+                    </div>
+                </div>    
+            </div>
+            <div *ngIf="!selectedQuiz">
+                <div class="card p-4">
+                    <h3>There is no active quiz</h3>
+                        <p>Please select a quiz from the list.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
