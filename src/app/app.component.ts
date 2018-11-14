@@ -57,7 +57,8 @@ addNewQuestion() {
 }
 
 removeQuestion(question) {
-  
+  this.selectedQuiz.questions = this.selectedQuiz.questions.filter(x => x !== question);
+
 }
 
   learningPromises() {
