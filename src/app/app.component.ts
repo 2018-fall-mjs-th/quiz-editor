@@ -4,7 +4,7 @@ import { QuizService } from './quiz.service';
 interface quizDisplay {
   name: string;
   numberQuestions: number;
-
+  question: any[];
 }
 
 @Component({
@@ -43,6 +43,10 @@ addNewQuiz() {
   let q = { name: "New Untitled Quiz", numberQuestions: 0 }
   this.quizzes = [...this.quizzes, q]
   this.selectQuiz(q);
+}
+
+addNewQuestion() {
+  
 }
 
   learningPromises() {
