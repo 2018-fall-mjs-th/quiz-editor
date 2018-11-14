@@ -56,6 +56,10 @@ addNewQuestion() {
 
 }
 
+removeQuestion(question) {
+  
+}
+
   learningPromises() {
     console.log("learningPromises()");
 
