@@ -40,7 +40,7 @@
                         </div>
                         <div class="card-body">
                             <h5>Name:</h5>
-                            <span class="btn btn-outline-dark disabled" >{{selectedQuiz.name}}</span>
+                            <input class="form-control" [(ngModel)]="selectedQuiz.name">
                         </div>
                     </div>
                     <br />
@@ -52,7 +52,7 @@
                                     <label class="mr-2">Question {{ i + 1 }}</label>
                                     <input type="text" class="form-control" placeholder="Your Question Here" >
                                     <div class="input-group-append">
-                                      <span (click)="removeQuestion();" class="btn btn-primary">Remove</span>
+                                      <span (click)="removeQuestion(question);" class="btn btn-primary">Remove</span>
                                     </div>
                                 </div>   
                         </div>
