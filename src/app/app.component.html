@@ -47,17 +47,15 @@
             Add Questions
           </div>
           <div class="card-body">
+              <button class="btn btn-outline-danger" (click)="addNewQuestion()">Add a Question</button>
             <div class="list-group">
-              <div *ngFor="let question of selectedQuiz.questions; let i = index">
-                Question #{{ i + 1 }}: {{ question.name }}
-                <span class="float-right">
-                  <button (click)="removeQuestion(question)" class="btn btn-link mb-2">Remove</button>
-                </span>
+
+              <div class="row" *ngFor="let question of selectedQuiz.questions; let i = index">
+                    <!-- <label for="nextQuestion" >Question #{{ i + 1 }}: -->
+                    <input  id="nextQuestion" type="text" [(ngModel)]="question.name">
+                    <span class="float-right"><button (click)="removeQuestion(question)" class="btn-link">Remove</button></span>
               </div>
             </div>
-
-            <input type="text" #newQuestionText [(ngModel)]="newQuestion" (keyup)="checkKeystroke($event)">
-            <button (click)="addNewQuestion()">Add</button>
           </div>
         </div>
                 
