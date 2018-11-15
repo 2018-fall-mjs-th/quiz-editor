@@ -4,6 +4,7 @@ import { QuizService } from './quiz.service';
 interface quizDisplay {
   name: string;
   numberQuestions: number;
+  questions : any;
 }
 
 @Component({
@@ -39,17 +40,19 @@ export class AppComponent {
   }
 
   addNewQuiz() {
-    let q = { name: "New Untitle Quiz", numberQuestions: 0 };
+    let q = { name: "New Untitle Quiz", numberQuestions: 0, questions: [] };
     this.quizzes = [...this.quizzes, q];
     this.selectQuiz(q);
   }
 
-  newQuestion = undefined;
-
   addNewQuestion() {
-    let q = { name: this.newQuestion}
-    this.selectedQuiz.questions = [...this.selectedQuiz.questions, q];
-    this.newQuestion = "";
+    this.selectedQuiz.questions = [...this.selectedQuiz.questions, { name: "New untitled question"}];
+    this.selectedQuiz.numberQuestions = this.selectedQuiz.questions.length;
+  }
+
+  removeQuestion(selectedQuestion) {
+    this.selectedQuiz.questions = this.selectedQuiz.questions.filter(n => n != selectedQuestion);
+    this.selectedQuiz.numberQuestions = this.selectedQuiz.questions.length;
   }
 
   learningPromises() {

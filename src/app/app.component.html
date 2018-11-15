@@ -34,7 +34,7 @@
                 </div>
                 <div class="card-body">
                     <h3>NAME</h3>
-                    <span class="btn btn-outline-dark disabled">{{selectedQuiz.name}}</span>
+                    <input type="text" class="form-control" [(ngModel)]="selectedQuiz.name">
                 </div>
             </div>
             <br />
@@ -43,18 +43,13 @@
                     Questions
                 </div>
                 <div class="card-body">
-                    <button class="btn btn-outline-success mb-2" (click)="addNewQuestion()">ADD NEW QUESTION</button>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control">
-                        <button class="btn btn-primary" type="button">Remove</button>                      
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control">
-                        <button class="btn btn-primary" type="button">Remove</button>                      
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control">
-                        <button class="btn btn-primary" type="button">Remove</button>                      
+                    <button class="btn btn-outline-success mb-2" (click)="addNewQuestion(selectedQuiz)">ADD NEW QUESTION</button>
+                    <div class="row" *ngFor="let q of selectedQuiz.questions">
+                    <div class="input-group">
+                        <input class="form-control" [(ngModel)]="question.name"></div>
+                        <div class="input-group-append">
+                        <button class="btn btn-link" (click)="removeQuestion(question)">Remove</button>
+                        </div>                                       
                     </div>
                 </div>
             </div>
@@ -69,5 +64,4 @@
             </div>
         </div>
     </div>
-
 </div>
