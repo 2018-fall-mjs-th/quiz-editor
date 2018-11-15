@@ -143,6 +143,8 @@ export class AppComponent {
 
   increaseImageWidth = () => this.imageWidth *= 1.5;
 
-
+  checkKeystroke(event) {
+    if (event.key === "Enter") {this.addNewQuestion();}
+  }
 
 }

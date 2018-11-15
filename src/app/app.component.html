@@ -56,7 +56,7 @@
               </div>
             </div>
 
-            <input type="text" id="newQuestion" [(ngModel)]="newQuestion">
+            <input type="text" id="newQuestion" [(ngModel)]="newQuestion" (keyup)="checkKeystroke($event)">
             <button (click)="addNewQuestion()">Add</button>
           </div>
         </div>
