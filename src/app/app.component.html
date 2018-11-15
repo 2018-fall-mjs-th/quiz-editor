@@ -1,6 +1,6 @@
 <div class="jumbotron" class="glow">
     <div class="page-header">
-        <h1 class="quizzyboi">Quiz Maker</h1>
+        <h1 class="quizzyboi">A E S T H E T I C</h1>
     </div>
 </div>
 <div class="container">
@@ -10,25 +10,26 @@
         </div>
     </div>
     <div class="row 1" *ngIf="!quizLoadingError">
-        <div class="col-md-4">
-            <button class="btn btn-outline-primary" (click)="addNewQuiz()">Add New Quiz</button>
+        <div class="col-md-4 class1">
+            <button class="btn add-new-quiz" (click)="addNewQuiz()">add New Quiz</button>
             <br>
             <br>
             <div class="list-group">
-            <div [class.active]="q === selectedQuiz" 
-                (click)="selectQuiz(q)" 
-                class="list-group-item list-group-item-action" 
-                *ngFor="let q of quizzes">
-                {{ q.name }}
-                <span class="badge badge-secondary float-right" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
-            </div>
+                <div [class.active]="q === selectedQuiz" 
+                    (click)="selectQuiz(q)" 
+                    class="list-group-item list-group-item-action" 
+                    *ngFor="let q of quizzes">
+                    {{ q.name }}
+                    <span class="badge badge-secondary float-right" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
+                </div>
+                <img class="vaporwave" src="https://66.media.tumblr.com/77bfb4472f4078747e7cc41df3ef7c10/tumblr_ofvr8fQOn31toe0eco1_500.gif" alt="vaporwave">
             </div>
         </div>
         <div class="col-md-8">
             <div [class.hiddenButtons]="!selectedQuiz">
-                <button class="btn btn-outline-success mr-3">Save</button>
+                <button class="btn save mr-3">S &nbsp;&nbsp;A&nbsp;&nbsp; V&nbsp;&nbsp; E</button>
 
-                <button class="btn btn-danger">Cancel</button>
+                <button class="btn cancel">C &nbsp;&nbsp;A &nbsp;&nbsp;N &nbsp;&nbsp;C &nbsp;&nbsp;E &nbsp;&nbsp;L</button>
                 <br>
                 <br>
             </div>
@@ -44,12 +45,12 @@
                     
                         <input type="text" autofocus onmouseover="javascript:this.focus();this.select();" onclick="this.select()" [(ngModel)]="selectedQuiz.name">
                         <span class="float-right">
-                            <button (click)="removeQuiz(selectedQuiz)" class="btn btn-danger mb-2">Remove</button>
+                            <button (click)="removeQuiz(selectedQuiz)" class="btn remove mb-2">r e m o v e</button>
                         </span>
                     
                     </div>
                 </div>
-                <div class="card">
+                <div class="card class3">
                     <div class="card-header">
                         Questions
                     </div>
@@ -58,13 +59,14 @@
                             <div *ngFor="let question of selectedQuiz.questions; let i = index">
                                 Question #{{ i + 1 }}: {{ question.name }}
                                 <span class="float-right">
-                                <button (click)="removeQuestion(question)" class="btn btn-danger mb-2">Remove</button>
+                                <button (click)="removeQuestion(question)" class="btn remove mb-2">r e m o v e</button>
                                 </span>
                             </div>
                         </div>
                         <input type="text" id="newQuestion" [(ngModel)]="newQuestion">&nbsp;&nbsp;
-                        <button (click)="addNewQuestion()" class="btn btn-success">Add A Question</button>
+                        <button (click)="addNewQuestion()" class="btn add">add a question</button>
                     </div>
+                    <img class="vaporwave2" src="https://media.giphy.com/media/G2k1HJdHvg0G4/giphy.gif" alt="vaporwave2">
                 </div>    
             </div>
             <div *ngIf="!selectedQuiz">

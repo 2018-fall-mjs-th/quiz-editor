@@ -20,6 +20,85 @@ body, html {
     background-size: cover;
 }
 
+.class1 {
+    border-style: outset;
+    border-color: grey;
+    border-width: 5px;
+    background-color: lightgrey;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.class2 {
+    border-style: dotted;
+}
+
+.vaporwave {
+    margin-top: 20px;
+}
+
+.vaporwave2 {
+    margin-top: 20px;
+}
+
+.add-new-quiz {
+    -webkit-animation-name: sadBoi;
+    -webkit-animation-duration: 8s;
+    -webkit-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes sadBoi {
+    from { background-color: #7072eb; -webkit-box-shadow: 0 0 9px #7072eb; }
+    50% { background-color: #109ddf; -webkit-box-shadow: 0 0 18px #109ddf; }
+    to { background-color: #7072eb; -webkit-box-shadow: 0 0 9px #7072eb; }
+}
+
+.save {
+    -webkit-animation-name: saveMe;
+    -webkit-animation-duration: 8s;
+    -webkit-animation-iteration-count: infinite;
+    font-family: "Impact", Charcoal, sans-serif;
+}
+
+@-webkit-keyframes saveMe {
+    from { background-color: #0ed467; -webkit-box-shadow: 0 0 9px #0ed467; }
+    50% { background-color: #10dfab; -webkit-box-shadow: 0 0 18px #10dfab; }
+    to { background-color: #0ed467; -webkit-box-shadow: 0 0 9px #0ed467; }
+}
+
+.cancel {
+    -webkit-animation-name: noMore;
+    -webkit-animation-duration: 8s;
+    -webkit-animation-iteration-count: infinite;
+    font-family: "Impact", Charcoal, sans-serif;
+}
+
+@-webkit-keyframes noMore {
+    from { background-color: #f11645; -webkit-box-shadow: 0 0 9px #f11645; }
+    50% { background-color: #c51f6c; -webkit-box-shadow: 0 0 18px #c51f6c; }
+    to { background-color: #f11645; -webkit-box-shadow: 0 0 9px #f11645; }
+}
+
+.remove {
+    -webkit-animation-name: purpleRain;
+    -webkit-animation-duration: 8s;
+    -webkit-animation-iteration-count: infinite;
+    font-family: "Courier New", Courier, monospace;
+}
+
+@-webkit-keyframes purpleRain {
+    from { background-color: #f116f1; -webkit-box-shadow: 0 0 9px #f116f1; }
+    50% { background-color: #bd5abd; -webkit-box-shadow: 0 0 18px #bd5abd; }
+    to { background-color: #f116f1; -webkit-box-shadow: 0 0 9px #f116f1; }
+}
+
+.add {
+    -webkit-animation-name: saveMe;
+    -webkit-animation-duration: 8s;
+    -webkit-animation-iteration-count: infinite;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
 
 .glow {
     background-color: #004A7F;
@@ -31,7 +110,7 @@ body, html {
     display: inline-block;
     font-family: Arial;
     font-size: 20px;
-    margin-left: 700px;
+    margin-left: 600px;
     margin-top: 30px;
     margin-bottom: 30px;
     margin-right: 30px;
