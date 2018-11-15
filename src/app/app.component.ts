@@ -4,9 +4,12 @@ import { QuizService } from './quiz.service';
 interface quizDisplay {
   name: string;
   numberQuestions: number;
-
+  questions: questionsList;
 }
 
+interface questionsList {
+  question: string;
+}
 
 @Component({
   selector: 'app-root',
@@ -17,6 +20,8 @@ export class AppComponent {
 
   quizzes: quizDisplay[] = [];
   wasErrorLoadingQuizzes: boolean = false;
+
+  questions: questionsList[] = [{question: "WhatQuestion1?"}, {question: "HowQuestion2?"}, {question: "WhyQuestion3?"}];
 
   constructor (private quizSvc: QuizService) {
   }
@@ -117,6 +122,7 @@ export class AppComponent {
   titleBackgroundColorDanger = false;
 
   headingTwoBackgroundColor = this.dumb === 'foo' ? 'Red' : 'Blue';
+
 
   imageWidth: number = 100;
   //imageWidth = '100px';

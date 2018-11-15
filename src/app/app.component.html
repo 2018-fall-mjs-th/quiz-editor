@@ -45,8 +45,9 @@
                         <div class="card-header">
                             Questions
                         </div>
-                        <div class="card-body">
-                            Coming soon!
+                        <button class="btn btn-outline-primary mb-2" (click)="addNewQuestion()">Add New Question</button>
+                        <div class="card-body" *ngFor="let q of questions">
+                            {{q.question}}
                         </div>
                     </div>
             </div>
