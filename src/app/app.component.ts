@@ -20,18 +20,17 @@ export class AppComponent {
   quizzes: quizDisplay[] = [];          // UI display of quizzes (not necessarily committed information )
   responseError: boolean = false;
   selectedQuiz = undefined;
-  savedQuizzes: quizDisplay[] = [];     // After save is clicked
-  selectedQuestions = undefined;
+  //savedQuizzes: quizDisplay[] = [];     // After save is clicked
+  //selectedQuestions = undefined;
 
   constructor (private quizSvc: QuizService) { }
 
   ngOnInit() {
 
-    
     this.quizSvc.getQuizzes('Isaac').subscribe(data => {
       console.log(data);
       this.quizzes = <quizDisplay[]> data;
-      this.savedQuizzes = <quizDisplay[]> data;
+      //this.savedQuizzes = <quizDisplay[]> data;
     }, err => {
       console.log('There was an error with the request');
       console.log(err);
@@ -45,6 +44,7 @@ export class AppComponent {
   public selectQuiz(q) {
 
     // Reset the previous information if it wasn't saved
+    /*
     if (this.selectedQuiz) {
       this.selectedQuiz.questions = this.selectedQuestions;
       this.updateQuestionCount(this.selectedQuiz);
@@ -52,6 +52,9 @@ export class AppComponent {
 
     this.selectedQuiz = q;
     this.selectedQuestions = q.questions;
+    this.updateQuestionCount(q);
+    */
+    this.selectedQuiz = q;
     this.updateQuestionCount(q);
   }
 
