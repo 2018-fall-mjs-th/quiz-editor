@@ -22,7 +22,7 @@
                     class="list-group-item list list-group-item-action" 
                     *ngFor="let q of quizzes">
                         {{ q.name }}
-                        <span class="badge badge-secondary float-right" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
+                        <span class="badge badge-secondary float-right" [class.bg-danger]="q.questions.length === 0">{{ q.questions.length }}</span>
                 </div>
             </div>
         </div>
