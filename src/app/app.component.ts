@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { QuizService } from './quiz.service';
+import { ViewEncapsulation } from '@angular/core';
 
 interface quizDisplay {
   name: string;
@@ -7,9 +8,10 @@ interface quizDisplay {
 }
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-root'
+  , templateUrl: './app.component.html'
+  , styleUrls: ['./app.component.css']
+  , encapsulation: ViewEncapsulation.None
 })
 
 export class AppComponent {
