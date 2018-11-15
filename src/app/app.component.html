@@ -50,10 +50,10 @@
               <button class="btn btn-outline-danger" (click)="addNewQuestion()">Add a Question</button>
             <div class="list-group">
 
-              <div class="row" *ngFor="let question of selectedQuiz.questions; let i = index">
-                    <!-- <label for="nextQuestion" >Question #{{ i + 1 }}: -->
-                    <input  id="nextQuestion" type="text" [(ngModel)]="question.name">
-                    <span class="float-right"><button (click)="removeQuestion(question)" class="btn-link">Remove</button></span>
+              <div *ngFor="let question of selectedQuiz.questions; let i = index">
+                    <label for="nextQuestion" >Question #{{ i + 1 }}:</label><br>
+                    <input style="width:75%" id="nextQuestion" type="text" [(ngModel)]="question.name">
+                    <span class="float-right"><button (click)="removeQuestion(question)" class="btn btn-link">Remove</button></span>
               </div>
             </div>
           </div>
