@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { QuizService } from './quiz.service';
+import {ViewEncapsulation} from '@angular/core';
 
 interface quizDisplay {
   name: string;
@@ -9,7 +10,8 @@ interface quizDisplay {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
 
@@ -20,12 +22,7 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    //console.log(this.quizSvc.getQuizzes());
     this.quizSvc.getQuizzes().subscribe(
-      // (data) => {
-      //   console.log(data);
-      //   this.quizzes = data
-      // }
       data => this.quizzes = <quizDisplay[]> data
       , error => this.quizLoadingError = true
     );
@@ -82,7 +79,6 @@ export class AppComponent {
       let y = this.quizSvc.getNumberOfQuizzes(true);
       console.log(y);
 
-      //let results = await Promise.race([x, y]);
       let results = await Promise.all([x, y]);
       console.log(results);
     }
@@ -100,17 +96,15 @@ export class AppComponent {
   }
 
   addNewQuiz() {
-    let q = { name: "New Blank Quiz", numberQuestions: 0, questions: []};
+    let q = { name: "New Quiz", numberQuestions: 0, questions: []};
     this.quizzes = [...this.quizzes, q];
     this.selectQuiz(q);
   }
   
   newQuestion = undefined;
   addNewQuestion() {
-    // console.log(this.newQuestion);
     this.selectedQuiz.questions = [...this.selectedQuiz.questions, {name: this.newQuestion}];
     this.updateQuizLength();
-    // console.log(this.selectedQuiz);
     this.newQuestion = "";
   }
 
@@ -120,7 +114,6 @@ export class AppComponent {
   }
 
   removeQuestion(deletion) {
-    // console.log("Kick me " + ndx);
     this.selectedQuiz.questions = this.selectedQuiz.questions.filter(x => x !== deletion);
     this.updateQuizLength();
   }
@@ -139,7 +132,6 @@ export class AppComponent {
   headingTwoBackgroundColor = this.dumb === 'foo' ? 'Red' : 'Blue';
 
   imageWidth: number = 100;
-  //imageWidth = '100px';
 
   increaseImageWidth = () => this.imageWidth *= 1.5;
 }

@@ -1,3 +1,26 @@
+body {
+    background-image: url(https://i0.wp.com/biseyre.com/wp-content/uploads/2018/08/vaporwave-wallpaper-8.png);
+}
+
+body, html {
+    height: 100%;
+}
+
+.parallax {
+    /* The image used */
+    background-image: url('https://66.media.tumblr.com/77bfb4472f4078747e7cc41df3ef7c10/tumblr_ofvr8fQOn31toe0eco1_500.gif');
+
+    /* Full height */
+    height: 100%; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
 .glow {
     background-color: #004A7F;
     -webkit-border-radius: 10px;
