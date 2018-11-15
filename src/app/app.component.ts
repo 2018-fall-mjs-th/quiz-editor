@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { QuizService } from './quiz.service';
 
 interface quizDisplay {
@@ -11,6 +11,7 @@ interface quizDisplay {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
 
   quizzes: quizDisplay[] = [];
@@ -29,7 +30,37 @@ export class AppComponent {
       data => this.quizzes = <quizDisplay[]> data
       , error => this.quizLoadingError = true
     );
+    console.log("quizzes loaded");
   }
+
+  ngAfterViewInit() {
+    console.log("After Viewing");
+    // this.setFocusOnQuestion = () => {
+    //   // the very first time this function is defined on page load it will throw an undefined error
+    //   try {
+    //     console.log("Focus called");
+    //     this.newQuestionText.nativeElement.focus();
+    //   } catch(err) {
+    //     console.log("focus called in error");
+    //     return;
+    //   }
+    // };
+  }
+
+  // setFocusOnQuestion = undefined;
+    
+  @ViewChild("newQuestionText") newQuestionText: ElementRef;
+  setFocusOnQuestion() {
+    // the very first time this function is called it will throw an undefined error
+    try {
+      console.log("Focus called");
+      this.newQuestionText.nativeElement.focus();
+    } catch(err) {
+      console.log("focus called in error");
+      return;
+    }
+  };
+
 
   learningPromises() {
     console.log("learningPromises()");
@@ -93,10 +124,11 @@ export class AppComponent {
   }
 
   selectedQuiz = undefined;
+
   selectQuiz(q) 
   {
-    console.log(q);
     this.selectedQuiz = q;
+    this.setFocusOnQuestion();
   }
 
   addNewQuiz() {
@@ -112,6 +144,7 @@ export class AppComponent {
     this.updateQuizLength();
     // console.log(this.selectedQuiz);
     this.newQuestion = "";
+    this.setFocusOnQuestion();
   }
 
   removeQuiz(deletion) {
