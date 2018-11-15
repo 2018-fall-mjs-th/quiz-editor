@@ -36,7 +36,9 @@
                         General
                     </div>
                     <div class="card-body">
-                        {{ selectedQuiz.name }}
+                        <div class="input-group">
+                            <input type="text" [(ngModel)]="selectedQuiz.name" class="form-control">
+                        </div>
                     </div>
                 </div>
                 <br />
@@ -52,7 +54,7 @@
                             <div class="input-group my-1">
                                 <input type="text" [(ngModel)]="question.name" class="form-control" placeholder="Add New Question" aria-label="Add New Question" aria-describedby="basic-addon2">
                                 <div class="input-group-append">
-                                    <button class="btn btn-outline-danger float-right" type="button">Delete</button>
+                                    <button class="btn btn-outline-danger float-right" type="button" (click)="deleteQuestion(question)">Delete</button>
                                 </div>
                             </div>
                         </div>

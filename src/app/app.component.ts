@@ -23,12 +23,7 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    //console.log(this.quizSvc.getQuizzes());
     this.quizSvc.getQuizzes().subscribe(
-      // (data) => {
-      //   console.log(data);
-      //   this.quizzes = data
-      // }
       data => this.quizzes = <quizDisplay[]> data // data is being cast as a quizDisplay array
       , error => this.wasErrorLoadingQuizzes = true
     );
@@ -46,7 +41,11 @@ export class AppComponent {
 
   addNewQuestion(selectedQuiz) {
     selectedQuiz.questions = [...selectedQuiz.questions, {name: "question"} ]
-  }  
+  }
+
+  deleteQuestion(question) {
+    this.questions = this.questions.filter(x => x !== question);
+  }
 
   learningPromises() {
     console.log("learningPromises()");
