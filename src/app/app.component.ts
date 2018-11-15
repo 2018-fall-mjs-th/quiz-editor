@@ -44,7 +44,7 @@ export class AppComponent {
   }
 
   deleteQuestion(question) {
-    this.questions = this.questions.filter(x => x !== question);
+    this.selectedQuiz.questions = this.selectedQuiz.questions.filter(x => x !== question);
   }
 
   learningPromises() {
