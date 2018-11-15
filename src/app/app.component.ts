@@ -34,7 +34,7 @@ export class AppComponent {
       , error => this.wasErrorLoadingQuizzes = true
     );
   }
-
+//test
   selectedQuiz = undefined;
 
   selectQuiz(quiz){
