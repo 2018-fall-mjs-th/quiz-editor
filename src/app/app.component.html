@@ -45,13 +45,15 @@
                         <div class="card-header">
                             Questions
                         </div>
-                        <button class="btn btn-outline-primary mb-2" (click)="addNewQuestion()">Add New Question</button>
-                        <div class="card-body" *ngFor="let q of questions">
-                            {{q.question}}
-                            <button class="btn btn-link mb-2">Remove
+                        
+                          <button class="btn btn-outline-primary mb-2" (click)="addNewQuestion()">Add New Question</button>
+                          <div class="card-body" *ngFor="let q of questions">
+                              <input [(ngModel)] = "q.question">
+                              <button class="btn btn-link mb-2" style="float:right">Remove
                                 
-                            </button>
-                        </div>
+                              </button>
+                          </div>
+                    
                     </div>
             </div>
 
