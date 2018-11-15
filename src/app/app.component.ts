@@ -46,10 +46,16 @@ export class AppComponent {
   }
 
   addNewQuiz() {
-    let q = {name: "New Untitled Quiz", numberQuestions: 0 };
+    let q = {name: "New Untitled Quiz", numberQuestions: 0, questions: {question: "Question"} };
     this.quizzes = [...this.quizzes, q];
     this.selectQuiz(q);
   }
+
+  addNewQuestion() {
+    let r = {question: "New Question"};
+    this.questions = [...this.questions, r];
+  }
+
 
   learningPromises() {
     console.log("learningPromises()");
