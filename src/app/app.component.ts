@@ -30,7 +30,7 @@ interface questionDisplay {
   animations: [
     trigger('detailsFromLeft', [
       transition('leftPosition => finalPosition', [
-        animate('2300ms', keyframes([
+        animate('300ms', keyframes([
           style({ left: '-30px', offset: 0.0 }),
           style({ left: '-20px', offset: 0.25 }),
           style({ left: '-10px', offset: 0.5 }),
@@ -79,6 +79,7 @@ export class AppComponent {
   selectQuiz(q) {
     //console.log(q);
     this.selectedQuiz = q;
+    this.detailsAnimationState = "finalPosition";
   }
 
   addNewQuiz() {
@@ -108,10 +109,11 @@ export class AppComponent {
     selectedQuiz.questions = selectedQuiz.questions.filter(n => n != selectedQuestion);
     selectedQuiz.numberQuestions = selectedQuiz.questions.length;
 
-    this.detailsAnimationState = "finalPosition";
+  } 
+
+  detailsFromLeftAnimationComplete() {
+    this.detailsAnimationState = "leftPosition";
   }
-
-
   //numberOfChangedQuizzes = 2;
 
   // TS readonly property...
