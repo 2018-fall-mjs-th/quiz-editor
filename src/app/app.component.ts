@@ -133,6 +133,9 @@ export class AppComponent {
 
   increaseImageWidth = () => this.imageWidth *= 1.5;
 
-
+  getQuizzes(countOfQuizzes) {
+    let quizzes = countOfQuizzes;
+    return quizzes;
+  }
 
 }
