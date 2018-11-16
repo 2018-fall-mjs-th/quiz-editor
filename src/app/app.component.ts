@@ -21,7 +21,7 @@ export class AppComponent {
   responseError: boolean = false;
   selectedQuiz = undefined;
   //savedQuizzes: quizDisplay[] = [];     // After save is clicked
-  //selectedQuestions = undefined;
+  selectedQuestions = undefined;
 
   constructor (private quizSvc: QuizService) { }
 
