@@ -5,7 +5,12 @@ interface quizDisplay {
   name: string;
   originalName: string;
   numberQuestions: number;
-  questions: any;
+  questions: questionDisplay[];
+  naiveQuestionsChecksum: string; //checksums check for deltas in variables to see if changes have occurred
+}
+
+interface questionDisplay {
+  name: string;
 }
 
 @Component({
@@ -22,7 +27,10 @@ export class AppComponent {
 
   // this is a read-only property
   get numberOfChangedQuizzes() {
-    let changedQuizzes = this.quizzes.filter(x => x.name !== x.originalName);
+    let changedQuizzes = this.quizzes.filter(x =>
+      x.name !== x.originalName
+      || x.naiveQuestionsChecksum !== x.questions.map(y => y.name).join("~")
+    );
     return changedQuizzes.length;
   }
 
@@ -34,6 +42,7 @@ export class AppComponent {
       data => this.quizzes = (<quizDisplay[]> data).map(x => ({
         ...x
         , originalName: x.name
+        , naiveQuestionsChecksum: x.questions.map(y => y.name).join("~")
       })) // data is being shaped with map to include data from service and give it an originalName field
       , error => this.wasErrorLoadingQuizzes = true
     );
@@ -48,7 +57,9 @@ export class AppComponent {
       name: "New Untitled Quiz"
       , originalName: "New Untitled Quiz"
       , numberQuestions: 0
-      , questions: [] };
+      , questions: []
+      , naiveQuestionsChecksum: ""
+    };
     this.quizzes = [...this.quizzes, q];
     this.selectQuiz(q);
   }
@@ -62,6 +73,8 @@ export class AppComponent {
     this.selectedQuiz.questions = this.selectedQuiz.questions.filter(x => x !== question);
     this.selectedQuiz.numberQuestions = this.selectedQuiz.numberQuestions - 1;
   }
+
+
 
   learningPromises() {
     console.log("learningPromises()");
