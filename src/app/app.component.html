@@ -27,12 +27,13 @@
             </div>
         </div>
         
-        <div class="col-md-8">
+        <div class="col-md-8" [@detailsFromLeft]="detailsAnimationState">
 
             <div *ngIf="selectedQuiz">
                     <button 
-                        class="btn btn-outline-success mb-2" 
+                        class="btn" 
                         [class.btn-outline-success]="numberOfChangedQuizzes === 0"
+                        [class.btn-success]="numberOfChnagedQuizzes > 0"
                     >
                         Save Quizzes ({{ numberOfChangedQuizzes }})
                     </button>
