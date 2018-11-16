@@ -77,7 +77,7 @@ export class AppComponent {
   // numberofChangedQuizzes = 2;
 
   //TS read-only property
-  get numberofChangedQuizzes() {
+  get numberOfChangedQuizzes() {
     let changedQuizzes = this.quizzes.filter(x => x.name !== x.originalName);
     return changedQuizzes.length;
   }
