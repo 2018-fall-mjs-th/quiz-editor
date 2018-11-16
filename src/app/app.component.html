@@ -35,7 +35,7 @@
                         </div>
                         <div class="card-body">
                             <label>Name</label>
-                            <input class="form-control" [(ngModel)]="selectedQuiz.name">
+                            <input class="form-control mb-2" [(ngModel)]="selectedQuiz.name">
                         </div>
                     </div>
                     <br />
@@ -44,8 +44,9 @@
                             Questions
                         </div>
                         <br />
-        
-                        <button class="btn btn-outline-success mb-2"  (click)="addNewQuestion()">ADD NEW QUESTION</button><br>
+                        
+                        <div class="col-md-4">
+                        <button class="btn btn-outline-success mb-2"  (click)="addNewQuestion()">ADD NEW QUESTION</button></div><br>
                         <div *ngFor="let question of selectedQuiz.questions;">
                             <div class="input-group">
                             <input class="form-control" [(ngModel)]="question.name">

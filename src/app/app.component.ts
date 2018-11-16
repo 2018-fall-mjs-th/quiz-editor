@@ -56,9 +56,8 @@ export class AppComponent {
   
   removeQuestion(question) {
     this.selectedQuiz.questions = this.selectedQuiz.questions.filter(x => x !== question);
-    // console.log(this.selectedQuiz.questions);
     // console.log(question);
-    // console.log(this.selectedQuiz.questions.length);
+    
   }
 
   learningPromises() {
