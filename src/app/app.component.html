@@ -30,7 +30,11 @@
         <div class="col-md-8">
 
             <div *ngIf="selectedQuiz">
-                    <button class="btn btn-outline-success mb-2">Save ({{ numberOfChangedQuizes }}) </button>
+                    <button 
+                        class="btn  mb-2"
+                        [class.btn-outline-success]="numberOfChangedQuizes == 0"
+                        [class.btn-success]="numberOfChangedQuizes > 0"
+                    >Save ({{ numberOfChangedQuizes }}) </button>
                     <button class="btn btn-link mb-2">Cancel</button>
                     <br />
                     <div class="card">
