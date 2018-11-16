@@ -25,7 +25,7 @@
         
         <div class="col-md-8">
             <div *ngIf="selectedQuiz">
-            <button class="btn btn-outline-success mb-2">Save</button>
+            <button class="btn btn-outline-success mb-2">Save Quizzes ({{numberOfChangedQuizzes}})</button>
             <button class="btn btn-link mb-2">Cancel</button>
             <br />
             <div class="card">
@@ -39,30 +39,26 @@
             </div>
             <br />
             <div class="card">
-                <div class="card-header">
-                    Questions
-                </div>
-                <div class="card-body">
-                    <button class="btn btn-outline-success mb-3" (click)="addNewQuestion();">ADD NEW QUESTION</button>
-                    <div class="input-group mb-3" *ngFor="let q of selectedQuiz.question">
-                            <div class="input-group">
-                            <input class="form-control" [(ngModel)]="question.name"></div>
-                        <div class="input-group-append">
-                        <span class="btn btn-link" (click)="removeQuestion(question);">Remove</span>
-                        </div>                                       
-                    </div>
+                    <div class="card-header">Questions</div>
+                    <div class="card-body">
+                            <button (click)="addNewQuestion()" class="btn btn-outline-success mb-3">Add New Question</button>
+                            <div *ngFor="let question of selectedQuiz.questions" class="input-group mb-3">  
+                                <input class="form-control" [(ngModel)]="question.name">
+                                <div class="input-group-append">
+                                <span  class="btn btn-primary" (click)="removeQuestion(question)">Remove</span>
+                        </div>
+                    </div>   
                 </div>
             </div>
         </div>
-
         <div *ngIf="!selectedQuiz">
             <div class="card">
                 <div class="card-body">
-                    <h3>No quiz selected</h3>
-                    <p>Select or Add Quiz</p>
+                    <h3>No Quiz Selected</h3>
+                    <p>Please Select a Quiz or Add One</p>
                     </div>
-                </div>
-            </div>
+                </div>         
+            </div>   
         </div>
     </div>
 </div>
