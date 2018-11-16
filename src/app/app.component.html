@@ -41,11 +41,11 @@
             <div class="card">
                     <div class="card-header">Questions</div>
                     <div class="card-body">
-                            <button (click)="addNewQuestion()" class="btn btn-outline-success mb-3">Add New Question</button>
-                            <div *ngFor="let question of selectedQuiz.questions" class="input-group mb-3">  
-                                <input class="form-control" [(ngModel)]="question.name">
-                                <div class="input-group-append">
-                                <span  class="btn btn-primary" (click)="removeQuestion(question)">Remove</span>
+                        <button (click)="addNewQuestion()" class="btn btn-outline-success mb-3">Add New Question</button>
+                        <div *ngFor="let question of selectedQuiz.questions" class="input-group mb-3">  
+                            <input class="form-control" [(ngModel)]="question.name">
+                            <div class="input-group-append">
+                            <span  class="btn btn-primary" (click)="removeQuestion(question)">Remove</span>
                         </div>
                     </div>   
                 </div>
@@ -54,8 +54,8 @@
         <div *ngIf="!selectedQuiz">
             <div class="card">
                 <div class="card-body">
-                    <h3>No Quiz Selected</h3>
-                    <p>Please Select a Quiz or Add One</p>
+                        <h3>No quiz selected</h3>
+                        <p>Select or Add Quiz</p>
                     </div>
                 </div>         
             </div>   

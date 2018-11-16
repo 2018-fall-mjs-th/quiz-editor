@@ -3,7 +3,12 @@ import { QuizService } from './quiz.service';
 
 interface quizDisplay {
   name: string;
+  originalName: string;
+
   numberQuestions: number;
+
+  questions : any;
+  naiveQuestionsChecksum: string;
   
 }
 
@@ -16,7 +21,6 @@ export class AppComponent {
 
   quizzes: quizDisplay[] = [];
   wasErrorLoadingQuizzes: boolean = false;
-  questions : any [];
 
   constructor (private quizSvc: QuizService) {
   }
@@ -41,9 +45,15 @@ export class AppComponent {
   }
 
   addNewQuiz() {
-    let q = {name: "New Untitled Quiz", numberQuestions: 0, questions: []}
-    this.quizzes = [...this.quizzes, q]
-    this.selectQuiz(q)
+    let q = {name: "New Untitled Quiz", numberQuestions: 0, questions: []};
+    let q = { 
+      name: "New Untitled Quiz"
+      , originalName: "New Untitled Quiz"
+      , numberQuestions: 0
+      , questions: []
+    };
+    this.quizzes = [...this.quizzes, q];
+    this.selectQuiz(q);
   }
 
   addNewQuestion() {
@@ -59,7 +69,8 @@ export class AppComponent {
   }
 
   get numberOfChangedQuizzes() {
-    return 42;
+    let changedQuizzes = this.quizzes.filter(x => x.name !== x.originalName );
+    return changedQuizzes.length;
   }
 
   learningPromises() {
