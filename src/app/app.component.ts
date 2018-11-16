@@ -3,6 +3,7 @@ import { QuizService } from './quiz.service';
 
 interface quizDisplay {
   name: string;
+  originalName: string;
   numberQuestions: number;
   questions: [];
 }
@@ -16,44 +17,42 @@ interface questionDisplay {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
+
 export class AppComponent {
   quizzes: quizDisplay[] = [];          // UI display of quizzes (not necessarily committed information )
   responseError: boolean = false;
-  selectedQuiz = undefined;
-  //savedQuizzes: quizDisplay[] = [];     // After save is clicked
+  selectedQuiz = undefined;             // The selected quiz
   selectedQuestions = undefined;
 
   constructor (private quizSvc: QuizService) { }
 
   ngOnInit() {
 
+    /*
     this.quizSvc.getQuizzes('Isaac').subscribe(data => {
       console.log(data);
       this.quizzes = <quizDisplay[]> data;
-      //this.savedQuizzes = <quizDisplay[]> data;
     }, err => {
       console.log('There was an error with the request');
       console.log(err);
       this.responseError = true;
     })
-    
+    */
+
+    this.quizSvc.getQuizzes('Isaac').subscribe(
+      data => this.quizzes = (<quizDisplay[]> data).map(x => ({
+          ...x
+          , originalName: x.name  // Set the originalName as the name 
+        }))
+      , error => this.responseError = true
+    );
+
     //this.quizSvc.getQuizzes('Isaac').subscribe(data => { this.quizzes = <quizDisplay[]> data);
   
   }
 
   public selectQuiz(q) {
-
-    // Reset the previous information if it wasn't saved
-    /*
-    if (this.selectedQuiz) {
-      this.selectedQuiz.questions = this.selectedQuestions;
-      this.updateQuestionCount(this.selectedQuiz);
-    }   
-
-    this.selectedQuiz = q;
-    this.selectedQuestions = q.questions;
-    this.updateQuestionCount(q);
-    */
     this.selectedQuiz = q;
     this.updateQuestionCount(q);
   }
@@ -68,6 +67,9 @@ export class AppComponent {
   public addNewQuestion() {
     let newQuestion = <questionDisplay> { name: "New Question" };
     this.selectedQuiz.questions = [...this.selectedQuiz.questions, newQuestion];
+
+    console.log('Changed Questions: ' + this.numberOfChangedQuizzes);
+
     this.updateQuestionCount(this.selectedQuiz);
   }
 
@@ -91,8 +93,16 @@ export class AppComponent {
     aQuiz.numberQuestions = aQuiz.questions.length;
   }
 
-  
 
+  // Typescript read-only property
+  get numberOfChangedQuizzes() {
+
+    let changedQuizzes = this.quizzes.filter(x => x.name !== x.originalName);
+    return changedQuizzes.length;
+  }
+
+  
+  // Learning Promises Examples (below)
   public myPromise() {
     console.log(this.quizSvc.getNumberOfQuizzes);
     let x = this.quizSvc.getNumberOfQuizzes(true);
