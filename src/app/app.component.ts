@@ -2,9 +2,12 @@ import { Component } from '@angular/core';
 import { QuizService } from './quiz.service';
 import { ViewEncapsulation } from '@angular/core';
 
+
 interface quizDisplay {
   name: string;
+  originalName: string;
   numberQuestions: number;
+  questions: any;
 }
 
 @Component({
@@ -15,36 +18,75 @@ interface quizDisplay {
 })
 
 export class AppComponent {
-
+  // ********************************************* Header Information and initializers variables
+  title = 'quiz-editor';
   quizzes: quizDisplay[] = [];
   wasErrorLoadingQuizzes: boolean = false;
-
-  constructor (private quizSvc: QuizService) {
-  }
+  selectedQuiz = undefined;
+  constructor (private quizSvc: QuizService) {}
 
   ngOnInit() {
-    //console.log(this.quizSvc.getQuizzes());
     this.quizSvc.getQuizzes().subscribe(
-      // (data) => {
-      //   console.log(data);
-      //   this.quizzes = data
-      // }
-      data => this.quizzes = <quizDisplay[]>data
+      data => this.quizzes = (<quizDisplay[]> data).map(x => ({
+        ...x
+        , originalName: x.name
+      }))
       , error => this.wasErrorLoadingQuizzes = true
     );
   }
 
-addNewQuiz() {
-  this.quizzes = [...this.quizzes, {name: "New Quiz", numberQuestions: 0 }];
-  this.quizzes = [...this.quizzes];
-  this.selectQuize;
-}
 
-  selectedQuiz = undefined;
-  selectQuize(q) {
+
+  
+// *************************************************************************************************
+// **                                     Process Quizzes                                         **
+// *************************************************************************************************
+  selectQuiz(q) {
     this.selectedQuiz = q;
-    console.log(this.selectedQuiz);
   }
+
+  addNewQuiz() {
+    let q = { name: "New Untitled Quiz",originalName: "New Untitled Quiz", numberQuestions: 0, questions: []};
+    this.quizzes = [...this.quizzes, q];
+    this.selectQuiz(q);
+  }
+
+  addNewQuestion(selectedQuiz) {
+    selectedQuiz.questions = [...selectedQuiz.questions, {"name": "New untitled question"}];
+    selectedQuiz.numberQuestions = selectedQuiz.questions.length;
+  }
+
+  removeQuestion(selectedQuiz, selectedQuestion) {
+    selectedQuiz.questions = selectedQuiz.questions.filter(n => n != selectedQuestion);
+    selectedQuiz.numberQuestions = selectedQuiz.questions.length;
+  }
+
+  get numberOfChangedQuizzes() {
+    let changedQuizzes = this.quizzes.filter(x => x.name !== x.originalName );
+    return changedQuizzes.length;
+  }
+
+
+
+
+
+
+
+
+// *************************************************************************************************
+// **                                      Practice Stuff                                         **
+// *************************************************************************************************
+
+  dumb: string = "foo123";
+
+  titleColorDanger = this.dumb === 'foo' ? true : false;
+  titleBackgroundColorDanger = false;
+
+  headingTwoBackgroundColor = this.dumb === 'foo' ? 'Red' : 'Blue';
+
+  imageWidth: number = 100;
+  //imageWidth = '100px';
+
 
   learningPromises() {
     console.log("learningPromises()");
@@ -108,19 +150,6 @@ addNewQuiz() {
       console.log(e);
     }
   }
-
-  title = 'quiz-editor';
-
-  dumb: string = "foo123";
-
-  titleColorDanger = this.dumb === 'foo' ? true : false;
-  titleBackgroundColorDanger = false;
-
-  headingTwoBackgroundColor = this.dumb === 'foo' ? 'Red' : 'Blue';
-
-  imageWidth: number = 100;
-  //imageWidth = '100px';
-
   increaseImageWidth = () => this.imageWidth *= 1.5;
 
 

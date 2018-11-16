@@ -19,46 +19,72 @@
         <div class="col-md-4">
             <button class="btn btn-outline-primary mb-2" (click)="addNewQuiz()">Add New Quiz</button>
             <div class="list-group mb-2">
-                <div        
-                    [class.active] = "q===selectedQuiz" 
-                    (click)="selectQuize(q)" class="list-group-item list-group-item-action"
+                <div 
+                    [class.active]="q === selectedQuiz" 
+                    (click)="selectQuiz(q)" 
+                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" 
                     *ngFor="let q of quizzes">
-                    {{ q.name }}
-                    <span class="badge badge-secondary float-right" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
+                        {{ q.name }}
+                        <span class="badge badge-secondary" [class.bg-danger]="q.questions.length === 0">{{ q.questions.length }}</span>
                 </div>
             </div>
         </div>
         
         <div class="col-md-8">
-        <div *ngIf = "selectedQuiz">
 
-            <button class="btn btn-outline-success mb-2">Save</button>
-            <button class="btn btn-link mb-2">Cancel</button>
-            <br />
-            <div class="card">
-                <div class="card-header">
-                    General
-                </div>
-                <div class="card-body">
-                    Coming soon!
-                </div>
+            <div *ngIf="selectedQuiz">
+                    <button 
+                        class="btn  mb-2" 
+                        [class.btn-outline-success]="numberOfChangedQuizzes === 0" 
+                        [class.btn-success]="numberOfChangedQuizzes > 0"
+                    >
+                        Save ({{numberOfChangedQuizzes}})
+                    </button>
+
+                    <button class="btn btn-link mb-2">Cancel</button>
+                    <br />
+                    <div class="card">
+                        <div class="card-header">
+                            {{ selectedQuiz.name }}
+                        </div>
+                        <div class="card-body">
+                            <input type="text" class="form-control" [(ngModel)]="selectedQuiz.name">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="card">
+                        <div class="card-header">
+                            Questions
+                        </div>
+                        <div class="card-body">
+                            <button class="btn btn-outline-success mb-2" (click)="addNewQuestion(selectedQuiz)">Add New Question</button>
+                            <div class="row" *ngFor="let question of selectedQuiz.questions">
+                                <div class="col-9">
+                                    <input type="text" class="form-control" [(ngModel)]="question.name">
+                                </div>
+                                <div class="col-3">
+                                    <button class="btn btn-outline-danger mb-2" (click)="removeQuestion(selectedQuiz, question)">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             </div>
-            <br />
-            <div class="card">
-                <div class="card-header">
-                    Questions
+
+            <div *ngIf="!selectedQuiz">
+                <div class="card">
+                    <h3 class="card-header">No quiz selected</h3>
+                    <div class="card-body">
+                        <p class="card-text">Select or add a new quiz</p>
+                    </div>
                 </div>
-                <div class="card-body">
-                    Coming soon!
-                </div>
-            </div>
+            </div>    
         </div>
-        <div *ngIf = "!selectedQuiz">
+        <!-- <div *ngIf = "!selectedQuiz">
             <div class = "card">
                 <div class = "card-body">
                     Thhhhere are no quizzes in America!
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
