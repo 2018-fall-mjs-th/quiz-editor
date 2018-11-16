@@ -5,7 +5,8 @@ interface quizDisplay {
   name: string;
   originalName: string;
   numberQuestions: number;
-  questions: [];
+  questions: questionDisplay[];
+  naiveQuestionsChecksum: string;
 }
 
 interface questionDisplay {
@@ -28,28 +29,16 @@ export class AppComponent {
   constructor (private quizSvc: QuizService) { }
 
   ngOnInit() {
-
-    /*
-    this.quizSvc.getQuizzes('Isaac').subscribe(data => {
-      console.log(data);
-      this.quizzes = <quizDisplay[]> data;
-    }, err => {
-      console.log('There was an error with the request');
-      console.log(err);
-      this.responseError = true;
-    })
-    */
-
     this.quizSvc.getQuizzes('Isaac').subscribe(
       data => this.quizzes = (<quizDisplay[]> data).map(x => ({
           ...x
           , originalName: x.name  // Set the originalName as the name 
+          , naiveQuestionsChecksum: x.questions.map(y => y.name).join("~")
         }))
       , error => this.responseError = true
     );
-
     //this.quizSvc.getQuizzes('Isaac').subscribe(data => { this.quizzes = <quizDisplay[]> data);
-  
+
   }
 
   public selectQuiz(q) {
@@ -58,18 +47,20 @@ export class AppComponent {
   }
 
   public addNewQuiz() {
-    let questions = [];
-    let newQuiz = <quizDisplay> { name: 'New Quiz', numberQuestions: questions.length, questions: questions };
+    let newQuiz = <quizDisplay> {
+      name: "New Quiz"
+      , originalName: "New Quiz"
+      , numberQuestions: 0
+      , questions: []
+      , naiveQuestionsChecksum: ""
+    };
     this.quizzes = [...this.quizzes, newQuiz];
-    this.selectedQuiz = newQuiz;
+    this.selectQuiz(newQuiz);
   }
 
   public addNewQuestion() {
     let newQuestion = <questionDisplay> { name: "New Question" };
     this.selectedQuiz.questions = [...this.selectedQuiz.questions, newQuestion];
-
-    console.log('Changed Questions: ' + this.numberOfChangedQuizzes);
-
     this.updateQuestionCount(this.selectedQuiz);
   }
 
@@ -93,11 +84,12 @@ export class AppComponent {
     aQuiz.numberQuestions = aQuiz.questions.length;
   }
 
-
   // Typescript read-only property
   get numberOfChangedQuizzes() {
-
-    let changedQuizzes = this.quizzes.filter(x => x.name !== x.originalName);
+    let changedQuizzes = this.quizzes.filter(x => 
+      x.name !== x.originalName
+      || x.naiveQuestionsChecksum !== x.questions.map(y => y.name).join("~")
+    );
     return changedQuizzes.length;
   }
 

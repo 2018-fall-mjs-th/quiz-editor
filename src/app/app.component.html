@@ -12,7 +12,13 @@
           <button class="btn btn-outline-primary" (click)="addNewQuiz();">Add New Quiz</button>
       </div>
       <div class="col-md-8" *ngIf="selectedQuiz != undefined">
-        <button class="btn btn-outline-success" (click)="saveQuizAndQuestions();">Save Quizzes ({{ numberOfChangedQuizzes }})</button>
+        <button 
+          class="btn"
+          [class.btn-outline-success]="numberOfChangedQuizzes === 0"
+          [class.btn-success]="numberOfChangedQuizzes > 0"
+          (click)="saveQuizAndQuestions();">
+          Save Quizzes ({{ numberOfChangedQuizzes }})
+        </button>
         <button class="btn btn-link">Cancel</button>
       </div>
   </div>
