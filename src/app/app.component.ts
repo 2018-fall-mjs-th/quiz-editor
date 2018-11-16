@@ -3,6 +3,7 @@ import { QuizService } from './quiz.service';
 
 interface quizDisplay {
   name: string;
+  originalName: string;
   numberQuestions: number;
   questions: any;
 }
@@ -18,13 +19,22 @@ export class AppComponent {
   wasErrorLoadingQuizzes: boolean = false;
   selectedQuiz = undefined;
   questions = [];
+  //numberOfChangedQuizzes: number;
+
+  get numberOfChangedQuizzes() {
+    let changedQuizzes = this.quizzes.filter(x => x.name !== x.originalName);
+    return changedQuizzes.length;
+  }
 
   constructor (private quizSvc: QuizService) {
   }
 
   ngOnInit() {
     this.quizSvc.getQuizzes().subscribe(
-      data => this.quizzes = <quizDisplay[]> data // data is being cast as a quizDisplay array
+      data => this.quizzes = (<quizDisplay[]> data).map(x => ({
+        ...x
+        , originalName: x.name
+      })) // data is being shaped with map to include data from service and give it an originalName field
       , error => this.wasErrorLoadingQuizzes = true
     );
   }
@@ -34,17 +44,23 @@ export class AppComponent {
   }
 
   addNewQuiz() {
-    let q = { name: "New Untitled Quiz", numberQuestions: 0, questions: [] };
+    let q = {
+      name: "New Untitled Quiz"
+      , originalName: "New Untitled Quiz"
+      , numberQuestions: 0
+      , questions: [] };
     this.quizzes = [...this.quizzes, q];
     this.selectQuiz(q);
   }
 
   addNewQuestion(selectedQuiz) {
-    selectedQuiz.questions = [...selectedQuiz.questions, {name: "question"} ]
+    selectedQuiz.questions = [...selectedQuiz.questions, {name: "question"} ];
+    selectedQuiz.numberQuestions = selectedQuiz.questions.length;
   }
 
   deleteQuestion(question) {
     this.selectedQuiz.questions = this.selectedQuiz.questions.filter(x => x !== question);
+    this.selectedQuiz.numberQuestions = this.selectedQuiz.numberQuestions - 1;
   }
 
   learningPromises() {
