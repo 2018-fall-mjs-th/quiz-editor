@@ -19,7 +19,8 @@
           (click)="saveQuizAndQuestions();">
           Save Quizzes ({{ numberOfChangedQuizzes }})
         </button>
-        <button class="btn btn-link">Cancel</button>
+        <button class="btn btn-link" (click)="cancelQuizEdits();">Cancel</button>
+        <button class="btn btn-outline-danger" style="float:right" (click)="clearStorage();">Clear Storage</button>
       </div>
   </div>
 <!-- END Buttons Header -->

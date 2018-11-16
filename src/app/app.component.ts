@@ -1,5 +1,12 @@
 import { Component } from '@angular/core';
 import { QuizService } from './quiz.service';
+import {
+  trigger
+  , style
+  , animate
+  , transition
+  , keyframes
+} from '@angular/animations';
 
 interface quizDisplay {
   name: string;
@@ -29,6 +36,20 @@ export class AppComponent {
   constructor (private quizSvc: QuizService) { }
 
   ngOnInit() {
+    if (localStorage.getItem('QuizEditor-Data') != null) {
+      this.quizzes = JSON.parse(localStorage.getItem('QuizEditor-Data'));
+      console.log('Retrieved quiz data from local storage');
+      if (this.quizzes.length == 0) {
+        // If the cached data doesn't contain any quizzes - just force a reload
+        this.loadQuizzesFromService();
+      }
+    } else {
+      this.loadQuizzesFromService();
+    }
+  }
+
+  public loadQuizzesFromService() {
+    this.quizzes = [];
     this.quizSvc.getQuizzes('Isaac').subscribe(
       data => this.quizzes = (<quizDisplay[]> data).map(x => ({
           ...x
@@ -37,8 +58,7 @@ export class AppComponent {
         }))
       , error => this.responseError = true
     );
-    //this.quizSvc.getQuizzes('Isaac').subscribe(data => { this.quizzes = <quizDisplay[]> data);
-
+    localStorage.setItem('QuizEditor-Data', JSON.stringify(this.quizzes));
   }
 
   public selectQuiz(q) {
@@ -59,7 +79,7 @@ export class AppComponent {
   }
 
   public addNewQuestion() {
-    let newQuestion = <questionDisplay> { name: "New Question" };
+    let newQuestion = <questionDisplay> { name: "New Question", originalName: "New Question" };
     this.selectedQuiz.questions = [...this.selectedQuiz.questions, newQuestion];
     this.updateQuestionCount(this.selectedQuiz);
   }
@@ -72,22 +92,31 @@ export class AppComponent {
   }
 
   public saveQuizAndQuestions() {
-    this.selectedQuiz.questions = this.selectedQuestions;
-    
+    //this.selectedQuiz.questions = this.selectedQuestions;
+    localStorage.setItem('QuizEditor-Data', JSON.stringify(this.quizzes));
+    console.log('Saved data to local storage');
   }
 
   public cancelQuizEdits() {
-    this.selectedQuiz.questions = this.selectedQuestions;
+    //this.selectedQuiz.questions = this.selectedQuestions;
   }
 
   public updateQuestionCount(aQuiz) {
     aQuiz.numberQuestions = aQuiz.questions.length;
   }
 
+  public clearStorage() {
+    localStorage.removeItem('QuizEditor-Data');
+    this.loadQuizzesFromService();
+    this.selectedQuiz = null;
+    console.log('Cleared Local Storage');
+  }
+
   // Typescript read-only property
   get numberOfChangedQuizzes() {
     let changedQuizzes = this.quizzes.filter(x => 
       x.name !== x.originalName
+      || x.originalName === "New Quiz"
       || x.naiveQuestionsChecksum !== x.questions.map(y => y.name).join("~")
     );
     return changedQuizzes.length;
