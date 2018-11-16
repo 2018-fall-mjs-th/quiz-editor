@@ -36,7 +36,7 @@ interface questionDisplay {
           style({ bottom: '-10vh', offset: 0.625 }),
           style({ bottom: '-5vh', offset: 0.75 }),
           style({ bottom: '-2.5vh', offset: 0.875 }),
-          style({ bottom: '0px', offset: 1.0 }),
+          style({ bottom: '0vh', offset: 1.0 }),
         ]))
       ]),
     ]),

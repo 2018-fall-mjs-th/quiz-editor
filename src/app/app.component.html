@@ -32,14 +32,17 @@
             (@detailsFromBottom.done)="detailsFromBottomAnimationComplete()"
         >
             <div *ngIf="selectedQuiz">
-                <button [class.btn-outline-success]="numberOfChangedQuizzes === 0"
-                        [class.btn-success]="numberOfChangedQuizzes > 0"
-                        class="btn mb-2"
-                >
+                <div
+                    [@pulseSaveCancelButtons]="numberOfChangedQuizzes > 0 ? 'somethingToSave' : 'nothingToSave'">
+                    <button [class.btn-outline-success]="numberOfChangedQuizzes === 0"
+                            [class.btn-success]="numberOfChangedQuizzes > 0"
+                            class="btn mb-2"
+                    >
                     Save Quizzes ({{ numberOfChangedQuizzes }})
-                </button>
-                <button class="btn btn-link mb-2">Cancel</button>
-                <br />
+                    </button>
+                    <button class="btn btn-link mb-2">Cancel</button>
+                </div>
+                
                 <div class="card">
                     <div class="card-header">
                         General
