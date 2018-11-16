@@ -28,11 +28,15 @@ interface questionDisplay {
     trigger('detailsFromBottom', [
       transition('bottomPosition => finalPosition', [
         animate('300ms', keyframes([
-          style({ bottom: '-100vh', offset: 0.0 }),
-          style({ bottom: '-50vh', offset: 0.25 }),
-          style({ bottom: '-25vh', offset: 0.5 }),
-          style({ bottom: '-10vh', offset: 0.75 }),
-          style({ bottom: '0px', offset: 1.0 })
+          style({ bottom: '-90vh', offset: 0.0 }),
+          style({ bottom: '-50vh', offset: 0.125 }),
+          style({ bottom: '-25vh', offset: 0.25 }),
+          style({ bottom: '-20vh', offset: 0.375 }),
+          style({ bottom: '-15vh', offset: 0.5 }),
+          style({ bottom: '-10vh', offset: 0.625 }),
+          style({ bottom: '-5vh', offset: 0.75 }),
+          style({ bottom: '-2.5vh', offset: 0.875 }),
+          style({ bottom: '0px', offset: 1.0 }),
         ]))
       ]),
     ]),
@@ -82,6 +86,11 @@ export class AppComponent {
 
   selectQuiz(q) {
     this.selectedQuiz = q;
+    this.detailsAnimationState = "finalPosition";
+  }
+
+  detailsFromBottomAnimationComplete() {
+    this.detailsAnimationState = "bottomPosition";
   }
 
   addNewQuiz() {
@@ -104,8 +113,6 @@ export class AppComponent {
   deleteQuestion(question) {
     this.selectedQuiz.questions = this.selectedQuiz.questions.filter(x => x !== question);
     this.selectedQuiz.numberQuestions = this.selectedQuiz.numberQuestions - 1;
-
-    this.detailsAnimationState = "finalPosition";
   }
 
 
