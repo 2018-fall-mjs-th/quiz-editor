@@ -26,7 +26,7 @@
             </div>
         </div>
         
-        <div class="col-md-8">
+        <div class="col-md-8" [@detailsFromBottom]="detailsAnimationState">
             <div *ngIf="selectedQuiz">
                 <button [class.btn-outline-success]="numberOfChangedQuizzes === 0"
                         [class.btn-success]="numberOfChangedQuizzes > 0"

@@ -1,5 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import { QuizService } from './quiz.service';
+import {
+  trigger
+  , keyframes
+  , style
+  , animate
+  , transition
+} from '@angular/animations';
 
 interface quizDisplay {
   name: string;
@@ -16,14 +23,38 @@ interface questionDisplay {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  animations: [
+    trigger('detailsFromBottom', [
+      transition('bottomPosition => finalPosition', [
+        animate('300ms', keyframes([
+          style({ bottom: '-100vh', offset: 0.0 }),
+          style({ bottom: '-50vh', offset: 0.25 }),
+          style({ bottom: '-25vh', offset: 0.5 }),
+          style({ bottom: '-10vh', offset: 0.75 }),
+          style({ bottom: '0px', offset: 1.0 })
+        ]))
+      ]),
+    ]),
+    trigger('pulseSaveCancelButtons', [
+      transition('nothingToSave => somethingToSave', [
+        animate('400ms', keyframes([
+          style({ transform: 'scale(1.0)', 'transform-origin': 'top left', offset: 0.0 }),
+          style({ transform: 'scale(1.2)', 'transform-origin': 'top left', offset: 0.5 }),
+          style({ transform: 'scale(1.0)', 'transform-origin': 'top left', offset: 1.0 })
+        ]))
+      ])
+    ])
+  ]
 })
+
 export class AppComponent {
 
   quizzes: quizDisplay[] = [];
   wasErrorLoadingQuizzes: boolean = false;
   selectedQuiz = undefined;
   questions = [];
+  detailsAnimationState: string = "bottomPosition";
 
   // this is a read-only property
   get numberOfChangedQuizzes() {
@@ -73,6 +104,8 @@ export class AppComponent {
   deleteQuestion(question) {
     this.selectedQuiz.questions = this.selectedQuiz.questions.filter(x => x !== question);
     this.selectedQuiz.numberQuestions = this.selectedQuiz.numberQuestions - 1;
+
+    this.detailsAnimationState = "finalPosition";
   }
 
 
