@@ -21,7 +21,11 @@
       </div>  
     </div>
 
-    <div class="col-md-8 mobileMargin">
+    <div 
+      class="col-md-8 mobileMargin" 
+      [@detailsFromLeft]="detailsAnimationState"
+      (@detailsFromLeft.done)="detailsFromLeftAnimationComplete()"
+    >
        <div *ngIf="selectedQuiz">
           <button class="btn" 
           [class.btn-outline-success]="numberOfChangedQuizzes === 0"
