@@ -1,17 +1,53 @@
 import { Component } from '@angular/core';
 import { QuizService } from './quiz.service';
 import {ViewEncapsulation} from '@angular/core';
+import {
+  trigger
+  , style 
+  , animate 
+  , transition 
+  , keyframes 
+} from '@angular/animations';
 
 interface quizDisplay {
   name: string;
+  originalName: string;
   numberQuestions: number;
+  questions: questionDisplay[];
+  naiveQuestionsCheckSum: string;
+}
+
+interface questionDisplay {
+  name: string;
 }
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  animations: [
+    trigger('detailsFromLeft', [
+      transition('leftPosition => finalPosition', [
+        animate('300ms', keyframes([
+          style({ left: '-30px', offset: 0.0 }),
+          style({ left: '-20px', offset: 0.25 }),
+          style({ left: '-10px', offset: 0.5 }),
+          style({ left: '-5px', offset: 0.75 }),
+          style({ left: '0px', offset: 1.0 })
+        ]))
+      ]),
+    ]),
+    trigger('pulseSaveCancelButtons', [
+      transition('nothingToSave => somethingToSave', [
+        animate('400ms', keyframes([
+          style({ transform: 'scale(1.0)', 'transform-origin': 'top left', offset: 0.0 }),
+          style({ transform: 'scale(1.2)', 'transform-origin': 'top left', offset: 0.5 }),
+          style({ transform: 'scale(1.0)', 'transform-origin': 'top left', offset: 1.0 })
+        ]))
+      ])
+    ])
+  ]
 })
 export class AppComponent {
 
@@ -23,7 +59,11 @@ export class AppComponent {
 
   ngOnInit() {
     this.quizSvc.getQuizzes().subscribe(
-      data => this.quizzes = <quizDisplay[]> data
+      data => this.quizzes = (<quizDisplay[]> data).map(x => ({
+        ...x
+        , originalName: x.name
+        , naiveQuestionsCheckSum: x.questions.map(y => y.name).join("~")
+      }))
       , error => this.quizLoadingError = true
     );
   }
@@ -93,10 +133,18 @@ export class AppComponent {
   {
     console.log(q);
     this.selectedQuiz = q;
+    this.detailsAnimationState = "finalPosition";
   }
 
   addNewQuiz() {
-    let q = { name: "New Quiz", numberQuestions: 0, questions: []};
+    let q = { 
+      name: "New Quiz"
+      , originalName: "New Quiz"
+      , numberQuestions: 0
+      , questions: []
+      , naiveQuestionsCheckSum: ""
+    };
+
     this.quizzes = [...this.quizzes, q];
     this.selectQuiz(q);
   }
@@ -106,6 +154,8 @@ export class AppComponent {
     this.selectedQuiz.questions = [...this.selectedQuiz.questions, {name: this.newQuestion}];
     this.updateQuizLength();
     this.newQuestion = "";
+
+    console.log(this.selectedQuiz.naiveQuestionsCheckSum);
   }
 
   removeQuiz(deletion) {
@@ -120,6 +170,21 @@ export class AppComponent {
 
   updateQuizLength() {
     this.selectedQuiz.numberQuestions = this.selectedQuiz.questions.length;
+  }
+
+  get numberOfChangedQuizzes() {
+    let changedQuizzes = this.quizzes.filter( 
+      x => x.name !== x.originalName
+      || x.originalName === "New Quiz"
+      || x.naiveQuestionsCheckSum !== x.questions.map(y => y.name).join("~")
+    );
+    return changedQuizzes.length;
+  }
+
+  detailsAnimationState = "leftPosition";
+
+  detailsFromLeftAnimationComplete() {
+    this.detailsAnimationState = "leftPosition";
   }
 
   title = 'quiz-editor';

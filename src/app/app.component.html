@@ -25,33 +25,38 @@
                 <img class="vaporwave" src="https://66.media.tumblr.com/77bfb4472f4078747e7cc41df3ef7c10/tumblr_ofvr8fQOn31toe0eco1_500.gif" alt="vaporwave">
             </div>
         </div>
-        <div class="col-md-8">
-            <div [class.hiddenButtons]="!selectedQuiz">
-                <button class="btn save mr-3">S &nbsp;&nbsp;A&nbsp;&nbsp; V&nbsp;&nbsp; E</button>
-
-                <button class="btn cancel">C &nbsp;&nbsp;A &nbsp;&nbsp;N &nbsp;&nbsp;C &nbsp;&nbsp;E &nbsp;&nbsp;L</button>
-                <br>
-                <br>
-            </div>
-            <div *ngIf="selectedQuiz">
-                <div class="card">
-                    <div class="card-header">
-                        General
-                    </div>
-                    <br>&nbsp;
-                    Name
-                    
-                    <div class="card-body">
-                    
-                        <input type="text" autofocus onmouseover="javascript:this.focus();this.select();" onclick="this.select()" [(ngModel)]="selectedQuiz.name">
-                        <span class="float-right">
-                            <button (click)="removeQuiz(selectedQuiz)" class="btn remove mb-2">r e m o v e</button>
-                        </span>
-                    
-                    </div>
+        <div    
+            class="col-md-8" 
+            [@detailsFromLeft]="detailsAnimationState"
+            (@detailsFromLeft.done)="detailsFromLeftAnimationComplete()"
+        >
+                <div    [class.hiddenButtons]="!selectedQuiz"
+                        [@pulseSaveCancelButtons] = "numberOfChangedQuizzes > 0 ? 'somethingToSave' : 'nothingToSave'"
+                >
+                    <button class="btn save  mr-3" 
+                            [class.save]="numberOfChangedQuizzes === 0"
+                            [class.super-save]="numberOfChangedQuizzes > 0"
+                            >
+                        S &nbsp;&nbsp;A &nbsp;&nbsp;V &nbsp;&nbsp;E &nbsp;&nbsp; ({{ numberOfChangedQuizzes }})</button>
+                    <button class="btn cancel">C A N C E L</button>
+                    <button (click)="removeQuiz(selectedQuiz)" class="btn remove">r e m o v e</button>
+                    <br>
+                    <br>
                 </div>
-                <div class="card class3">
-                    <div class="card-header">
+
+            <div *ngIf="selectedQuiz">
+                        <div class="card general">
+                            <div class="card-header boop-right">
+                                General
+                            </div>
+                            <br>&nbsp;
+                            Name
+                            <div class="card-body">
+                                <input type="text" autofocus onmouseover="javascript:this.focus();this.select();" onclick="this.select()" [(ngModel)]="selectedQuiz.name">
+                            </div>
+                        </div>
+                <div class="card questions">
+                    <div class="card-header boop-right">
                         Questions
                     </div>
                     <div class="card-body">

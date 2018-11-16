@@ -29,10 +29,6 @@ body, html {
     padding-bottom: 5px;
 }
 
-.class2 {
-    border-style: dotted;
-}
-
 .vaporwave {
     margin-top: 20px;
 }
@@ -41,16 +37,11 @@ body, html {
     margin-top: 20px;
 }
 
-.add-new-quiz {
-    -webkit-animation-name: sadBoi;
-    -webkit-animation-duration: 8s;
-    -webkit-animation-iteration-count: infinite;
-}
-
-@-webkit-keyframes sadBoi {
-    from { background-color: #7072eb; -webkit-box-shadow: 0 0 9px #7072eb; }
-    50% { background-color: #109ddf; -webkit-box-shadow: 0 0 18px #109ddf; }
-    to { background-color: #7072eb; -webkit-box-shadow: 0 0 9px #7072eb; }
+.add-new-quiz, .add {
+    border-style: outset;
+    border-color: grey;
+    background-color: lightblue;
+    border-width: 4px;
 }
 
 .save {
@@ -60,17 +51,24 @@ body, html {
     font-family: "Impact", Charcoal, sans-serif;
 }
 
+.super-save {
+    -webkit-animation-name: saveMe;
+    -webkit-animation-duration: .1s;
+    -webkit-animation-iteration-count: infinite;
+    font-family: "Impact", Charcoal, sans-serif;
+}
+
 @-webkit-keyframes saveMe {
-    from { background-color: #0ed467; -webkit-box-shadow: 0 0 9px #0ed467; }
+    from { background-color: #0ed467; -webkit-box-shadow: 0 0 25px #0ed467; }
     50% { background-color: #10dfab; -webkit-box-shadow: 0 0 18px #10dfab; }
-    to { background-color: #0ed467; -webkit-box-shadow: 0 0 9px #0ed467; }
+    to { background-color: #0ed467; -webkit-box-shadow: 0 0 25px #0ed467; }
 }
 
 .cancel {
     -webkit-animation-name: noMore;
     -webkit-animation-duration: 8s;
     -webkit-animation-iteration-count: infinite;
-    font-family: "Impact", Charcoal, sans-serif;
+    font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 @-webkit-keyframes noMore {
@@ -79,24 +77,50 @@ body, html {
     to { background-color: #f11645; -webkit-box-shadow: 0 0 9px #f11645; }
 }
 
+.general {
+    border-style: outset;
+    border-color: lightgrey;
+    border-width: 5px;
+    background-color: grey;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.boop-right {
+    padding-left: 75px;
+    margin-top: 10px;
+}
+
+.questions {
+    border-style: outset;
+    border-color: lightgrey;
+    border-width: 5px;
+    background-color: grey;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.card-header {
+    border-style: outset;
+    margin-left: 4px;
+    margin-right: 500px;
+    background-color: grey;
+}
+
 .remove {
+    margin-left: 15px;
     -webkit-animation-name: purpleRain;
     -webkit-animation-duration: 8s;
     -webkit-animation-iteration-count: infinite;
-    font-family: "Courier New", Courier, monospace;
+    font-family: "Lucida Console", Monaco;
 }
 
 @-webkit-keyframes purpleRain {
     from { background-color: #f116f1; -webkit-box-shadow: 0 0 9px #f116f1; }
     50% { background-color: #bd5abd; -webkit-box-shadow: 0 0 18px #bd5abd; }
     to { background-color: #f116f1; -webkit-box-shadow: 0 0 9px #f116f1; }
-}
-
-.add {
-    -webkit-animation-name: saveMe;
-    -webkit-animation-duration: 8s;
-    -webkit-animation-iteration-count: infinite;
-    font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 
@@ -172,4 +196,32 @@ body, html {
     50% { background-color: #08172c; box-shadow: 0 0 40px #08172c; }
     75% { background-color: #0d47a1; box-shadow: 0 0 40px #0d47a1; }
     100% { background-color: #00695c; box-shadow: 0 0 30px #00695c; }
+}
+
+@keyframes details-from-left {
+    0% { transform: translateX(-30px) }
+    25% { transform: translateX(-20px) }
+    50% { transform: translateX(-10px) }
+    75% { transform: translateX(-5px) }
+    100% { transform: translateX(0px) }
+}
+
+.details-display-animation {
+    animation-name: details-from-left;
+    animation-delay: 30ms;
+    animation-duration: 300ms;
+}
+
+    
+@keyframes save-cancel-buttons-grow-shrink {
+    0% { transform: scale(1.0) }
+    50% { transform: scale(1.1) }
+    100% { transform: scale(1.0) }
+}
+
+.changes-detected-animation {
+    animation-name: save-cancel-buttons-grow-shrink;
+    animation-delay: 100ms;
+    animation-duration: 0.75s;
+    transform-origin: top left;
 }
