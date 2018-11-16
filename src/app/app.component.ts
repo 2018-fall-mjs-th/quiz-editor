@@ -74,7 +74,8 @@ export class AppComponent {
   //TS read only property
   get numberOfChangedQuizzes() {
     let changedQuizzes = this.quizzes.filter(x => 
-      x.name !== x.originalName 
+      x.name !== x.originalName
+      || x.originalName === "New Untitled Quiz" 
       || x.naiveQuestionChecksum !== x.questions.map(y => y.name).join("~")
     );
     return changedQuizzes.length;
