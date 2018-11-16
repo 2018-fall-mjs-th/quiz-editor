@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { QuizService } from './quiz.service';
+
 import {
   trigger
   , style
@@ -92,13 +93,18 @@ export class AppComponent {
   }
 
   public saveQuizAndQuestions() {
-    //this.selectedQuiz.questions = this.selectedQuestions;
+    // Loop through the current quizzes and set the originalName property to match
+    this.quizzes.map(aQuiz => {
+      aQuiz.originalName = aQuiz.name;
+      aQuiz.naiveQuestionsChecksum = aQuiz.questions.map(aQuestion => aQuestion.name).join("~");
+    })
     localStorage.setItem('QuizEditor-Data', JSON.stringify(this.quizzes));
     console.log('Saved data to local storage');
   }
 
   public cancelQuizEdits() {
-    //this.selectedQuiz.questions = this.selectedQuestions;
+    this.quizzes = JSON.parse(localStorage.getItem('QuizEditor-Data'));
+    this.selectedQuiz = null;
   }
 
   public updateQuestionCount(aQuiz) {
@@ -121,6 +127,8 @@ export class AppComponent {
     );
     return changedQuizzes.length;
   }
+
+  detailsAnimationState = "finalPosition";
 
   
   // Learning Promises Examples (below)

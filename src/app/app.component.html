@@ -17,7 +17,7 @@
           [class.btn-outline-success]="numberOfChangedQuizzes === 0"
           [class.btn-success]="numberOfChangedQuizzes > 0"
           (click)="saveQuizAndQuestions();">
-          Save Quizzes ({{ numberOfChangedQuizzes }})
+          Save Quizzes <span *ngIf="numberOfChangedQuizzes > 0"> ({{ numberOfChangedQuizzes }})</span>
         </button>
         <button class="btn btn-link" (click)="cancelQuizEdits();">Cancel</button>
         <button class="btn btn-outline-danger" style="float:right" (click)="clearStorage();">Clear Storage</button>
