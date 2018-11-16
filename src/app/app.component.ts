@@ -48,6 +48,7 @@ interface questionDisplay {
     ])
   ]
 })
+
 export class AppComponent {
 
   quizzes: quizDisplay[] = [];
@@ -77,6 +78,8 @@ export class AppComponent {
   selectQuiz(q) {
     //console.log(q);
     this.selectedQuiz = q;
+
+    this.detailsAnimationState = "finalPosition";
   }
 
   addNewQuiz() {
@@ -90,6 +93,8 @@ export class AppComponent {
     this.quizzes = [...this.quizzes, q];
     this.selectQuiz(q);
     console.log(this.numberOfChangedQuizes);
+
+    
   }
 
   addNewQuestion(selectedQuiz) {
@@ -97,13 +102,13 @@ export class AppComponent {
     selectedQuiz.numberQuestions = selectedQuiz.questions.length;
 
     console.log(this.numberOfChangedQuizes);
+
+    
   }
 
   removeQuestion(selectedQuiz, selectedQuestion) {
     selectedQuiz.questions = selectedQuiz.questions.filter(n => n != selectedQuestion);
     selectedQuiz.numberQuestions = selectedQuiz.questions.length;
-
-    this.detailsAnimationState = "finalPosition";
   }
 
 
@@ -119,6 +124,10 @@ export class AppComponent {
   }
 
   detailsAnimationState = "leftPosition";
+
+  detailsFromLeftAnimationComplete() {
+    this.detailsAnimationState = "leftPosition";
+  }
 
   // Learning promises functions
 
