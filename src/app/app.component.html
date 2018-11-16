@@ -31,7 +31,7 @@
         <div class="col-md-8">
 
             <div *ngIf="selectedQuiz">
-                <button class="btn btn-outline-success mb-2">Save</button>
+                <button class="btn btn-outline-success mb-2">Save Quizzes({{numberOfChangedQuizzes}})</button>
                 <button class="btn btn-link mb-2">Cancel</button>
                 <br />
                 <div class="card">
@@ -54,8 +54,12 @@
                     <div class="list-group mb-2">
                             <div
                             class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" 
-                                *ngFor="let nextQuest of selectedQuiz.questions">
-                                <div> <input size="40" bindon-ngModel="nextQuest.name"/>
+                                *ngFor="let nextQuest of selectedQuiz.questions; index as i">
+                                
+                                
+                                <div> 
+                                        <span>Question  {{i + 1}}</span><br />
+                                    <input size="40" bindon-ngModel="nextQuest.name"/>
                                     <button class="btn btn-link" (click)="removeQuestion(nextQuest)">Remove</button>
                                 
                                 </div>

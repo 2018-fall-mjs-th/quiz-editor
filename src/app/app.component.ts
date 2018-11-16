@@ -3,6 +3,7 @@ import { QuizService } from './quiz.service';
 
 interface quizDisplay {
   name: string;
+  originalName: string;
   numberQuestions: number;
   questions: questionDisplay[];
 
@@ -30,7 +31,10 @@ export class AppComponent {
 
   ngOnInit(){
     this.quizSvc.getQuizzes().subscribe(
-      data => this.quizzes = <quizDisplay[]>data
+      data => this.quizzes = (<quizDisplay[]>data).map(x => ({
+        ...x,
+        originalName: x.name
+      }))
       , error => this.wasErrorLoadingQuizzes = true
     );
   }
@@ -51,7 +55,11 @@ export class AppComponent {
 
 
   addNewQuiz(){
-    let q = {name:"New Untitled Quiz", numberQuestions: 0, questions:[]};
+    let q = {
+      name:"New Untitled Quiz",
+      originalName: name,
+      numberQuestions: 0,
+      questions:[]};
     this.quizzes = [...this.quizzes, q];
     this.selectQuiz(q);
   }
@@ -65,6 +73,7 @@ export class AppComponent {
     this.selectQuestion(newQuestion);
     this.selectedQuiz.numberQuestions = this.selectedQuiz.questions.length;
     console.log("after addNewQuestion \n", this.selectedQuiz.questions[1]);
+    console.log(this.numberOfChangedQuizzes);
   }
 
   removeQuestion(deleted){
@@ -74,14 +83,17 @@ export class AppComponent {
 
    arrayRemove (arr, value) {
 
-    return arr.filter(function(ele){
+    return arr.filter(function (ele){
         return ele != value;
     });
  
  }
- 
+ //numberOfChangedQuizzes = 2;<p>Question&nbsp</p><br />
 
-
+get numberOfChangedQuizzes(){
+  let changedQuizzes = this.quizzes.filter(x => x.name !== x.originalName);
+  return changedQuizzes.length;
+}
 
   learningPromises() {
     
