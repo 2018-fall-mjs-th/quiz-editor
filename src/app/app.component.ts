@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { QuizService } from './quiz.service';
-
+import {
+  trigger
+  , style
+  , animate
+  , transition
+  , keyframes
+} from '@angular/animations';
 
 interface quizDisplay {
   
@@ -20,7 +26,29 @@ interface questionDisplay {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  animations: [
+    trigger('detailsFromLeft', [
+      transition('leftPosition => finalPosition', [
+        animate('300ms', keyframes([
+          style({ left: '-30px', offset: 0.0 }),
+          style({ left: '-20px', offset: 0.25 }),
+          style({ left: '-10px', offset: 0.5 }),
+          style({ left: '-5px', offset: 0.75 }),
+          style({ left: '0px', offset: 1.0 })
+        ]))
+      ]),
+    ]),
+    trigger('pulseSaveCancelButtons', [
+      transition('nothingToSave => somethingToSave', [
+        animate('400ms', keyframes([
+          style({ transform: 'scale(1.0)', 'transform-origin': 'top left', offset: 0.0 }),
+          style({ transform: 'scale(1.2)', 'transform-origin': 'top left', offset: 0.5 }),
+          style({ transform: 'scale(1.0)', 'transform-origin': 'top left', offset: 1.0 })
+        ]))
+      ])
+    ])
+  ]  
 })
 export class AppComponent {
 
@@ -79,6 +107,8 @@ export class AppComponent {
   removeQuestion(selectedQuiz, selectedQuestion) {
     selectedQuiz.questions = selectedQuiz.questions.filter(n => n != selectedQuestion);
     selectedQuiz.numberQuestions = selectedQuiz.questions.length;
+
+    this.detailsAnimationState = "finalPosition";
   }
 
 
@@ -94,6 +124,7 @@ export class AppComponent {
     return changedQuizzes.length;
   }
 
+  detailsAnimationState = "leftPosition";
 
 
   // Learning promises functions below...
