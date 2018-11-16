@@ -1,0 +1,27 @@
+@keyframes details-from-left {
+    0% { transform: translateX(-30px) }
+    25% { transform: translateX(-20px) }
+    50% { transform: translateX(-10px) }
+    75% { transform: translateX(-5px) }
+    100% { transform: translateX(0px) }
+}
+
+.details-display-animation {
+    animation-name: details-from-left;
+    animation-delay: 30ms;
+    animation-duration: 300ms;
+}
+
+    
+@keyframes save-cancel-buttons-grow-shrink {
+    0% { transform: scale(1.0) }
+    50% { transform: scale(1.1) }
+    100% { transform: scale(1.0) }
+}
+
+.changes-detected-animation {
+    animation-name: save-cancel-buttons-grow-shrink;
+    animation-delay: 100ms;
+    animation-duration: 0.75s;
+    transform-origin: top left;
+}
