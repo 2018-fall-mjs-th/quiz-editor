@@ -3,6 +3,7 @@ import { QuizService } from './quiz.service';
 
 interface quizDisplay {
   name: string;
+  originalName: string;
   numberQuestions: number;
   questions: any [];
 }
@@ -27,7 +28,10 @@ export class AppComponent {
     this.quizSvc.getQuizzes().subscribe(
     
       // a shorter way
-      data => this.quizzes = <quizDisplay[]> data
+      data => this.quizzes = (<quizDisplay[]> data).map(x => ({
+        ...x
+        , originalName: x.name
+      }))
       , error => this.wasErrorLoadingQuizzes = true
 
       //   data => {
@@ -44,7 +48,12 @@ export class AppComponent {
   }
 
   addNewQuiz() {
-    let q = { name: "Untitled Quiz", numberQuestions: 0, questions: [] };
+    let q = { 
+      name: "New Untitled Quiz"
+      , originalName: "New Untitled Quiz"
+      , numberQuestions: 0
+      , questions: [] 
+    };
     this.quizzes = [...this.quizzes, q];
     this.selectQuiz(q);
   }
@@ -63,6 +72,18 @@ export class AppComponent {
     // console.log(question);
     // console.log(this.selectedQuiz.questions.length);
   }
+
+
+  // numberofChangedQuizzes = 2;
+
+  //TS read-only property
+  get numberofChangedQuizzes() {
+    let changedQuizzes = this.quizzes.filter(x => x.name !== x.originalName);
+    return changedQuizzes.length;
+  }
+
+
+  // learning promises
 
   learningPromises() {
     console.log("learningPromises()");
