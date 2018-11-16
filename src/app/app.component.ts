@@ -5,8 +5,17 @@ import { QuizService } from './quiz.service';
 interface quizDisplay {
   name: string;
   originalName: string;
+
   numberQuestions: number;
-  questions: any;
+  
+  questions: questionDisplay[];
+  naiveQuestionsChecksum: string;
+}
+
+interface questionDisplay {
+  name: string;
+  
+
 }
 
 @Component({
@@ -32,6 +41,7 @@ export class AppComponent {
       data => this.quizzes = (<quizDisplay[]> data).map(x => ({
         ...x
         , originalName: x.name
+        , naiveQuestionsChecksum: x.questions.map(y => y.name).join("~")
 
       }))
       , error => this.wasErrorLoadingQuizzes = true
@@ -51,6 +61,7 @@ export class AppComponent {
       , originalName: "New Untitled Quiz"
       , numberQuestions: 0
       , questions: []
+      , naiveQuestionsChecksum: ""
     };
     this.quizzes = [...this.quizzes, q];
     this.selectQuiz(q);
@@ -59,7 +70,7 @@ export class AppComponent {
   addNewQuestion(selectedQuiz) {
     selectedQuiz.questions = [...selectedQuiz.questions, {"name": "New untitled question"}];
     selectedQuiz.numberQuestions = selectedQuiz.questions.length;
-    console.log(this.numberOfChangedQuizzes);
+    console.log(this.selectedQuiz.naiveQuestionsChecksum);
   }
 
   removeQuestion(selectedQuiz, selectedQuestion) {
@@ -71,7 +82,10 @@ export class AppComponent {
 
   //TS read-only property
   get numberOfChangedQuizzes() {
-    let changedQuizzes = this.quizzes.filter(x => x.name !== x.originalName);
+    let changedQuizzes = this.quizzes.filter(x => 
+      x.name !== x.originalName
+      || x.naiveQuestionsChecksum !== x.questions.map(y => y.name).join("~")
+    );
     return changedQuizzes.length;
   }
 
