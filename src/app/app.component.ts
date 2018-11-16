@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { QuizService } from './quiz.service';
-
+import {
+  trigger,
+  style,
+  animate,
+  transition,
+  keyframes
+} from '@angular/animations';
 interface quizDisplay {
   name: string;
   originalName: string;
@@ -16,7 +22,30 @@ interface questionDisplay {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+
+  animations: [
+    trigger('detailsFromLeft', [
+      transition('leftPosition => finalPosition', [
+        animate('300ms', keyframes([
+          style({ left: '-30px', offset: 0.0 }),
+          style({ left: '-20px', offset: 0.25 }),
+          style({ left: '-10px', offset: 0.5 }),
+          style({ left: '-5px', offset: 0.75 }),
+          style({ left: '0px', offset: 1.0 })
+        ]))
+      ]),
+    ]),
+    trigger('pulseSaveCancelButtons', [
+      transition('nothingToSave => somethingToSave', [
+        animate('400ms', keyframes([
+          style({ transform: 'scale(1.0)', 'transform-origin': 'top left', offset: 0.0 }),
+          style({ transform: 'scale(1.2)', 'transform-origin': 'top left', offset: 0.5 }),
+          style({ transform: 'scale(1.0)', 'transform-origin': 'top left', offset: 1.0 })
+        ]))
+      ])
+    ])
+  ]
 })
 export class AppComponent {
 
@@ -42,9 +71,15 @@ export class AppComponent {
 //test
   selectedQuiz = undefined;
 
+
+  detailsFromLeftState = 'leftPosition';
+  pulseButtonsState = "nothingToSave";
+
+
   selectQuiz(quiz){
     console.log(quiz);
     this.selectedQuiz = quiz;
+    this.detailsAnimationState = "finalPosition";
   }
 
   selectedQuestion = undefined;
@@ -63,11 +98,13 @@ export class AppComponent {
       questions:[],
       naiveQuestionCheckSum: ""
     };
+
+
     this.quizzes = [...this.quizzes, q];
     this.selectQuiz(q);
   }
 
-  //appendingQuiz= undefined;
+  //appendingQuiz= detailsFromLeftAnimationComplete()
 
   addNewQuestion(){
   
@@ -75,8 +112,9 @@ export class AppComponent {
     this.selectedQuiz.questions = [...this.selectedQuiz.questions, {name:"New Untitled Question"}];
     this.selectQuestion(newQuestion);
     this.selectedQuiz.numberQuestions = this.selectedQuiz.questions.length;
-    console.log("after addNewQuestion \n", this.selectedQuiz.questions[1]);
+ 
     console.log(this.numberOfChangedQuizzes);
+    this.pulseButtonsState = "somethingToSave";
   }
 
   removeQuestion(deleted){
@@ -102,7 +140,13 @@ get numberOfChangedQuizzes(){
   return changedQuizzes.length;
 }
 
-  learningPromises() {
+detailsAnimationState = "leftPosition";
+detailsFromLeftAnimationComplete(){
+
+  this.detailsAnimationState = "leftPosition";
+}
+
+  learningPromises() {"numberOfChangedQuizzes || true"
     
     console.log("learningPromises()");
 
