@@ -4,7 +4,7 @@ import { QuizService } from './quiz.service';
 interface quizDisplay {
   name: string;
   numberQuestions: number;
-  questions : any;
+  questions : any [];
 }
 
 @Component({
@@ -16,6 +16,7 @@ export class AppComponent {
 
   quizzes: quizDisplay[] = [];
   wasErrorLoadingQuizzes: boolean = false;
+  
 
   constructor (private quizSvc: QuizService) {
   }
@@ -46,13 +47,15 @@ export class AppComponent {
   }
 
   addNewQuestion() {
-    this.selectedQuiz.questions = [...this.selectedQuiz.questions, { name: "New untitled question"}];
-    this.selectedQuiz.numberQuestions = this.selectedQuiz.questions.length;
+    if (this.selectedQuiz.questions) {
+      this.selectedQuiz.questions = [...this.selectedQuiz.questions, { name: "New Question" } ];
+    } else {
+    this.selectedQuiz.questions = [ { name: "New Question" } ];
+    }
   }
 
-  removeQuestion(selectedQuestion) {
-    this.selectedQuiz.questions = this.selectedQuiz.questions.filter(n => n != selectedQuestion);
-    this.selectedQuiz.numberQuestions = this.selectedQuiz.questions.length;
+  removeQuestion(question) {
+    this.selectedQuiz.questions = this.selectedQuiz.questions.filter(n => n !== question);
   }
 
   learningPromises() {

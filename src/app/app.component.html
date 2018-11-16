@@ -18,7 +18,7 @@
             <div class="list-group mb-2">
                 <div [class.active]="q === selectedQuiz" (click)="selectQuiz(q)" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" *ngFor="let q of quizzes">
                     {{ q.name }}
-                    <span class="badge badge-secondary" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
+                    <span class="badge badge-secondary" [class.bg-danger]="q.questions.length === 0">{{ q.questions.length }}</span>
                 </div>
             </div>
         </div>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="card-body">
                     <h3>NAME</h3>
-                    <input type="text" class="form-control" [(ngModel)]="selectedQuiz.name">
+                    <input class="form-control" [(ngModel)]="selectedQuiz.name">
                 </div>
             </div>
             <br />
@@ -43,12 +43,12 @@
                     Questions
                 </div>
                 <div class="card-body">
-                    <button class="btn btn-outline-success mb-2" (click)="addNewQuestion(selectedQuiz)">ADD NEW QUESTION</button>
-                    <div class="row" *ngFor="let q of selectedQuiz.questions">
-                    <div class="input-group">
-                        <input class="form-control" [(ngModel)]="question.name"></div>
+                    <button class="btn btn-outline-success mb-3" (click)="addNewQuestion();">ADD NEW QUESTION</button>
+                    <div class="input-group mb-3" *ngFor="let q of selectedQuiz.question">
+                            <div class="input-group">
+                            <input class="form-control" [(ngModel)]="question.name"></div>
                         <div class="input-group-append">
-                        <button class="btn btn-link" (click)="removeQuestion(question)">Remove</button>
+                        <span class="btn btn-link" (click)="removeQuestion(question);">Remove</span>
                         </div>                                       
                     </div>
                 </div>
@@ -60,6 +60,7 @@
                 <div class="card-body">
                     <h3>No quiz selected</h3>
                     <p>Select or Add Quiz</p>
+                    </div>
                 </div>
             </div>
         </div>
