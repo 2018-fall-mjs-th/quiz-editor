@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { QuizService } from './quiz.service';
 
-
 interface quizDisplay {
-  name: string;
+  name: String;
+  originalName: String;
   numberQuestions: number;
   questions: any;
 }
@@ -17,6 +17,7 @@ export class AppComponent {
 
   quizzes: quizDisplay[] = [];
   wasErrorLoadingQuizzes: boolean = false;
+  questions: any [];
 
   constructor (private quizSvc: QuizService) {
   }
@@ -28,7 +29,10 @@ export class AppComponent {
       //   console.log(data);
       //   this.quizzes = data
       // }
-      data => this.quizzes = <quizDisplay[]> data
+      data => this.quizzes = (<quizDisplay[]> data).map(x => ({
+        ...x
+        , originalName: x.name
+      }))
       , error => this.wasErrorLoadingQuizzes = true
     );
   }
@@ -36,25 +40,42 @@ export class AppComponent {
   selectedQuiz = undefined;
 
   selectQuiz(q) {
-    //console.log(q);
+    console.log(q);
     this.selectedQuiz = q;
   }
 
   addNewQuiz() {
-    let q = { name: "New Untitled Quiz", numberQuestions: 0, questions: []};
-    this.quizzes = [...this.quizzes, q];
-    this.selectQuiz(q);
+    let q = {name: "New Untitled Quiz"
+            , originalName: "New Untitlted Quiz"
+            , numberQuestions: 0
+            , questions: []
+    };
+    this.quizzes = [...this.quizzes, q]
+    this.selectQuiz(q)
   }
 
-  addNewQuestion(selectedQuiz) {
-    selectedQuiz.questions = [...selectedQuiz.questions, {"name": "New untitled question"}];
-    selectedQuiz.numberQuestions = selectedQuiz.questions.length;
+
+  addNewQuestion() {
+    if (this.selectedQuiz.questions) {
+      this.selectedQuiz.questions = [...this.selectedQuiz.questions, { name: "New Question" } ];
+    } else {
+    this.selectedQuiz.questions = [ { name: "New Question" } ];
+    }
+    console.log(this.numberOfChangedQuizzes);
+
   }
 
-  removeQuestion(selectedQuiz, selectedQuestion) {
-    selectedQuiz.questions = selectedQuiz.questions.filter(n => n != selectedQuestion);
-    selectedQuiz.numberQuestions = selectedQuiz.questions.length;
+  removeQuestion(question) {
+    this.selectedQuiz.questions = this.selectedQuiz.questions.filter(x => x !== question);
   }
+
+  //TS read only property..
+  get numberOfChangedQuizzes() {
+    let changedQuizzes = this.quizzes.filter(x => x.name !== x.originalName);
+    return changedQuizzes.length;
+  }
+
+
 
   learningPromises() {
     console.log("learningPromises()");
