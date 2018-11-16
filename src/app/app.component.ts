@@ -71,6 +71,7 @@ export class AppComponent {
   selectQuiz(q) {
     //console.log(q);
     this.selectedQuiz = q;
+    this.detailsAnimationState = "finalPosition";
   }
 
   addNewQuiz() {
@@ -92,7 +93,7 @@ export class AppComponent {
     console.log(this.numberOfChangedQuizzes);
     //this.numberOfChangedQuizzes = 75;
 
-    this.detailsAnimationState = "finalPosition";
+    
   }
 
   removeQuestion(selectedQuiz, selectedQuestion) {
@@ -106,7 +107,13 @@ export class AppComponent {
   // TS readonly property...
   get numberOfChangedQuizzes() {
     let changedQuizzes = this.quizzes.filter(x => x.name !== x.originalName );
+
     return changedQuizzes.length;
+  }
+
+
+  detailsFromLeftAnimationComplete() {
+    this.detailsAnimationState = "leftPosition";
   }
 
   detailsAnimationState = "leftPosition";

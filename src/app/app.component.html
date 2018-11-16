@@ -27,7 +27,11 @@
             </div>
         </div>
         
-        <div class="col-md-8" [@detailsFromLeft]="detailsAnimationState">
+        <div 
+            class="col-md-8" 
+            [@detailsFromLeft]="detailsAnimationState"
+            (@detailsFromLeft.done)="detailsFromLeftAnimationComplete()"
+        >
 
             <div *ngIf="selectedQuiz">
                     <button 
