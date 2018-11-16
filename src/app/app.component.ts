@@ -7,6 +7,11 @@ interface quizDisplay {
   originalName: string;
   numberQuestions: number;
   questions: any;
+  naiveQuestionsChecksum: string;
+}
+
+interface questionDisplay {
+  name: string;
 }
 
 @Component({
@@ -32,7 +37,7 @@ export class AppComponent {
       data => this.quizzes = (<quizDisplay[]> data).map( x => ({
         ...x
         , originalName: x.name
-        
+        , naiveQuestionsChecksum: x.questions.map(y => y.name).join("~")
       }))
       , error => this.wasErrorLoadingQuizzes = true
     );
@@ -46,7 +51,11 @@ export class AppComponent {
   }
 
   addNewQuiz() {
-    let q = { name: "New Untitled Quiz", numberQuestions: 0, questions: []};
+    let q = { 
+      name: "New Untitled Quiz", 
+      numberQuestions: 0, 
+      questions: [],
+    };
     this.quizzes = [...this.quizzes, q];
     this.selectQuiz(q);
     console.log(this.numberOfChangedQuizes);
@@ -55,6 +64,8 @@ export class AppComponent {
   addNewQuestion(selectedQuiz) {
     selectedQuiz.questions = [...selectedQuiz.questions, {"name": "New untitled question"}];
     selectedQuiz.numberQuestions = selectedQuiz.questions.length;
+
+    console.log(this.numberOfChangedQuizes);
   }
 
   removeQuestion(selectedQuiz, selectedQuestion) {
@@ -66,8 +77,11 @@ export class AppComponent {
   //numberOfChangedQuizes = 2;
   
   get numberOfChangedQuizes() {
-
-    let changedQuizzes = this.quizzes.filter( x => x.name !== x.originalName );
+    let changedQuizzes = this.quizzes.filter( 
+      x => x.name !== x.originalName
+      || x.orginalName === "New Untitled Quiz"
+      || x.naiveQuestionsChecksum !== x.questions.map(y => y.name).join("~")
+    );
     return changedQuizzes.length;
   }
 
