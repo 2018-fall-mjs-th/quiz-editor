@@ -33,9 +33,9 @@ export class AppComponent {
     this.quizSvc.getQuizzes().subscribe(
       data => this.quizzes = (<quizDisplay[]>data).map(x => ({
         ...x,
-        originalName: x.name,
-        naiveQuestionCheckSum: this.questions.map(y => y.name).join("~")
-      }))
+        originalName: x.name,  
+        naiveQuestionCheckSum: x.questions.map(y => y.name).join("~")
+      }))       //x versus this ^     
       , error => this.wasErrorLoadingQuizzes = true
     );
   }
