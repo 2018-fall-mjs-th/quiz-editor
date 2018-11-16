@@ -32,7 +32,11 @@ export class AppComponent {
       //   console.log(data);
       //   this.quizzes = data
       // }
-      data => this.quizzes = <quizDisplay[]> data
+      data => this.quizzes = (<quizDisplay[]> data).map(x => ({
+        ...x
+        , originalName: x.name
+        , naiveQuestionsChecksum: x.questions.map(x => x.name)
+      }))
       , error => this.wasErrorLoadingQuizzes = true
     );
   }
@@ -51,6 +55,7 @@ export class AppComponent {
       , originalName: "New Untitled Quiz"
       , numberQuestions: 0
       , questions: []
+      , naiveQuestionsChecksum: ""
     };
     this.quizzes = [...this.quizzes, q];
     this.selectQuiz(q);
@@ -69,7 +74,11 @@ export class AppComponent {
   }
 
   get numberOfChangedQuizzes() {
-    let changedQuizzes = this.quizzes.filter(x => x.name !== x.originalName );
+    let changedQuizzes = this.quizzes.filter(x =>
+       x.name !== x.originalName
+       || x.originalName === "New Untitled Quiz"
+       || x.naiveQuestionsChecksum !== x.questions.map(y => y.name).join("~")
+    );
     return changedQuizzes.length;
   }
 
