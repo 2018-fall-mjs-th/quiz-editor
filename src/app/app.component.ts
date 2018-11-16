@@ -1,20 +1,56 @@
 import { Component } from '@angular/core';
 import { QuizService } from './quiz.service';
 import { ViewEncapsulation } from '@angular/core';
+import {
+  trigger
+  , state
+  , style
+  , animate
+  , transition
+  , keyframes
+} from '@angular/animations';
 
 
 interface quizDisplay {
   name: string;
   originalName: string;
+
   numberQuestions: number;
-  questions: any;
+
+  questions: questionDisplay[];
+  naiveQuestionChecksum: string;
 }
 
+interface questionDisplay {
+  name: string;
+}
 @Component({
   selector: 'app-root'
   , templateUrl: './app.component.html'
   , styleUrls: ['./app.component.css']
   , encapsulation: ViewEncapsulation.None
+  , animations: [
+    trigger('detailsFromLeft', [
+      transition('leftPosition => finalPosition', [
+        animate('300ms', keyframes([
+          style({ left: '-30px', offset: 0.0 }),
+          style({ left: '-20px', offset: 0.25 }),
+          style({ left: '-10px', offset: 0.5 }),
+          style({ left: '-5px', offset: 0.75 }),
+          style({ left: '0px', offset: 1.0 })
+        ]))
+      ]),
+    ])
+    , trigger('pulseSaveCancelButtons', [
+      transition('nothingToSave => somethingToSave', [
+        animate('100ms', keyframes([
+          style({ transform: 'scale(1.0)', 'transform-origin': 'top left', offset: 0.0 }),
+          style({ transform: 'scale(1.05)', 'transform-origin': 'top left', offset: 0.5 }),
+          style({ transform: 'scale(1.0)', 'transform-origin': 'top left', offset: 1.0 })
+        ]))
+      ])
+    ])
+  ]
 })
 
 export class AppComponent {
@@ -24,33 +60,44 @@ export class AppComponent {
   wasErrorLoadingQuizzes: boolean = false;
   selectedQuiz = undefined;
   constructor (private quizSvc: QuizService) {}
+  detailsAnimationState = "leftPosition";
+  
+
 
   ngOnInit() {
     this.quizSvc.getQuizzes().subscribe(
       data => this.quizzes = (<quizDisplay[]> data).map(x => ({
         ...x
         , originalName: x.name
+        , naiveQuestionChecksum: x.questions.map(y => y.name).join("~")
       }))
       , error => this.wasErrorLoadingQuizzes = true
     );
   }
-
-
-
   
 // *************************************************************************************************
 // **                                     Process Quizzes                                         **
 // *************************************************************************************************
   selectQuiz(q) {
     this.selectedQuiz = q;
+    this.detailsAnimationState = "finalPosition";
   }
 
   addNewQuiz() {
-    let q = { name: "New Untitled Quiz",originalName: "New Untitled Quiz", numberQuestions: 0, questions: []};
+    let q = { name: "New Untitled Quiz"
+        , originalName: "New Untitled Quiz"
+        , numberQuestions: 0
+        , questions: []
+        , naiveQuestionChecksum: ""
+    };
     this.quizzes = [...this.quizzes, q];
     this.selectQuiz(q);
   }
 
+
+// *************************************************************************************************
+// **                                    Process Questions                                        **
+// *************************************************************************************************
   addNewQuestion(selectedQuiz) {
     selectedQuiz.questions = [...selectedQuiz.questions, {"name": "New untitled question"}];
     selectedQuiz.numberQuestions = selectedQuiz.questions.length;
@@ -59,20 +106,28 @@ export class AppComponent {
   removeQuestion(selectedQuiz, selectedQuestion) {
     selectedQuiz.questions = selectedQuiz.questions.filter(n => n != selectedQuestion);
     selectedQuiz.numberQuestions = selectedQuiz.questions.length;
+    
   }
 
+// *************************************************************************************************
+// **                                   Utility Functions                                         **
+// *************************************************************************************************
+
   get numberOfChangedQuizzes() {
-    let changedQuizzes = this.quizzes.filter(x => x.name !== x.originalName );
+    let changedQuizzes = this.quizzes.filter(x =>
+                          x.name !== x.originalName 
+      ||           x.originalName == "New Untitled Quiz"
+      || x.naiveQuestionChecksum !== x.questions.map(y => y.name).join("~")
+    );
+
     return changedQuizzes.length;
   }
 
+  detailsFromLeftAnimationComplete() {
+    this.detailsAnimationState = "leftPosition";
+  }
 
-
-
-
-
-
-
+  
 // *************************************************************************************************
 // **                                      Practice Stuff                                         **
 // *************************************************************************************************
