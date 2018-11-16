@@ -6,7 +6,7 @@ interface quizDisplay {
   originalName: string;
   numberQuestions: number;
   questions: questionDisplay[];
-
+  naiveQuestionCheckSum: string;
 }
 
 interface questionDisplay {
@@ -33,7 +33,8 @@ export class AppComponent {
     this.quizSvc.getQuizzes().subscribe(
       data => this.quizzes = (<quizDisplay[]>data).map(x => ({
         ...x,
-        originalName: x.name
+        originalName: x.name,
+        naiveQuestionCheckSum: this.questions.map(y => y.name).join("~")
       }))
       , error => this.wasErrorLoadingQuizzes = true
     );
@@ -59,7 +60,9 @@ export class AppComponent {
       name:"New Untitled Quiz",
       originalName: name,
       numberQuestions: 0,
-      questions:[]};
+      questions:[],
+      naiveQuestionCheckSum: ""
+    };
     this.quizzes = [...this.quizzes, q];
     this.selectQuiz(q);
   }
@@ -88,10 +91,14 @@ export class AppComponent {
     });
  
  }
- //numberOfChangedQuizzes = 2;<p>Question&nbsp</p><br />
+ 
 
 get numberOfChangedQuizzes(){
-  let changedQuizzes = this.quizzes.filter(x => x.name !== x.originalName);
+  let changedQuizzes = this.quizzes.filter(x =>
+     x.name !== x.originalName
+     || x.originalName === "New Untitled Question"
+     || x.naiveQuestionCheckSum !== x.questions.map(y => y.name).join("~"))
+
   return changedQuizzes.length;
 }
 
