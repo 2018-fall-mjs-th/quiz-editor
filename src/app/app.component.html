@@ -23,7 +23,7 @@
             </div>
         </div>
         
-        <div class="col-md-8">
+        <div class="col-md-8" [@detailsFromLeft]="detailsAnimationState">
             <div *ngIf="selectedQuiz">
             <button class="btn btn-outline-success mb-2">Save Quizzes ({{numberOfChangedQuizzes}})</button>
             <button class="btn btn-link mb-2">Cancel</button>

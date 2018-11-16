@@ -1,5 +1,12 @@
 import { Component } from '@angular/core';
 import { QuizService } from './quiz.service';
+import {
+  trigger
+  , style
+  , animate
+  , transition
+  , keyframes
+} from '@angular/animations';
 
 interface quizDisplay {
   name: string;
@@ -7,16 +14,43 @@ interface quizDisplay {
 
   numberQuestions: number;
 
-  questions : any;
+  questions : questionDisplay[];
   naiveQuestionsChecksum: string;
   
+}
+
+interface questionDisplay {
+  name: string;
 }
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  animations: [
+    trigger('detailsFromLeft', [
+      transition('leftPosition => finalPosition', [
+        animate('300ms', keyframes([
+          style({ left: '-30px', offset: 0.0 }),
+          style({ left: '-20px', offset: 0.25 }),
+          style({ left: '-10px', offset: 0.5 }),
+          style({ left: '-5px', offset: 0.75 }),
+          style({ left: '0px', offset: 1.0 })
+        ]))
+      ]),
+    ]),
+    trigger('pulseSaveCancelButtons', [
+      transition('nothingToSave => somethingToSave', [
+        animate('400ms', keyframes([
+          style({ transform: 'scale(1.0)', 'transform-origin': 'top left', offset: 0.0 }),
+          style({ transform: 'scale(1.2)', 'transform-origin': 'top left', offset: 0.5 }),
+          style({ transform: 'scale(1.0)', 'transform-origin': 'top left', offset: 1.0 })
+        ]))
+      ])
+    ])
+  ]
 })
+
 export class AppComponent {
 
   quizzes: quizDisplay[] = [];
@@ -35,7 +69,7 @@ export class AppComponent {
       data => this.quizzes = (<quizDisplay[]> data).map(x => ({
         ...x
         , originalName: x.name
-        , naiveQuestionsChecksum: x.questions.map(x => x.name)
+        , naiveQuestionsChecksum: x.questions.map(y => y.name).join("~")
       }))
       , error => this.wasErrorLoadingQuizzes = true
     );
@@ -49,8 +83,7 @@ export class AppComponent {
   }
 
   addNewQuiz() {
-    let q = {name: "New Untitled Quiz", numberQuestions: 0, questions: []};
-    let q = { 
+    let q = {
       name: "New Untitled Quiz"
       , originalName: "New Untitled Quiz"
       , numberQuestions: 0
@@ -71,6 +104,8 @@ export class AppComponent {
 
   removeQuestion(question) {
     this.selectedQuiz.questions = this.selectedQuiz.questions.filter(x => x !== question);
+
+    this.detailsAnimationState = "finalPosition";
   }
 
   get numberOfChangedQuizzes() {
@@ -81,6 +116,8 @@ export class AppComponent {
     );
     return changedQuizzes.length;
   }
+
+  detailsAnimationState = "leftPosition";
 
   learningPromises() {
     console.log("learningPromises()");
