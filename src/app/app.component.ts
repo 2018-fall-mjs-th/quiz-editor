@@ -19,8 +19,8 @@ export class AppComponent {
   wasErrorLoadingQuizzes: boolean = false;
   selectedQuiz = undefined;
   questions = [];
-  //numberOfChangedQuizzes: number;
 
+  // this is a read-only property
   get numberOfChangedQuizzes() {
     let changedQuizzes = this.quizzes.filter(x => x.name !== x.originalName);
     return changedQuizzes.length;
