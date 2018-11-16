@@ -4,6 +4,7 @@ import { QuizService } from './quiz.service';
 
 interface quizDisplay {
   name: string;
+  originalName: string;
   numberQuestions: number;
   questions: any;
 }
@@ -28,7 +29,10 @@ export class AppComponent {
       //   console.log(data);
       //   this.quizzes = data
       // }
-      data => this.quizzes = <quizDisplay[]> data
+      data => this.quizzes = (<quizDisplay[]> data).map(x => ({
+        ...x
+        , originalName: x.name
+      }))
       , error => this.wasErrorLoadingQuizzes = true
     );
   }
@@ -41,7 +45,13 @@ export class AppComponent {
   }
 
   addNewQuiz() {
-    let q = { name: "New Untitled Quiz", numberQuestions: 0, questions: []};
+    let q = { 
+      name: "New Untitled Quiz"
+      , originalName: "New Untitled Quiz"
+      , numberQuestions: 0
+      , questions: []
+    };
+
     this.quizzes = [...this.quizzes, q];
     this.selectQuiz(q);
   }
@@ -49,12 +59,29 @@ export class AppComponent {
   addNewQuestion(selectedQuiz) {
     selectedQuiz.questions = [...selectedQuiz.questions, {"name": "New untitled question"}];
     selectedQuiz.numberQuestions = selectedQuiz.questions.length;
+
+    console.log(this.numberOfChangedQuizzes);
+    //this.numberOfChangedQuizzes = 75;
   }
 
   removeQuestion(selectedQuiz, selectedQuestion) {
     selectedQuiz.questions = selectedQuiz.questions.filter(n => n != selectedQuestion);
     selectedQuiz.numberQuestions = selectedQuiz.questions.length;
   }
+
+
+  //numberOfChangedQuizzes = 2;
+
+  // TS readonly property...
+  get numberOfChangedQuizzes() {
+    let changedQuizzes = this.quizzes.filter(x => x.name !== x.originalName );
+    return changedQuizzes.length;
+  }
+
+
+
+  // Learning promises functions below...
+
 
   learningPromises() {
     console.log("learningPromises()");
