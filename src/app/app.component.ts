@@ -4,6 +4,7 @@ import { QuizService } from './quiz.service';
 
 interface quizDisplay {
   name: string;
+  originalName: string;
   numberQuestions: number;
   questions: any;
 }
@@ -28,7 +29,11 @@ export class AppComponent {
       //   console.log(data);
       //   this.quizzes = data
       // }
-      data => this.quizzes = <quizDisplay[]> data
+      data => this.quizzes = (<quizDisplay[]> data).map( x => ({
+        ...x
+        , originalName: x.name
+        
+      }))
       , error => this.wasErrorLoadingQuizzes = true
     );
   }
@@ -44,6 +49,7 @@ export class AppComponent {
     let q = { name: "New Untitled Quiz", numberQuestions: 0, questions: []};
     this.quizzes = [...this.quizzes, q];
     this.selectQuiz(q);
+    console.log(this.numberOfChangedQuizes);
   }
 
   addNewQuestion(selectedQuiz) {
@@ -55,6 +61,19 @@ export class AppComponent {
     selectedQuiz.questions = selectedQuiz.questions.filter(n => n != selectedQuestion);
     selectedQuiz.numberQuestions = selectedQuiz.questions.length;
   }
+
+
+  //numberOfChangedQuizes = 2;
+  
+  get numberOfChangedQuizes() {
+
+    let changedQuizzes = this.quizzes.filter( x => x.name !== x.originalName );
+    return changedQuizzes.length;
+  }
+
+
+
+  // Learning promises functions
 
   learningPromises() {
     console.log("learningPromises()");
