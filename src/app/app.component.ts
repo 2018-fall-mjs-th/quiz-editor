@@ -7,6 +7,7 @@ interface quizDisplay {
   originalName: string;
   numberQuestions: number;
   questions: any;
+  naiveQuestionChecksum: string;
 }
 
 @Component({
@@ -32,6 +33,7 @@ export class AppComponent {
       data => this.quizzes = (<quizDisplay[]> data).map(x => ({
         ...x
         , originalName: x.name
+        , naiveQuestionChecksum : x.questions.map(y => y.name).join("~")
       }))
       , error => this.wasErrorLoadingQuizzes = true
     );
@@ -50,6 +52,7 @@ export class AppComponent {
       , originalName: "New Untitled Quiz" 
       , numberQuestions: 0
       , questions: []
+      , naiveQuestionChecksum: ""
     };
     this.quizzes = [...this.quizzes, q];
     this.selectQuiz(q);
@@ -70,7 +73,10 @@ export class AppComponent {
 
   //TS read only property
   get numberOfChangedQuizzes() {
-    let changedQuizzes = this.quizzes.filter(x => x.name !== x.originalName );
+    let changedQuizzes = this.quizzes.filter(x => 
+      x.name !== x.originalName 
+      || x.naiveQuestionChecksum !== x.questions.map(y => y.name).join("~")
+    );
     return changedQuizzes.length;
   }
 
