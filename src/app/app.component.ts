@@ -82,6 +82,7 @@ export class AppComponent {
   selectQuiz(q) {
     //console.log(q);
     this.selectedQuiz = q;
+    this.detailsAnimationState = "finalPosition";
   }
 
   addNewQuiz() {
@@ -105,7 +106,7 @@ export class AppComponent {
   removeQuestion(selectedQuiz, selectedQuestion) {
     selectedQuiz.questions = selectedQuiz.questions.filter(n => n != selectedQuestion);
     selectedQuiz.numberQuestions = selectedQuiz.questions.length;
-    this.detailsAnimationState = "finalPosition";
+    
   }
 
   //numberOfChangedQuizzes = 2;
@@ -121,7 +122,9 @@ export class AppComponent {
   }
 
   detailsAnimationState = "leftPosition";
-
+  detailsFromLeftAnimationComplete() {
+    this.detailsAnimationState = "leftPosition";
+  }
   //Learning promises functions below...
 
   learningPromises() {
