@@ -2,13 +2,8 @@ import { Component } from '@angular/core';
 import { QuizService } from './quiz.service';
 
 interface quizDisplay {
-<<<<<<< HEAD
   name: String;
   originalName: String;
-=======
-  name: string;
-  originalName: string;
->>>>>>> 24047b27adbef926ab68c86859ba2295767fc1e5
   numberQuestions: number;
   questions: any;
 }
@@ -50,7 +45,6 @@ export class AppComponent {
   }
 
   addNewQuiz() {
-<<<<<<< HEAD
     let q = {name: "New Untitled Quiz"
             , originalName: "New Untitlted Quiz"
             , numberQuestions: 0
@@ -73,25 +67,6 @@ export class AppComponent {
 
   removeQuestion(question) {
     this.selectedQuiz.questions = this.selectedQuiz.questions.filter(x => x !== question);
-=======
-    let q = { 
-      name: "New Untitled Quiz"
-      , originalName: "New Untitled Quiz"
-      , numberQuestions: 0
-      , questions: []
-    };
-
-    this.quizzes = [...this.quizzes, q];
-    this.selectQuiz(q);
-  }
-
-  addNewQuestion(selectedQuiz) {
-    selectedQuiz.questions = [...selectedQuiz.questions, {"name": "New untitled question"}];
-    selectedQuiz.numberQuestions = selectedQuiz.questions.length;
-
-    console.log(this.numberOfChangedQuizzes);
-    //this.numberOfChangedQuizzes = 75;
->>>>>>> 24047b27adbef926ab68c86859ba2295767fc1e5
   }
 
   //TS read only property..
@@ -101,21 +76,6 @@ export class AppComponent {
   }
 
 
-<<<<<<< HEAD
-=======
-  //numberOfChangedQuizzes = 2;
-
-  // TS readonly property...
-  get numberOfChangedQuizzes() {
-    let changedQuizzes = this.quizzes.filter(x => x.name !== x.originalName );
-    return changedQuizzes.length;
-  }
-
-
-
-  // Learning promises functions below...
-
->>>>>>> 24047b27adbef926ab68c86859ba2295767fc1e5
 
   learningPromises() {
     console.log("learningPromises()");
