@@ -27,12 +27,26 @@
             </div>
         </div>
         
-        <div class="col-md-8">
+        <div 
+            class="col-md-8" 
+            [@detailsFromLeft]="detailsAnimationState"
+            (@detailsFromLeft.done)="detailsFromLeftAnimationComplete()"
+        >
 
             <div *ngIf="selectedQuiz">
-                    <button class="btn btn-outline-success mb-2">Save</button>
-                    <button class="btn btn-link mb-2">Cancel</button>
-                    <br />
+                    <div
+                        [@pulseSaveCancelButtons]="numberOfChangedQuizzes > 0 ? 'somethingToSave' : 'nothingToSave' "
+                    >
+                        <button 
+                            class="btn mb-2" 
+                            [class.btn-outline-success]="numberOfChangedQuizzes === 0"
+                            [class.btn-success]="numberOfChangedQuizzes > 0"
+                        >
+                            Save Quizzes ({{ numberOfChangedQuizzes }})
+                        </button>
+                        <button class="btn btn-link mb-2">Cancel</button>
+    
+                    </div>
                     <div class="card">
                         <div class="card-header">
                             {{ selectedQuiz.name }}
