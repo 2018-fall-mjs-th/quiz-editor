@@ -42,7 +42,8 @@ export class QuizService {
 
     let h = new HttpHeaders({
       'Content-Type': 'application/json'
-      , 'X-Sas-Token': 'sig=WLBiqg_HC_FaEVqTUL4EeujDBQRQT9oL3R5uo1kIB1g'
+      //, 'X-Sas-Token': 'sig=WLBiqg_HC_FaEVqTUL4EeujDBQRQT9oL3R5uo1kIB1g'
+      , 'X-Sas-Token': 'sig=K2WE6NQPtyoV6ke5hwPEaEaW52fgvyFWUeCEdPJls1s'
     });
 
     //h.append('Content-Type', 'application/json');
@@ -50,10 +51,18 @@ export class QuizService {
     console.log(h);
 
     return this.builtInAngularHttpClient.post(
-      'https://modern-js.azurewebsites.net/add-quizzes-proxy'
+      //'https://modern-js.azurewebsites.net/add-quizzes-proxy'
+      'https://modern-js.azurewebsites.net/save-quizzes-proxy'
       , JSON.stringify(
         {
-          "newQuizzes": [{ 
+          "changedQuizzes": [{
+            "name": "Foo"
+            , "originalName": "Bar"
+            , "numberQuestions": 0
+            , "questions": []
+            , "naiveQuestionsChecksum": ""
+          }]
+          , "newQuizzes": [{ 
               "quizName": "Foo"
               , "quizQuestions": [
                   "qOne"

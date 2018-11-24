@@ -1,5 +1,13 @@
 {
-    "newQuizzes": [{ 
+    "changedQuizzes": [{
+        "name": "Foo"
+        , "originalName": "Bar"
+        , "numberQuestions": 0
+        , "questions": []
+        , "naiveQuestionsChecksum": ""
+    }
+    ]
+    , "newQuizzes": [{ 
         "quizName": "Foo"
         , "quizQuestions": [
             "qOne"
@@ -15,6 +23,9 @@
     }]
 }
 
-
+// add-quizzes
 // sig=WLBiqg_HC_FaEVqTUL4EeujDBQRQT9oL3R5uo1kIB1g
+
+// save-quizzes
+//sig=K2WE6NQPtyoV6ke5hwPEaEaW52fgvyFWUeCEdPJls1s
 
