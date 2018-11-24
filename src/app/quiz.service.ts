@@ -44,12 +44,12 @@ export class QuizService {
       'Content-Type': 'application/json'
       , 'X-Sas-Token': 'sig=WLBiqg_HC_FaEVqTUL4EeujDBQRQT9oL3R5uo1kIB1g'
     });
-    
+
     //h.append('Content-Type', 'application/json');
     //h.append('X-Sas-Token', 'sig=WLBiqg_HC_FaEVqTUL4EeujDBQRQT9oL3R5uo1kIB1g');
     console.log(h);
 
-    this.builtInAngularHttpClient.post(
+    return this.builtInAngularHttpClient.post(
       'https://modern-js.azurewebsites.net/add-quizzes-proxy'
       , JSON.stringify(
         {
@@ -65,6 +65,7 @@ export class QuizService {
               , "quizQuestions": [
                   "cat"
                   , "dog"
+                  , "parrot"
               ]
           }]
         }
@@ -72,6 +73,6 @@ export class QuizService {
     , {
       headers: h
     }
-    ).subscribe();
+    );
   }
 }

@@ -142,7 +142,10 @@ export class AppComponent implements OnInit {
   }
 
   saveQuizzes() {
-    this.quizSvc.saveQuizzes();
+    this.quizSvc.saveQuizzes().subscribe(
+      data => console.log(data)
+      , error => console.log(error)
+    )
   }
 
 
