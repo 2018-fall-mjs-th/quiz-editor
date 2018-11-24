@@ -1,13 +1,27 @@
 import { TestBed, async } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
+import { QuizService } from './quiz.service';
 
 describe('AppComponent', () => {
+
+  let httpClientSpy: { get: jasmine.Spy };
+  let quizService: QuizService;
+
   beforeEach(async(() => {
+    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
+    quizService = new QuizService(<any> httpClientSpy);
+
     TestBed.configureTestingModule({
       declarations: [
         AppComponent
       ],
-    }).compileComponents();
+      imports: [
+        FormsModule
+      ]
+    })
+    //.overrideComponent(QuizService, quizService)
+    .compileComponents();
   }));
 
   it('should create the app', () => {
