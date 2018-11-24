@@ -30,7 +30,7 @@ export class QuizService {
     return p;
   }
 
-  saveQuizzes() {
+  saveQuizzes(changedQuizzes: any[]) {
 
     //let headers = new Headers({ 'Content-Type': 'application/json' });
     //let options = new RequestOptions({ headers: headers });
@@ -55,13 +55,7 @@ export class QuizService {
       'https://modern-js.azurewebsites.net/save-quizzes-proxy'
       , JSON.stringify(
         {
-          "changedQuizzes": [{
-            "name": "Foo"
-            , "originalName": "Bar"
-            , "numberQuestions": 0
-            , "questions": []
-            , "naiveQuestionsChecksum": ""
-          }]
+          "changedQuizzes": changedQuizzes
           , "newQuizzes": [{ 
               "quizName": "Foo"
               , "quizQuestions": [
