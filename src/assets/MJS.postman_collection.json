@@ -1,0 +1,143 @@
+{
+	"info": {
+		"_postman_id": "8c38e002-0291-ece0-24ca-0d1b756fce17",
+		"name": "MJS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "save-quizzes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "save-quizzes",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "newQuizzes",
+							"value": "[object Object]",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://prod-13.centralus.logic.azure.com:443/workflows/18446007fa284ba69be5202457331a77?api-version=2018-07-01-preview",
+					"protocol": "https",
+					"host": [
+						"prod-13",
+						"centralus",
+						"logic",
+						"azure",
+						"com"
+					],
+					"port": "443",
+					"path": [
+						"workflows",
+						"18446007fa284ba69be5202457331a77"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2018-07-01-preview"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add-quizzes-api-mgmt",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "5d5db76eacc043f6bf53bb4778cf57be",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://add-quizzes.azure-api.net/manual/paths/invoke?api-version=2018-07-01-preview",
+					"protocol": "https",
+					"host": [
+						"add-quizzes",
+						"azure-api",
+						"net"
+					],
+					"path": [
+						"manual",
+						"paths",
+						"invoke"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2018-07-01-preview"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add-quzzes-azure-function-proxy",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Sas-Token",
+						"value": "sig=WLBiqg_HC_FaEVqTUL4EeujDBQRQT9oL3R5uo1kIB1g",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"newQuizzes\": [{ \n        \"quizName\": \"Foo\"\n        , \"quizQuestions\": [\n            \"qOne\"\n            , \"qTwo\"\n        ]\n    }\n    , {\n        \"quizName\": \"Bar\"\n        , \"quizQuestions\": [\n            \"cat\"\n            , \"dog\"\n            , \"parrot\"\n            , \"bunny\"\n        ]\n    }]\n}\n"
+				},
+				"url": {
+					"raw": "https://modern-js.azurewebsites.net/add-quizzes-proxy",
+					"protocol": "https",
+					"host": [
+						"modern-js",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"add-quizzes-proxy"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

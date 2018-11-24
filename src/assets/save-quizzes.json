@@ -1,0 +1,20 @@
+{
+    "newQuizzes": [{ 
+        "quizName": "Foo"
+        , "quizQuestions": [
+            "qOne"
+            , "qTwo"
+        ]
+    }
+    , {
+        "quizName": "Bar"
+        , "quizQuestions": [
+            "cat"
+            , "dog"
+        ]
+    }]
+}
+
+
+// sig=WLBiqg_HC_FaEVqTUL4EeujDBQRQT9oL3R5uo1kIB1g
+
