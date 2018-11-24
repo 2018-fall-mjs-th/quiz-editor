@@ -144,8 +144,9 @@ export class AppComponent implements OnInit {
   saveQuizzes() {
 
     const changedQuizzes = this.quizzes.filter(x =>
-      x.name !== x.originalName
-      || x.naiveQuestionsChecksum !== x.questions.map(y => y.name).join('~')
+      x.originalName !== 'New Untitled Quiz'
+      && (x.name !== x.originalName
+      || x.naiveQuestionsChecksum !== x.questions.map(y => y.name).join('~'))
     );
 
     this.quizSvc.saveQuizzes(changedQuizzes).subscribe(

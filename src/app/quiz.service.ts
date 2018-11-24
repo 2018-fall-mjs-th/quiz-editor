@@ -56,21 +56,22 @@ export class QuizService {
       , JSON.stringify(
         {
           "changedQuizzes": changedQuizzes
-          , "newQuizzes": [{ 
-              "quizName": "Foo"
-              , "quizQuestions": [
-                  "qOne"
-                  , "qTwo"
-              ]
-          }
-          , {
-              "quizName": "Bar"
-              , "quizQuestions": [
-                  "cat"
-                  , "dog"
-                  , "parrot"
-              ]
-          }]
+          , "newQuizzes": []
+          // , "newQuizzes": [{ 
+          //     "quizName": "Foo"
+          //     , "quizQuestions": [
+          //         "qOne"
+          //         , "qTwo"
+          //     ]
+          // }
+          // , {
+          //     "quizName": "Bar"
+          //     , "quizQuestions": [
+          //         "cat"
+          //         , "dog"
+          //         , "parrot"
+          //     ]
+          // }]
         }
       )
     , {
