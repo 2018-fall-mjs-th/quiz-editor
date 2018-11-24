@@ -141,6 +141,11 @@ export class AppComponent implements OnInit {
     this.detailsAnimationState = 'leftPosition';
   }
 
+  saveQuizzes() {
+    this.quizSvc.saveQuizzes();
+  }
+
+
   // Learning promises functions below...
 
 

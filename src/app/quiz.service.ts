@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +28,50 @@ export class QuizService {
     );
 
     return p;
+  }
+
+  saveQuizzes() {
+
+    //let headers = new Headers({ 'Content-Type': 'application/json' });
+    //let options = new RequestOptions({ headers: headers });
+    // let headers = new Headers()
+    //   .set("X-Sas-Token", "sig=WLBiqg_HC_FaEVqTUL4EeujDBQRQT9oL3R5uo1kIB1g")
+    //   ;
+
+    // headers.set('Content-Type', 'application/json')
+
+    let h = new HttpHeaders({
+      'Content-Type': 'application/json'
+      , 'X-Sas-Token': 'sig=WLBiqg_HC_FaEVqTUL4EeujDBQRQT9oL3R5uo1kIB1g'
+    });
+    
+    //h.append('Content-Type', 'application/json');
+    //h.append('X-Sas-Token', 'sig=WLBiqg_HC_FaEVqTUL4EeujDBQRQT9oL3R5uo1kIB1g');
+    console.log(h);
+
+    this.builtInAngularHttpClient.post(
+      'https://modern-js.azurewebsites.net/add-quizzes-proxy'
+      , JSON.stringify(
+        {
+          "newQuizzes": [{ 
+              "quizName": "Foo"
+              , "quizQuestions": [
+                  "qOne"
+                  , "qTwo"
+              ]
+          }
+          , {
+              "quizName": "Bar"
+              , "quizQuestions": [
+                  "cat"
+                  , "dog"
+              ]
+          }]
+        }
+      )
+    , {
+      headers: h
+    }
+    ).subscribe();
   }
 }
