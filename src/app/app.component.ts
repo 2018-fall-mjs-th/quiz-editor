@@ -84,6 +84,10 @@ export class AppComponent {
     );
   }
 
+  reloadQuizzes() {
+    console.log('foo');
+  }
+
   selectQuiz(q) {
     this.selectedQuiz = q;
     this.detailsAnimationState = "finalPosition";
