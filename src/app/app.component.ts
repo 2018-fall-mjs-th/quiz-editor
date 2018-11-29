@@ -89,25 +89,29 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // console.log(this.quizSvc.getQuizzes());
+    this.loadQuizzes();
+  }
+
+  private loadQuizzes() {
     this.quizSvc.getQuizzes().subscribe(
       // (data) => {
       //   console.log(data);
       //   this.quizzes = data
       // }
-      data => this.quizzes = (<QuizDisplay[]> data).map(x => ({
-        ...x
-        , originalName: x.name
-        , naiveQuestionsChecksum: x.questions.map(y => y.name).join('~')
-      }))
-      , error => this.wasErrorLoadingQuizzes = true
-    );
+      data => this.quizzes = (<QuizDisplay[]>data).map(x => ({
+        ...x,
+        originalName: x.name,
+        naiveQuestionsChecksum: x.questions.map(y => y.name).join('~')
+      })), error => this.wasErrorLoadingQuizzes = true);
   }
 
   /**
    * New method written in-class. 
    */
   reloadQuizzes() {
-    console.log('test');
+    this.loadQuizzes();
+    this.selectedQuiz = undefined;
+    console.log('Reloaded Quizzes');
   }
 
   selectQuiz(q) {
