@@ -61,25 +61,23 @@ export class AppComponent {
 
   ngOnInit() {
     // because getQuizzes returns an Observable, we have to subscribe to it
-    this.quizSvc.getQuizzes().subscribe(
-    
-      // a shorter way
-      data => this.quizzes = (<quizDisplay[]> data).map(x => ({
-        ...x
-        , originalName: x.name
-        , naiveQuestionsChecksum: x.questions.map(y => y.name).join("~")
-      }))
-      , error => this.wasErrorLoadingQuizzes = true
+    this.loadQuizzes();
+  }
 
-      //   data => {
-      //    console.log(data);
-      //     this.quizzes = data;
-      //   }
-    );
+  private loadQuizzes() {
+    this.quizSvc.getQuizzes().subscribe(
+      // a shorter way
+      data => this.quizzes = (<quizDisplay[]>data).map(x => ({
+        ...x,
+        originalName: x.name,
+        naiveQuestionsChecksum: x.questions.map(y => y.name).join("~")
+      })), error => this.wasErrorLoadingQuizzes = true);
   }
 
   reloadQuizzes() {
-    console.log('foo');
+    // console.log('foo');
+    this.selectedQuiz = undefined;
+    this.loadQuizzes();
   }
 
   selectedQuiz = undefined;
