@@ -89,18 +89,25 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // console.log(this.quizSvc.getQuizzes());
+    this.loadQuizzes();
+  }
+
+  private loadQuizzes() {
     this.quizSvc.getQuizzes().subscribe(
       // (data) => {
       //   console.log(data);
       //   this.quizzes = data
       // }
-      data => this.quizzes = (<QuizDisplay[]> data).map(x => ({
-        ...x
-        , originalName: x.name
-        , naiveQuestionsChecksum: x.questions.map(y => y.name).join('~')
-      }))
-      , error => this.wasErrorLoadingQuizzes = true
-    );
+      data => this.quizzes = (<QuizDisplay[]>data).map(x => ({
+        ...x,
+        originalName: x.name,
+        naiveQuestionsChecksum: x.questions.map(y => y.name).join('~')
+      })), error => this.wasErrorLoadingQuizzes = true);
+  }
+  reloadQuizzes(){
+    console.log('reloadQuizzes');
+    this.loadQuizzes();
+    this.selectedQuiz = undefined;
   }
 
   selectQuiz(q) {
@@ -109,9 +116,7 @@ export class AppComponent implements OnInit {
     this.detailsAnimationState = 'finalPosition';
   }
 
-  reloadQuizzes(){
-    console.log('reloadQuizzes');
-  }
+
 
   addNewQuiz() {
     const q = {
