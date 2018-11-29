@@ -74,18 +74,21 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.quizSvc.getQuizzes().subscribe(
-      data => this.quizzes = (<quizDisplay[]> data).map(x => ({
-        ...x
-        , originalName: x.name
-        , naiveQuestionsChecksum: x.questions.map(y => y.name).join("~")
-      })) // data is being shaped with map to include data from service and give it an originalName field
-      , error => this.wasErrorLoadingQuizzes = true
-    );
+    this.loadQuizzes();
+  }
+
+  private loadQuizzes() {
+    this.quizSvc.getQuizzes().subscribe(data => this.quizzes = (<quizDisplay[]>data).map(x => ({
+      ...x,
+      originalName: x.name,
+      naiveQuestionsChecksum: x.questions.map(y => y.name).join("~")
+    })) // data is being shaped with map to include data from service and give it an originalName field
+      , error => this.wasErrorLoadingQuizzes = true);
   }
 
   reloadQuizzes() {
-    console.log('foo');
+    this.selectedQuiz = undefined;
+    this.loadQuizzes();
   }
 
   selectQuiz(q) {
