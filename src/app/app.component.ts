@@ -141,6 +141,10 @@ export class AppComponent implements OnInit {
     this.detailsAnimationState = 'leftPosition';
   }
 
+  reloadQuizzes() {
+    console.log("works");
+  }
+
   // Learning promises functions below...
 
 
