@@ -89,19 +89,27 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // console.log(this.quizSvc.getQuizzes());
+    this.loadQuizzes();
+  }
+
+  private loadQuizzes() {
     this.quizSvc.getQuizzes().subscribe(
       // (data) => {
       //   console.log(data);
       //   this.quizzes = data
       // }
-      data => this.quizzes = (<QuizDisplay[]> data).map(x => ({
-        ...x
-        , originalName: x.name
-        , naiveQuestionsChecksum: x.questions.map(y => y.name).join('~')
-      }))
-      , error => this.wasErrorLoadingQuizzes = true
-    );
+      data => this.quizzes = (<QuizDisplay[]>data).map(x => ({
+        ...x,
+        originalName: x.name,
+        naiveQuestionsChecksum: x.questions.map(y => y.name).join('~')
+      })), error => this.wasErrorLoadingQuizzes = true);
   }
+
+  reloadQuizzes() {
+    this.loadQuizzes();
+    this.selectedQuiz = undefined;
+  }
+
 
   selectQuiz(q) {
     // console.log(q);
@@ -141,10 +149,7 @@ export class AppComponent implements OnInit {
     this.detailsAnimationState = 'leftPosition';
   }
 
-  reloadQuizzes() {
-    console.log("works");
-  }
-
+  
   // Learning promises functions below...
 
 
