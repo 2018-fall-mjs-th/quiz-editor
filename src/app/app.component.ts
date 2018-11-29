@@ -103,6 +103,10 @@ export class AppComponent implements OnInit {
     );
   }
 
+  reloadQuizzes() {
+    console.log("foo");
+  }
+
   selectQuiz(q) {
     // console.log(q);
     this.selectedQuiz = q;
