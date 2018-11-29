@@ -7,6 +7,7 @@ import {
   transition,
   keyframes
 } from '@angular/animations';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 interface quizDisplay {
   name: string;
   originalName: string;
@@ -59,14 +60,7 @@ export class AppComponent {
   }
 
   ngOnInit(){
-    this.quizSvc.getQuizzes().subscribe(
-      data => this.quizzes = (<quizDisplay[]>data).map(x => ({
-        ...x,
-        originalName: x.name,  
-        naiveQuestionCheckSum: x.questions.map(y => y.name).join("~")
-      }))       //x versus this ^     
-      , error => this.wasErrorLoadingQuizzes = true
-    );
+    this.loadQuizzes();
   }
 //test
   selectedQuiz = undefined;
@@ -75,6 +69,15 @@ export class AppComponent {
   detailsFromLeftState = 'leftPosition';
   pulseButtonsState = "nothingToSave";
 
+
+  private loadQuizzes() {
+    this.quizSvc.getQuizzes().subscribe(data => this.quizzes = (<quizDisplay[]>data).map(x => ({
+      ...x,
+      originalName: x.name,
+      naiveQuestionCheckSum: x.questions.map(y => y.name).join("~")
+    })) //x versus this ^     
+      , error => this.wasErrorLoadingQuizzes = true);
+  }
 
   selectQuiz(quiz){
     console.log(quiz);
@@ -144,6 +147,13 @@ detailsAnimationState = "leftPosition";
 detailsFromLeftAnimationComplete(){
 
   this.detailsAnimationState = "leftPosition";
+}
+
+reloadQuizzes(){
+  this.selectedQuiz= undefined;
+  this.loadQuizzes();
+  console.log("quizzes");
+  
 }
 
   learningPromises() {"numberOfChangedQuizzes || true"
