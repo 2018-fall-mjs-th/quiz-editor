@@ -65,7 +65,9 @@ export class AppComponent {
 
 
   ngOnInit() {
+    
     this.loadQuizzesFromServer();
+
   }
   
 
@@ -98,6 +100,7 @@ export class AppComponent {
   }
   
   reloadQuizzes(){
+    this.selectedQuiz = undefined;
     this.loadQuizzesFromServer();
   }
 
