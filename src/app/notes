@@ -1,0 +1,2 @@
+Changelog:
+Added a new "reloadQuizzes()" method. Added clickhandler for cancel button. 

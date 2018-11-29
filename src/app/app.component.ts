@@ -103,6 +103,13 @@ export class AppComponent implements OnInit {
     );
   }
 
+  /**
+   * New method written in-class. 
+   */
+  reloadQuizzes() {
+    console.log('test');
+  }
+
   selectQuiz(q) {
     // console.log(q);
     this.selectedQuiz = q;
