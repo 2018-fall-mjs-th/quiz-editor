@@ -65,19 +65,22 @@ export class AppComponent {
 
 
   ngOnInit() {
-    this.quizSvc.getQuizzes().subscribe(
-      data => this.quizzes = (<quizDisplay[]> data).map(x => ({
-        ...x
-        , originalName: x.name
-        , naiveQuestionChecksum: x.questions.map(y => y.name).join("~")
-      }))
-      , error => this.wasErrorLoadingQuizzes = true
-    );
+    this.loadQuizzesFromServer();
   }
   
+
 // *************************************************************************************************
 // **                                     Process Quizzes                                         **
 // *************************************************************************************************
+
+  private loadQuizzesFromServer() {
+    this.quizSvc.getQuizzes().subscribe(data => this.quizzes = (<quizDisplay[]>data).map(x => ({
+      ...x,
+      originalName: x.name,
+      naiveQuestionChecksum: x.questions.map(y => y.name).join("~")
+    })), error => this.wasErrorLoadingQuizzes = true);
+  }
+
   selectQuiz(q) {
     this.selectedQuiz = q;
     this.detailsAnimationState = "finalPosition";
@@ -95,7 +98,7 @@ export class AppComponent {
   }
   
   reloadQuizzes(){
-    console.log("What's up?!");
+    this.loadQuizzesFromServer();
   }
 
 
