@@ -78,6 +78,10 @@ export class AppComponent {
     );
   }
 
+  reloadQuizzes() {
+    console.log('foo');
+  }
+
   selectedQuiz = undefined;
   
   selectQuiz(q) {
