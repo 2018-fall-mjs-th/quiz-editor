@@ -107,6 +107,7 @@ export class AppComponent implements OnInit {
 
   reloadQuizzes() {
     //console.log('Foo');
+    this.selectedQuiz = undefined;
     this.loadQuizzes();
   }
 
