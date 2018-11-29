@@ -93,6 +93,11 @@ export class AppComponent {
     this.quizzes = [...this.quizzes, q];
     this.selectQuiz(q);
   }
+  
+  reloadQuizzes(){
+    console.log("What's up?!");
+  }
+
 
 
 // *************************************************************************************************
