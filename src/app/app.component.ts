@@ -131,10 +131,19 @@ export class AppComponent implements OnInit {
 
     console.log(this.selectedQuiz.naiveQuestionsChecksum);
   }
+<<<<<<< HEAD
 
   removeQuestion(selectedQuiz, selectedQuestion) {
     selectedQuiz.questions = selectedQuiz.questions.filter(n => n !== selectedQuestion);
     selectedQuiz.numberQuestions = selectedQuiz.questions.length;
+=======
+   
+  
+  removeQuestion(question) {
+    this.selectedQuiz.questions = this.selectedQuiz.questions.filter(x => x !== question);
+    // console.log(question);
+    
+>>>>>>> bf4153581f66f17a054343109d3711ec5d900f34
   }
 
   detailsFromLeftAnimationComplete() {
