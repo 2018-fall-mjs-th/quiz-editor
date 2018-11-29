@@ -109,6 +109,10 @@ export class AppComponent implements OnInit {
     this.detailsAnimationState = 'finalPosition';
   }
 
+  reloadQuizzes(){
+    console.log('reloadQuizzes');
+  }
+
   addNewQuiz() {
     const q = {
       name: 'New Untitled Quiz'
