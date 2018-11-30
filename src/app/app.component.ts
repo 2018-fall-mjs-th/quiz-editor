@@ -58,14 +58,7 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.quizSvc.getQuizzes().subscribe(
-      data => this.quizzes = (<QuizDisplay[]> data).map(x => ({
-        ...x
-        , originalName: x.name
-        , naiveQuestionsCheckSum: x.questions.map(y => y.name).join("~")
-      }))
-      , error => this.quizLoadingError = true
-    );
+    this.loadQuizzes();
   }
 
   learningPromises() {
@@ -133,8 +126,16 @@ export class AppComponent {
     this.loadQuizzes();
   }
 
-  loadQuizzes() {
-    
+  private loadQuizzes() {
+
+    this.quizSvc.getQuizzes().subscribe(
+      data => this.quizzes = (<QuizDisplay[]> data).map(x => ({
+        ...x
+        , originalName: x.name
+        , naiveQuestionsCheckSum: x.questions.map(y => y.name).join("~")
+      }))
+      , error => this.quizLoadingError = true
+    );
   }
 
   selectedQuiz = undefined;
