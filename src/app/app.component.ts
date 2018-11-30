@@ -88,6 +88,20 @@ export class AppComponent {
     this.detailsAnimationState = "finalPosition";
   }
 
+  saveQuizzes() {
+    // console.log('save quizzes');
+    const changedQuizzes = this.quizzes.filter(x =>
+      x.originalName !== "New Untitled Quiz"
+      && (x.name !== x.originalName
+      || x.naiveQuestionsChecksum !== x.questions.map(y => y.name).join("~"))
+    );
+
+    this.quizSvc.saveQuizzes(changedQuizzes).subscribe(
+      data => console.log(data)
+      , error => console.log(error)
+    );
+  }
+
   addNewQuiz() {
     let q = { 
       name: "New Untitled Quiz"

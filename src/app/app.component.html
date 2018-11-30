@@ -33,6 +33,7 @@
             <button class="btn" 
             [class.btn-outline-success]="numberOfChangedQuizzes === 0"
             [class.btn-success]="numberOfChangedQuizzes > 0"
+            (click)="saveQuizzes()"
           >
           Save Quizzes ({{ numberOfChangedQuizzes }})</button>
           <button class="btn btn-link" (click)="reloadQuizzes()">Cancel</button>
