@@ -129,9 +129,8 @@ export class AppComponent implements OnInit {
       .filter(x => x.originalName === 'New Untitled Quiz')
       .map(x => ({
         quizName: x.name
-        , quizQuestions: x.questions
-      })
-
+        , quizQuestions: x.questions.map(y => y.name)
+        })
       );
     this.quizSvc.saveQuizzes(changedQuizzes, newQuizzes).subscribe(
       data => console.log("Data: " + data)
