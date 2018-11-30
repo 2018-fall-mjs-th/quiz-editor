@@ -54,11 +54,11 @@
                     Questions
                 </div>
                 <div class="card-body">
-                    <input type="button" class="btn btn-outline-success" value="Add New Question" (click)="addNewQuestion()">
+                    <input type="button" class="btn btn-outline-success" value="Add New Question" (click)="addNewQuestion(selectedQuiz, question)">
                     <br />
                     <br />
                     <div *ngFor="let question of questions">
-                        <input type="text"  value="{{question.name}}" /> <input type="button" class=" btn btn-link" value="Remove" (click)="removeQuestion()">
+                        <input type="text"  value="{{question.name}}" /> <input type="button" class=" btn btn-link" value="Remove" (click)="removeQuestion(selectedQuiz, question)">
                     </div>
                     
                 </div>
