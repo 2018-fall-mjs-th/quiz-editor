@@ -110,6 +110,14 @@ export class AppComponent implements OnInit {
     this.loadQuizzes();
   }
   
+  saveQuizzes() {
+    const changedQuizzes = [];
+    this.quizSvc.saveQuizzes(changedQuizzes).subscribe(
+      data => console.log(data)
+      , error => console.log(error)
+    );
+  }
+
   selectQuiz(q) {
     // console.log(q);
     this.selectedQuiz = q;
