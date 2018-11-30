@@ -89,24 +89,48 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // console.log(this.quizSvc.getQuizzes());
+    this.loadQuizzes();
+  }
+
+  private loadQuizzes() {
     this.quizSvc.getQuizzes().subscribe(
       // (data) => {
       //   console.log(data);
       //   this.quizzes = data
       // }
-      data => this.quizzes = (<QuizDisplay[]> data).map(x => ({
-        ...x
-        , originalName: x.name
-        , naiveQuestionsChecksum: x.questions.map(y => y.name).join('~')
-      }))
-      , error => this.wasErrorLoadingQuizzes = true
-    );
+      data => this.quizzes = (<QuizDisplay[]>data).map(x => ({
+        ...x,
+        originalName: x.name,
+        naiveQuestionsChecksum: x.questions.map(y => y.name).join('~')
+      })), error => this.wasErrorLoadingQuizzes = true);
+  }
+
+  reloadQuizzes() {
+    //console.log('Foo');
+    this.selectedQuiz = undefined;
+    this.loadQuizzes();
   }
 
   selectQuiz(q) {
     // console.log(q);
     this.selectedQuiz = q;
     this.detailsAnimationState = 'finalPosition';
+  }
+
+  saveQuizzes() {
+    //console.log('saveQuizzes()');
+    const changedQuizzes = this.quizzes
+    .filter(x =>
+      x.originalName !== 'New Untitled Quiz'
+      && (x.name !== x.originalName
+      || x.naiveQuestionsChecksum !== x.questions.map(y => y.name).join('~'))
+    );      
+
+    this.quizSvc.saveQuizzes(changedQuizzes).subscribe(
+      data => console.log(data)
+      , error => console.log(error)
+    );
+
   }
 
   addNewQuiz() {

@@ -41,10 +41,11 @@
                             class="btn mb-2" 
                             [class.btn-outline-success]="numberOfChangedQuizzes === 0"
                             [class.btn-success]="numberOfChangedQuizzes > 0"
+                            (click)="saveQuizzes()"
                         >
                             Save Quizzes ({{ numberOfChangedQuizzes }})
                         </button>
-                        <button class="btn btn-link mb-2">Cancel</button>
+                        <button class="btn btn-link mb-2" (click)="reloadQuizzes()">Cancel</button>
     
                     </div>
                     <div class="card">
