@@ -39,12 +39,15 @@ export class AppComponent {
     this.selectQuiz(q);
   }
 
-  addNewQuestion() {
+  addNewQuestion(selectedQuiz) {
+    selectedQuiz.questions = [...selectedQuiz.questions, {'name': 'New untitled question'}];
+    selectedQuiz.numberQuestions = selectedQuiz.questions.length;
 
   }
 
-  removeQuestion() {
-
+  removeQuestion(selectedQuiz, selectedQuestion) {
+    selectedQuiz.questions = selectedQuiz.questions.filter(n => n !== selectedQuestion);
+    selectedQuiz.numberQuestions = selectedQuiz.questions.length;
   }
 
   learningPromises() {
