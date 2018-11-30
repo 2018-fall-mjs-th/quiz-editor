@@ -21,12 +21,37 @@ export class QuizService {
     // ];
   }
 
-  getNumberOfQuizzes(succeed: boolean): Promise<number> {
+	saveQuizzes(changedQuizzes: any[], newQuizzes: any[] = []) {
 
-    let p = new Promise<number>(
-      (resolve, reject) => succeed ? resolve(42) : reject("Failed!")
-    );
+		let h = new HttpHeaders({
+		'Content-Type': 'application/json'
+		, 'X-Sas-Token': 'sig=K2WE6NQPtyoV6ke5hwPEaEaW52fgvyFWUeCEdPJls1s'
+		});
 
-    return p;
-  }
+		//console.log(h);
+
+		return this.builtInAngularHttpClient.post(
+		'https://modern-js.azurewebsites.net/save-quizzes-proxy'
+		, JSON.stringify(
+			{
+			"changedQuizzes": changedQuizzes
+			, "newQuizzes": newQuizzes
+			}
+		)
+		, {
+			headers: h
+		}
+		);
+	}
+
+	getNumberOfQuizzes(succeed: boolean): Promise<number> {
+
+    	let p = new Promise<number>(
+    		(resolve, reject) => succeed ? resolve(42) : reject("Failed!")
+    	);
+
+		return p;
+	}
+
+  
 }

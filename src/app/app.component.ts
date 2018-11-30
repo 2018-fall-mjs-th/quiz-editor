@@ -92,18 +92,19 @@ export class AppComponent implements OnInit {
     this.LoadQuizzes();
   }
 
-  private LoadQuizzes() {
-    this.quizSvc.getQuizzes().subscribe(
-      // (data) => {
-      //   console.log(data);
-      //   this.quizzes = data
-      // }
-      data => this.quizzes = (<QuizDisplay[]>data).map(x => ({
-        ...x,
-        originalName: x.name,
-        naiveQuestionsChecksum: x.questions.map(y => y.name).join('~')
-      })), error => this.wasErrorLoadingQuizzes = true);
-  }
+	private LoadQuizzes() {
+		this.quizSvc.getQuizzes().subscribe(
+		// (data) => {
+		//   console.log(data);
+		//   this.quizzes = data
+		// }
+		data => this.quizzes = (<QuizDisplay[]>data).map(x => ({
+			...x,
+			originalName: x.name,
+			naiveQuestionsChecksum: x.questions.map(y => y.name).join('~')
+		})), error => this.wasErrorLoadingQuizzes = true);
+		
+	}
 
   reloadQuizze() {
     console.log('Foo');
@@ -115,6 +116,16 @@ export class AppComponent implements OnInit {
     // console.log(q);
     this.selectedQuiz = q;
     this.detailsAnimationState = 'finalPosition';
+  }
+
+  saveQuizzes() {
+    //console.log('SaveQuizzes()');
+    const changedQuizzes = [];
+    
+    this.quizSvc.saveQuizzes(changedQuizzes).subscribe(
+		data => console.log(data)
+		, error => console.log(error)
+	);
   }
 
   addNewQuiz() {
