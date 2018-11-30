@@ -9,6 +9,7 @@ import {
   , transition
   , keyframes
 } from '@angular/animations';
+import { Subscriber } from 'rxjs';
 
 
 interface quizDisplay {
@@ -102,6 +103,28 @@ export class AppComponent {
   reloadQuizzes(){
     this.selectedQuiz = undefined;
     this.loadQuizzesFromServer();
+  }
+
+  saveQuizzes(){
+    const changedQuizzes = this.quizzes.filter(x =>
+      x.originalName !== "New Untitled Quiz"
+      && (x.name  !== x.originalName                  
+      || x.naiveQuestionChecksum  !== x.questions.map(y => y.name).join("~"))
+    );
+  
+    // const addedQuizzes = this.quizzes.filter(x => 
+    //   x.originalName === "New Untitled Quiz"
+    // );
+
+   // const newQuizzes = addedQuizzes.map( x=> ({quizName: x.name, quizQuestions: x.questions.map(y=>y.name)}));
+    
+    const newQuizzes = this.quizzes.filter(x => x.originalName === "New Untitled Quiz")
+      .map( x=> ({quizName: x.name, quizQuestions: x.questions.map(y=>y.name)}));
+
+    this.quizSvc.saveQuizzes(changedQuizzes, newQuizzes).subscribe( 
+      data =>console.log(data)
+      , error => console.log(error)
+    );
   }
 
 
