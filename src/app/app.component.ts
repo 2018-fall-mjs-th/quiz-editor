@@ -9,7 +9,7 @@ import {
   , keyframes 
 } from '@angular/animations';
 
-interface quizDisplay {
+interface QuizDisplay {
   name: string;
   originalName: string;
   numberQuestions: number;
@@ -51,7 +51,7 @@ interface questionDisplay {
 })
 export class AppComponent {
 
-  quizzes: quizDisplay[] = [];
+  quizzes: QuizDisplay[] = [];
   quizLoadingError: boolean = false;
 
   constructor (private quizSvc: QuizService) {
@@ -59,7 +59,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.quizSvc.getQuizzes().subscribe(
-      data => this.quizzes = (<quizDisplay[]> data).map(x => ({
+      data => this.quizzes = (<QuizDisplay[]> data).map(x => ({
         ...x
         , originalName: x.name
         , naiveQuestionsCheckSum: x.questions.map(y => y.name).join("~")
@@ -146,7 +146,12 @@ export class AppComponent {
   }
 
   saveQuizzes() {
-    const changedQuizzes = [];
+    const changedQuizzes = this.quizzes
+      .filter(
+        x => x.name !== x.originalName
+        && (x.originalName !== "New Quiz"
+        || x.naiveQuestionsCheckSum !== x.questions.map(y => y.name).join("~"))
+      );
 
     this.quizSvc.saveQuizzes(changedQuizzes).subscribe(
       data => console.log(data)
