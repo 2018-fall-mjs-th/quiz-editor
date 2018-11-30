@@ -54,13 +54,15 @@
                     Questions
                 </div>
                 <div class="card-body">
-                    <input type="button" class="btn btn-outline-success" value="Add New Question" (click)="addNewQuestion(selectedQuiz, question)">
-                    <br />
-                    <br />
-                    <div *ngFor="let question of questions">
-                        <input type="text"  value="{{question.name}}" /> <input type="button" class=" btn btn-link" value="Remove" (click)="removeQuestion(selectedQuiz, question)">
+                    <button class="btn btn-outline-success mb-2" (click)="addNewQuestion(selectedQuiz)">Add New Question</button>
+                    <div class="row" *ngFor="let question of selectedQuiz.questions">
+                        <div class="col-9">
+                            <input type="text" class="form-control" [(ngModel)]="question.name">
+                        </div>
+                        <div class="col-3">
+                            <button class="btn btn-outline-danger mb-2" (click)="removeQuestion(selectedQuiz, question)">Remove</button>
+                        </div>
                     </div>
-                    
                 </div>
             </div>
             </div>
