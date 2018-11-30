@@ -126,20 +126,17 @@ export class AppComponent implements OnInit {
     );
 
     /*
-    const newQuizzes = this.quizzes
-    .filter(x => )
-    .map(x => )
-
-    }
-    */
-    
     const newQuizzes = [
       { "quizName": "Test"
         , "quizQuestions": [
             "qOne"
             , "qTwo"
         ]
-  }];
+    }];
+    */
+
+
+
   
       
 
