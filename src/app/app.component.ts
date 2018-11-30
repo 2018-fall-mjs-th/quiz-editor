@@ -10,12 +10,9 @@ import {
 import { LifecycleHooks } from '@angular/compiler/src/lifecycle_reflector';
 
 interface QuizDisplay {
-
   name: string;
   originalName: string;
-
   numberQuestions: number;
-
   questions: QuestionDisplay[];
   naiveQuestionsChecksum: string;
 }
@@ -23,6 +20,7 @@ interface QuizDisplay {
 interface QuestionDisplay {
   name: string;
 }
+
 
 @Component({
   selector: 'app-root',
@@ -53,7 +51,7 @@ interface QuestionDisplay {
 })
 export class AppComponent implements OnInit {
 
-  constructor (private quizSvc: QuizService) {
+  constructor(private quizSvc: QuizService) {
   }
 
 
@@ -104,10 +102,35 @@ export class AppComponent implements OnInit {
         naiveQuestionsChecksum: x.questions.map(y => y.name).join('~')
       })), error => this.wasErrorLoadingQuizzes = true);
   }
-  reloadQuizzes(){
+  reloadQuizzes() {
     console.log('reloadQuizzes');
     this.loadQuizzes();
     this.selectedQuiz = undefined;
+  }
+
+  saveQuizzes() {
+    const newQuiz = this.quizzes.filter(q =>
+      q.originalName === 'New Untitled Quiz'
+    )
+      .map(quiz =>
+        ({
+          quizName: quiz.name,
+          quizQuestions: quiz.questions
+        })
+      );
+    console.log('newQuiz', newQuiz);
+
+    const changedQuizzes = this.quizzes
+      .filter(x =>
+        x.originalName !== 'New Untitled Quiz' &&
+        (x.name !== x.originalName
+          || x.naiveQuestionsChecksum !== x.questions.map(y => y.name).join('~'))
+      );
+
+    this.quizSvc.saveQuizzes(changedQuizzes, newQuiz).subscribe(
+      data => console.log(data),
+      error => console.log(error)
+    );
   }
 
   selectQuiz(q) {
@@ -115,8 +138,6 @@ export class AppComponent implements OnInit {
     this.selectedQuiz = q;
     this.detailsAnimationState = 'finalPosition';
   }
-
-
 
   addNewQuiz() {
     const q = {
@@ -132,7 +153,7 @@ export class AppComponent implements OnInit {
   }
 
   addNewQuestion(selectedQuiz) {
-    selectedQuiz.questions = [...selectedQuiz.questions, {'name': 'New untitled question'}];
+    selectedQuiz.questions = [...selectedQuiz.questions, { 'name': 'New untitled question' }];
     selectedQuiz.numberQuestions = selectedQuiz.questions.length;
 
     console.log(this.numberOfChangedQuizzes);
