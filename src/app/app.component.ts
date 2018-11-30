@@ -120,15 +120,32 @@ export class AppComponent implements OnInit {
   saveQuizzes() {
     console.log('Saving Quizzes...');
     const changedQuizzes = this.quizzes.filter(aQuiz =>
-      //aQuiz.name !== aQuiz.originalName 
       aQuiz.originalName !== 'New Untitled Quiz'
       && (aQuiz.name !== aQuiz.originalName 
         || aQuiz.naiveQuestionsChecksum !== aQuiz.questions.map(y => y.name).join('~'))
     );
 
+    /*
+    const newQuizzes = this.quizzes
+    .filter(x => )
+    .map(x => )
+
+    }
+    */
+    
+    const newQuizzes = [
+      { "quizName": "Test"
+        , "quizQuestions": [
+            "qOne"
+            , "qTwo"
+        ]
+  }];
+  
+      
+
     // You have to .subscribe to observables 
-    this.quizSvc.saveQuizzes(changedQuizzes).subscribe(
-      data => console.log('Success ' + data), error => console.log('Failure: ' + error)
+    this.quizSvc.saveQuizzes(changedQuizzes, newQuizzes).subscribe(
+      data => console.log('Success ' + data), error => console.log(error)
     );
 
   }

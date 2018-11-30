@@ -26,6 +26,29 @@ export class QuizService {
     });
 
     console.log(h);
+    console.log(JSON.stringify(changedQuizzes));
+
+    return this.builtInAngularHttpClient.post(
+      'https://modern-js.azurewebsites.net/save-quizzes-proxy'
+      , JSON.stringify(
+        {
+          "changedQuizzes": changedQuizzes
+          , "newQuizzes": newQuizzes
+        }
+      )
+      , {
+        headers: h
+      }
+    );
+  }
+
+  saveQuizzes2(changedQuizzes: any[], newQuizzes: any[] = []) {
+    let h = new HttpHeaders({
+      'Content-Type': 'application/json'
+      , 'X-Sas-Token': 'sig=K2WE6NQPtyoV6ke5hwPEaEaW52fgvyFWUeCEdPJls1s'
+    });
+
+    console.log(h);
 
     return this.builtInAngularHttpClient.post(
       'https://modern-js.azurewebsites.net/save-quizzes-proxy'
