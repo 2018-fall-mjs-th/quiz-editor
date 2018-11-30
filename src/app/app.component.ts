@@ -118,7 +118,14 @@ export class AppComponent implements OnInit {
    * New method written in-class
    */
   saveQuizzes() {
-    
+    console.log('Saving Quizzes...');
+    const changedQuizzes = [];
+
+    // You have to .subscribe to observables 
+    this.quizSvc.saveQuizzes(changedQuizzes).subscribe(
+      data => console.log('Success ' + data), error => console.log('Failure: ' + error)
+    );
+
   }
 
   selectQuiz(q) {
