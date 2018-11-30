@@ -1,91 +1,87 @@
-<div class="jumbotron">
+<div class="jumbotron" class="glow">
     <div class="page-header">
-        <h1 class="text-center">Quiz Editor</h1>
+        <h1 class="quizzyboi">A E S T H E T I C</h1>
     </div>
 </div>
-
 <div class="container">
-
-    <div class="row" *ngIf="wasErrorLoadingQuizzes">
+    <div class="row" *ngIf="quizLoadingError">
         <div class="col-md-12">
-            <h3>Can't load quizzes, please try again later.</h3>
+            <h3>Can't load quizzes, please try again</h3>
         </div>
     </div>
-
-    <div class="row" *ngIf="!wasErrorLoadingQuizzes">
-        <div class="col-md-4">
-            <button class="btn btn-outline-primary mb-2" (click)="addNewQuiz()">Add New Quiz</button>
-            <div class="list-group mb-2">
-                <div 
-                    [class.active]="q === selectedQuiz" 
+    <div class="row 1" *ngIf="!quizLoadingError">
+        <div class="col-md-4 class1">
+            <button class="btn add-new-quiz" (click)="addNewQuiz()">add New Quiz</button>
+            <br>
+            <br>
+            <div class="list-group">
+                <div [class.active]="q === selectedQuiz" 
                     (click)="selectQuiz(q)" 
-                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" 
+                    class="list-group-item list-group-item-action" 
                     *ngFor="let q of quizzes">
-                        {{ q.name }}
-                        <span class="badge badge-secondary" [class.bg-danger]="q.questions.length === 0">{{ q.questions.length }}</span>
+                    {{ q.name }}
+                    <span class="badge badge-secondary float-right" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
                 </div>
+                <img class="vaporwave" src="https://66.media.tumblr.com/77bfb4472f4078747e7cc41df3ef7c10/tumblr_ofvr8fQOn31toe0eco1_500.gif" alt="vaporwave">
             </div>
         </div>
-        
-        <div 
+        <div    
             class="col-md-8" 
             [@detailsFromLeft]="detailsAnimationState"
             (@detailsFromLeft.done)="detailsFromLeftAnimationComplete()"
         >
+                <div    [class.hiddenButtons]="!selectedQuiz"
+                        [@pulseSaveCancelButtons] = "numberOfChangedQuizzes > 0 ? 'somethingToSave' : 'nothingToSave'"
+                >
+                    <button class="btn save  mr-3" 
+                            [class.save]="numberOfChangedQuizzes === 0"
+                            [class.super-save]="numberOfChangedQuizzes > 0"
+                            (click)="saveQuizzes()"
+                    >
+                    S &nbsp;&nbsp;A &nbsp;&nbsp;V &nbsp;&nbsp;E &nbsp;&nbsp; ({{ numberOfChangedQuizzes }})</button>
+                    <button class="btn cancel">C A N C E L</button>
+                    <button (click)="removeQuiz(selectedQuiz)" class="btn remove">r e m o v e</button>
+                    <button (click)="removeAllQuizzes()" class="btn remove-all">remove all</button>
+                    <br>
+                    <br>
+                </div>
 
             <div *ngIf="selectedQuiz">
-                    <div
-                        [@pulseSaveCancelButtons]="numberOfChangedQuizzes > 0 ? 'somethingToSave' : 'nothingToSave' "
-                    >
-                        <button 
-                            class="btn mb-2" 
-                            [class.btn-outline-success]="numberOfChangedQuizzes === 0"
-                            [class.btn-success]="numberOfChangedQuizzes > 0"
-                        >
-                            Save Quizzes ({{ numberOfChangedQuizzes }})
-                        </button>
-                        <button class="btn btn-link mb-2">Cancel</button>
-    
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            {{ selectedQuiz.name }}
-                        </div>
-                        <div class="card-body">
-                            <input type="text" class="form-control" [(ngModel)]="selectedQuiz.name">
-                        </div>
-                    </div>
-                    <br />
-                    <div class="card">
-                        <div class="card-header">
-                            Questions
-                        </div>
-                        <div class="card-body">
-                            <button class="btn btn-outline-success mb-2" (click)="addNewQuestion(selectedQuiz)">Add New Question</button>
-                            <div class="row" *ngFor="let question of selectedQuiz.questions">
-                                <div class="col-9">
-                                    <input type="text" class="form-control" [(ngModel)]="question.name">
-                                </div>
-                                <div class="col-3">
-                                    <button class="btn btn-outline-danger mb-2" (click)="removeQuestion(selectedQuiz, question)">Remove</button>
-                                </div>
+                        <div class="card general">
+                            <div class="card-header boop-right">
+                                General
+                            </div>
+                            <br>&nbsp;
+                            Name
+                            <div class="card-body">
+                                <input type="text" autofocus onmouseover="javascript:this.focus();this.select();" onclick="this.select()" [(ngModel)]="selectedQuiz.name">
                             </div>
                         </div>
+                <div class="card questions">
+                    <div class="card-header boop-right">
+                        Questions
                     </div>
-            </div>
-
-            <div *ngIf="!selectedQuiz">
-                <div class="card">
-                    <h3 class="card-header">No quiz selected</h3>
                     <div class="card-body">
-                        <p class="card-text">Select or add a new quiz</p>
+                        <div class="list-group">
+                            <div *ngFor="let question of selectedQuiz.questions; let i = index">
+                                Question #{{ i + 1 }}: {{ question.name }}
+                                <span class="float-right">
+                                <button (click)="removeQuestion(question)" class="btn remove mb-2">r e m o v e</button>
+                                </span>
+                            </div>
+                        </div>
+                        <input type="text" id="newQuestion" [(ngModel)]="newQuestion">&nbsp;&nbsp;
+                        <button (click)="addNewQuestion()" class="btn add">add a question</button>
                     </div>
+                    <img class="vaporwave2" src="https://media.giphy.com/media/G2k1HJdHvg0G4/giphy.gif" alt="vaporwave2">
+                </div>    
+            </div>
+            <div *ngIf="!selectedQuiz">
+                <div class="card p-4">
+                    <h3>There is no active quiz</h3>
+                        <p>Please select a quiz from the list.</p>
                 </div>
             </div>
-
-
-            
         </div>
     </div>
-
 </div>

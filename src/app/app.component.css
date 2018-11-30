@@ -1,0 +1,237 @@
+body {
+    background-image: url(https://media.giphy.com/media/U3qYN8S0j3bpK/giphy.gif);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+body, html {
+    height: 100%;
+}
+
+.parallax {
+    /* The image used */
+    background-image: url('https://66.media.tumblr.com/77bfb4472f4078747e7cc41df3ef7c10/tumblr_ofvr8fQOn31toe0eco1_500.gif');
+
+    /* Full height */
+    height: 100%; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.class1 {
+    border-style: outset;
+    border-color: grey;
+    border-width: 5px;
+    background-color: lightgrey;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.vaporwave {
+    margin-top: 20px;
+}
+
+.vaporwave2 {
+    margin-top: 20px;
+}
+
+.add-new-quiz, .add {
+    border-style: outset;
+    border-color: grey;
+    background-color: lightblue;
+    border-width: 4px;
+}
+
+.save {
+    -webkit-animation-name: saveMe;
+    -webkit-animation-duration: 8s;
+    -webkit-animation-iteration-count: infinite;
+    font-family: "Impact", Charcoal, sans-serif;
+}
+
+.super-save {
+    -webkit-animation-name: saveMe;
+    -webkit-animation-duration: .1s;
+    -webkit-animation-iteration-count: infinite;
+    font-family: "Impact", Charcoal, sans-serif;
+}
+
+@-webkit-keyframes saveMe {
+    from { background-color: #0ed467; -webkit-box-shadow: 0 0 25px #0ed467; }
+    50% { background-color: #10dfab; -webkit-box-shadow: 0 0 18px #10dfab; }
+    to { background-color: #0ed467; -webkit-box-shadow: 0 0 25px #0ed467; }
+}
+
+.cancel {
+    -webkit-animation-name: noMore;
+    -webkit-animation-duration: 8s;
+    -webkit-animation-iteration-count: infinite;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+@-webkit-keyframes noMore {
+    from { background-color: #f11645; -webkit-box-shadow: 0 0 9px #f11645; }
+    50% { background-color: #c51f6c; -webkit-box-shadow: 0 0 18px #c51f6c; }
+    to { background-color: #f11645; -webkit-box-shadow: 0 0 9px #f11645; }
+}
+
+.general {
+    border-style: outset;
+    border-color: lightgrey;
+    border-width: 5px;
+    background-color: grey;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.boop-right {
+    padding-left: 75px;
+    margin-top: 10px;
+}
+
+.questions {
+    border-style: outset;
+    border-color: lightgrey;
+    border-width: 5px;
+    background-color: grey;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.card-header {
+    border-style: outset;
+    margin-left: 4px;
+    margin-right: 500px;
+    background-color: grey;
+}
+
+.remove {
+    margin-left: 15px;
+    -webkit-animation-name: purpleRain;
+    -webkit-animation-duration: 8s;
+    -webkit-animation-iteration-count: infinite;
+    font-family: "Lucida Console", Monaco;
+}
+
+.remove-all {
+    margin-left: 15px;
+    -webkit-animation-name: purpleRain;
+    -webkit-animation-duration: .1s;
+    -webkit-animation-iteration-count: infinite;
+    font-family: "Lucida Console", Monaco;
+}
+
+@-webkit-keyframes purpleRain {
+    from { background-color: #f116f1; -webkit-box-shadow: 0 0 9px #f116f1; }
+    50% { background-color: #bd5abd; -webkit-box-shadow: 0 0 18px #bd5abd; }
+    to { background-color: #f116f1; -webkit-box-shadow: 0 0 9px #f116f1; }
+}
+
+
+.glow {
+    background-color: #004A7F;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    border: none;
+    color: rgb(248, 248, 245);
+    cursor: pointer;
+    display: inline-block;
+    font-family: Arial;
+    font-size: 20px;
+    margin-left: 600px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-right: 30px;
+    padding: 5px 100px;
+    text-align: center;
+    text-decoration: none;
+    -webkit-animation: glowing 20000ms infinite;
+    -moz-animation: glowing 20000ms infinite;
+    -o-animation: glowing 20000ms infinite;
+    animation: glowing 20000ms infinite;
+}
+
+.card {
+    margin-bottom: 30px;
+}
+
+.quizzyboi {
+        font-size: 80px;
+        color: #fff;
+        text-align: center;
+        -webkit-animation: glow 1s ease-in-out infinite alternate;
+        -moz-animation: glow 1s ease-in-out infinite alternate;
+        animation: glow 1s ease-in-out infinite alternate;
+      }
+      
+      @-webkit-keyframes glow {
+        from {
+          text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+        }
+        to {
+          text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+        }
+}
+
+@-webkit-keyframes glowing {
+    0% { background-color: #00695c; -webkit-box-shadow: 0 0 3px #00695c; }
+    25% { background-color: #004d40; -webkit-box-shadow: 0 0 3px #004d40; }
+    50% { background-color: #08172c; -webkit-box-shadow: 0 0 40px #08172c; }
+    75% { background-color: #1a237e; -webkit-box-shadow: 0 0 40px #1a237e; }
+    100% { background-color: #00695c; -webkit-box-shadow: 0 0 30px #00695c; }
+}
+@-moz-keyframes glowing {
+    0% { background-color: #00695c; -moz-box-shadow: 0 0 3px #00695c; }
+    25% { background-color: #004d40; -moz-box-shadow: 0 0 3px #004d40; }
+    50% { background-color: #08172c; -moz-box-shadow: 0 0 40px #08172c; }
+    75% { background-color: #0d47a1; -moz-box-shadow: 0 0 40px #0d47a1; }
+    100% { background-color: #00695c; -moz-box-shadow: 0 0 30px #00695c; }
+}
+@-o-keyframes glowing {
+    0% { background-color: #00695c; box-shadow: 0 0 3px #00695c; }
+    25% { background-color: #004d40; box-shadow: 0 0 3px #004d40; }
+    50% { background-color: #08172c; box-shadow: 0 0 40px #08172c; }
+    75% { background-color: #0d47a1; box-shadow: 0 0 40px #0d47a1; }
+    100% { background-color: #00695c; box-shadow: 0 0 30px #00695c; }
+}
+@keyframes glowing {
+    0% { background-color: #00695c; box-shadow: 0 0 3px #00695c; }
+    0% { background-color: #004d40; box-shadow: 0 0 3px #004d40; }
+    50% { background-color: #08172c; box-shadow: 0 0 40px #08172c; }
+    75% { background-color: #0d47a1; box-shadow: 0 0 40px #0d47a1; }
+    100% { background-color: #00695c; box-shadow: 0 0 30px #00695c; }
+}
+
+@keyframes details-from-left {
+    0% { transform: translateX(-30px) }
+    25% { transform: translateX(-20px) }
+    50% { transform: translateX(-10px) }
+    75% { transform: translateX(-5px) }
+    100% { transform: translateX(0px) }
+}
+
+.details-display-animation {
+    animation-name: details-from-left;
+    animation-delay: 30ms;
+    animation-duration: 300ms;
+}
+
+    
+@keyframes save-cancel-buttons-grow-shrink {
+    0% { transform: scale(1.0) }
+    50% { transform: scale(1.1) }
+    100% { transform: scale(1.0) }
+}
+
+.changes-detected-animation {
+    animation-name: save-cancel-buttons-grow-shrink;
+    animation-delay: 100ms;
+    animation-duration: 0.75s;
+    transform-origin: top left;
+}
