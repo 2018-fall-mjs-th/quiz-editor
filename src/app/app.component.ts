@@ -104,8 +104,12 @@ export class AppComponent implements OnInit {
 
   reloadQuizzes() {
     this.loadQuizzes();
+    this.selectedQuiz = undefined;
   }
 
+  saveQuizzes() {
+    console.log("saveQuizzes()");
+  }
   selectQuiz(q) {
     // console.log(q);
     this.selectedQuiz = q;

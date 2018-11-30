@@ -41,6 +41,7 @@
                             class="btn mb-2" 
                             [class.btn-outline-success]="numberOfChangedQuizzes === 0"
                             [class.btn-success]="numberOfChangedQuizzes > 0"
+                            (click) = "saveQuizzes()"
                         >
                             Save Quizzes ({{ numberOfChangedQuizzes }})
                         </button>
