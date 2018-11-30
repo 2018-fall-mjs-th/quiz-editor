@@ -123,7 +123,9 @@ export class AppComponent implements OnInit {
       || x.naiveQuestionsChecksum !== x.questions.map(y => y.name).join('~'))
     );
 
-    this.quizSvc.saveQuizzes(changedQuizzes).subscribe(
+    const newQuizzes = [{name: "Kevin Selm"}]
+
+    this.quizSvc.saveQuizzes(changedQuizzes, newQuizzes).subscribe(
       data => console.log(data)
       , error => console.log(error)
     );
