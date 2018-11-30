@@ -4,3 +4,8 @@ Added a new "reloadQuizzes()" method. Added clickhandler for cancel button.
 Visual Studio Shortcut:
 Create a new method from highlighted code. 
 Highlight code, right click -> "Refactor" => "Extract to Method in Class"
+
+
+Something New: 
+saveQuizzes(changedQuizzes: any[], newQuizzes: any[] = []) { }
+You can give a parameter a default value with javascript
