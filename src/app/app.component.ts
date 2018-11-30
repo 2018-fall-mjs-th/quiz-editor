@@ -56,6 +56,8 @@ export class AppComponent implements OnInit {
   constructor (private quizSvc: QuizService) {
   }
 
+  changedQuizzes = undefined;
+
 
   // numberOfChangedQuizzes = 2;
 
@@ -111,8 +113,29 @@ export class AppComponent implements OnInit {
   }
   
   saveQuizzes() {
-    const changedQuizzes = [];
-    this.quizSvc.saveQuizzes(changedQuizzes).subscribe(
+    // const changedQuizzes = [];
+    const changedQuizzes = this.quizzes.filter(x =>
+      x.originalName !== 'New Untitled Quiz'
+      && (x.name !== x.originalName
+      || x.naiveQuestionsChecksum !== x.questions.map(y => y.name).join('~'))
+    );
+
+    // shape new questions
+    const newQuizzes = this.quizzes.filter(x => 
+      x.originalName === "New Untitled Quiz"
+    );
+
+    // shape the new quiz to conform to the expected data
+    const shapedQuizzes = newQuizzes.map(x => ({
+      quizName : x.name
+      , quizQuestions : x.questions
+    }));
+
+
+    console.log(`Changed quizzes: ${changedQuizzes}`);
+    console.log(shapedQuizzes);
+
+    this.quizSvc.saveQuizzes(changedQuizzes, shapedQuizzes).subscribe(
       data => console.log(data)
       , error => console.log(error)
     );
