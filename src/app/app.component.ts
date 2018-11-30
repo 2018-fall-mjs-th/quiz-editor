@@ -109,7 +109,7 @@ export class AppComponent implements OnInit {
     this.selectedQuiz = undefined
     this.loadQuizzes();
   }
-
+  
   selectQuiz(q) {
     // console.log(q);
     this.selectedQuiz = q;
