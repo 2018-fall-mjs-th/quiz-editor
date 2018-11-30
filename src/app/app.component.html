@@ -36,6 +36,7 @@
                     [@pulseSaveCancelButtons]="numberOfChangedQuizzes > 0 ? 'somethingToSave' : 'nothingToSave'">
                     <button [class.btn-outline-success]="numberOfChangedQuizzes === 0"
                             [class.btn-success]="numberOfChangedQuizzes > 0"
+                            (click)="saveQuizzes()"
                             class="btn mb-2"
                     >
                     Save Quizzes ({{ numberOfChangedQuizzes }})

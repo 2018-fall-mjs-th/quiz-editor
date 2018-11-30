@@ -96,6 +96,15 @@ export class AppComponent {
     this.detailsAnimationState = "finalPosition";
   }
 
+  saveQuizzes() {
+    //console.log("saveQuizzes()");
+    const changedQuizzes = [];
+    this.quizSvc.saveQuizzes(changedQuizzes).subscribe(
+      data => console.log(data)
+      , error => console.log(error)
+    );
+  }
+
   detailsFromBottomAnimationComplete() {
     this.detailsAnimationState = "bottomPosition";
   }
