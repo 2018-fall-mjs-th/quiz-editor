@@ -27,7 +27,7 @@ interface questionDisplay {
   animations: [
     trigger('detailsFromBottom', [
       transition('bottomPosition => finalPosition', [
-        animate('300ms', keyframes([
+        animate('400ms', keyframes([
           style({ bottom: '-90vh', offset: 0.0 }),
           style({ bottom: '-50vh', offset: 0.125 }),
           style({ bottom: '-25vh', offset: 0.25 }),
@@ -98,7 +98,12 @@ export class AppComponent {
 
   saveQuizzes() {
     //console.log("saveQuizzes()");
-    const changedQuizzes = [];
+    const changedQuizzes = this.quizzes
+        .filter(x =>
+          x.originalName !== "New Untitled Quiz"
+          && (x.name !== x.originalName
+          || x.naiveQuestionsChecksum !== x.questions.map(y => y.name).join("~"))
+        );
     this.quizSvc.saveQuizzes(changedQuizzes).subscribe(
       data => console.log(data)
       , error => console.log(error)
