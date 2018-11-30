@@ -1,22 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { QuizService } from './quiz.service';
 import {
-  trigger,
-  style,
-  animate,
-  transition,
-  keyframes
+  trigger
+  , style
+  , animate
+  , transition
+  , keyframes
 } from '@angular/animations';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-interface quizDisplay {
+import { LifecycleHooks } from '@angular/compiler/src/lifecycle_reflector';
+
+interface QuizDisplay {
+
   name: string;
   originalName: string;
+
   numberQuestions: number;
-  questions: questionDisplay[];
-  naiveQuestionCheckSum: string;
+
+  questions: QuestionDisplay[];
+  naiveQuestionsChecksum: string;
 }
 
-interface questionDisplay {
+interface QuestionDisplay {
   name: string;
 }
 
@@ -24,7 +28,6 @@ interface questionDisplay {
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-
   animations: [
     trigger('detailsFromLeft', [
       transition('leftPosition => finalPosition', [
@@ -48,184 +51,177 @@ interface questionDisplay {
     ])
   ]
 })
-export class AppComponent {
-
-  quizzes: quizDisplay[] = [];
-  questions: questionDisplay[] = [];
-  wasErrorLoadingQuizzes: boolean = false;
+export class AppComponent implements OnInit {
 
   constructor (private quizSvc: QuizService) {
-    //console.log(this.quizSvc.getQuizzes());
-    //this.quizzes = this.quizSvc.getQuizzes();
   }
 
-  ngOnInit(){
-    this.loadQuizzes();
+
+  // numberOfChangedQuizzes = 2;
+
+  // TS readonly property...
+  get numberOfChangedQuizzes() {
+    const changedQuizzes = this.quizzes.filter(x =>
+      x.name !== x.originalName
+      || x.originalName === 'New Untitled Quiz'
+      || x.naiveQuestionsChecksum !== x.questions.map(y => y.name).join('~')
+    );
+    return changedQuizzes.length;
   }
-//test
+
+  quizzes: QuizDisplay[] = [];
+  wasErrorLoadingQuizzes = false;
+
   selectedQuiz = undefined;
 
-
-  detailsFromLeftState = 'leftPosition';
-  pulseButtonsState = "nothingToSave";
-
-
-  private loadQuizzes() {
-    this.quizSvc.getQuizzes().subscribe(data => this.quizzes = (<quizDisplay[]>data).map(x => ({
-      ...x,
-      originalName: x.name,
-      naiveQuestionCheckSum: x.questions.map(y => y.name).join("~")
-    })) //x versus this ^     
-      , error => this.wasErrorLoadingQuizzes = true);
-  }
-
-  selectQuiz(quiz){
-    console.log(quiz);
-    this.selectedQuiz = quiz;
-    this.detailsAnimationState = "finalPosition";
-  }
-
-  selectedQuestion = undefined;
-
-  selectQuestion(question){
-    console.log(question);
-    this.selectedQuestion = question;
-  }
-
-
-  addNewQuiz(){
-    let q = {
-      name:"New Untitled Quiz",
-      originalName: name,
-      numberQuestions: 0,
-      questions:[],
-      naiveQuestionCheckSum: ""
-    };
-
-
-    this.quizzes = [...this.quizzes, q];
-    this.selectQuiz(q);
-  }
-
-  //appendingQuiz= detailsFromLeftAnimationComplete()
-
-  addNewQuestion(){
-  
-    let newQuestion = "New Untitled Question";
-    this.selectedQuiz.questions = [...this.selectedQuiz.questions, {name:"New Untitled Question"}];
-    this.selectQuestion(newQuestion);
-    this.selectedQuiz.numberQuestions = this.selectedQuiz.questions.length;
- 
-    console.log(this.numberOfChangedQuizzes);
-    this.pulseButtonsState = "somethingToSave";
-  }
-
-  removeQuestion(deleted){
-    this.selectedQuiz.questions = this.arrayRemove(this.selectedQuiz.questions, deleted);
-    this.selectedQuiz.numberQuestions = this.selectedQuiz.questions.length;
-  }
-
-   arrayRemove (arr, value) {
-
-    return arr.filter(function (ele){
-        return ele != value;
-    });
- 
- }
- 
-
-get numberOfChangedQuizzes(){
-  let changedQuizzes = this.quizzes.filter(x =>
-     x.name !== x.originalName
-     || x.originalName === "New Untitled Question"
-     || x.naiveQuestionCheckSum !== x.questions.map(y => y.name).join("~"))
-
-  return changedQuizzes.length;
-}
-
-detailsAnimationState = "leftPosition";
-detailsFromLeftAnimationComplete(){
-
-  this.detailsAnimationState = "leftPosition";
-}
-
-reloadQuizzes(){
-  this.selectedQuiz= undefined;
-  this.loadQuizzes();
-  console.log("quizzes");
-  
-}
-
-  learningPromises() {"numberOfChangedQuizzes || true"
-    
-    console.log("learningPromises()");
-
-    let x = this.quizSvc.getNumberOfQuizzes(true);
-    console.log(x);
-
-    x.then(
-      n => console.log(n)
-    ).catch(
-      e => console.log(e)
-    );
-
-    let y = this.quizSvc.getNumberOfQuizzes(false);
-    console.log(y);
-
-    y.then(
-      n => console.log(n)
-    ).catch(
-      e => console.log(e)
-    );
-}
-  
-
-  async learningPromisesWithAsyncAwait() {
-
-    console.log("learningPromisesWithAsyncAwait");
-    try {
-    let x = await this.quizSvc.getNumberOfQuizzes(true);
-    console.log(x);
-
-    let y = await this.quizSvc.getNumberOfQuizzes(false);
-    console.log(y);
-    } 
-    catch (e) {
-      console.log(e);
-    }
-  }
-
-  async learningPromisesWithAwaitAll() {
-
-    console.log("learningPromisesWithAwaitAll");
-
-    try {
-    let x = await this.quizSvc.getNumberOfQuizzes(true);
-    console.log(x);
-
-    let y = await this.quizSvc.getNumberOfQuizzes(true);
-    console.log(y);
-
-    let results = await Promise.all([x, y]);
-    console.log(results);
-    } 
-    catch (e) {
-      console.log(e);
-    }
-  }
-
+  detailsAnimationState = 'leftPosition';
 
   title = 'quiz-editor';
 
-  dumb: string = "foo123";
+  dumb = 'foo123';
 
   titleColorDanger = this.dumb === 'foo' ? true : false;
   titleBackgroundColorDanger = false;
 
   headingTwoBackgroundColor = this.dumb === 'foo' ? 'Red' : 'Blue';
 
-  imageWidth: number = 100;
-  //imageWidth = '100px';
+  imageWidth = 100;
+
+  ngOnInit() {
+    // console.log(this.quizSvc.getQuizzes());
+    this.loadQuizzes();
+  }
+
+  private loadQuizzes() {
+    this.quizSvc.getQuizzes().subscribe(
+      // (data) => {
+      //   console.log(data);
+      //   this.quizzes = data
+      // }
+      data => this.quizzes = (<QuizDisplay[]>data).map(x => ({
+        ...x,
+        originalName: x.name,
+        naiveQuestionsChecksum: x.questions.map(y => y.name).join('~')
+      })), error => this.wasErrorLoadingQuizzes = true);
+  }
+
+  reloadQuizzes() {
+    //console.log('Foo');
+    this.selectedQuiz = undefined;
+    this.loadQuizzes();
+  }
+
+  selectQuiz(q) {
+    // console.log(q);
+    this.selectedQuiz = q;
+    this.detailsAnimationState = 'finalPosition';
+  }
+
+  saveQuizzes() {
+    //console.log('saveQuizzes()');
+    const changedQuizzes = [];
+
+    this.quizSvc.saveQuizzes(changedQuizzes).subscribe(
+      data => console.log(data)
+      , error => console.log(error)
+    );
+
+  }
+
+  addNewQuiz() {
+    const q = {
+      name: 'New Untitled Quiz'
+      , originalName: 'New Untitled Quiz'
+      , numberQuestions: 0
+      , questions: []
+      , naiveQuestionsChecksum: ''
+    };
+
+    this.quizzes = [...this.quizzes, q];
+    this.selectQuiz(q);
+  }
+
+  addNewQuestion(selectedQuiz) {
+    selectedQuiz.questions = [...selectedQuiz.questions, {'name': 'New untitled question'}];
+    selectedQuiz.numberQuestions = selectedQuiz.questions.length;
+
+    console.log(this.numberOfChangedQuizzes);
+    // this.numberOfChangedQuizzes = 75;
+
+    console.log(this.selectedQuiz.naiveQuestionsChecksum);
+  }
+
+  removeQuestion(selectedQuiz, selectedQuestion) {
+    selectedQuiz.questions = selectedQuiz.questions.filter(n => n !== selectedQuestion);
+    selectedQuiz.numberQuestions = selectedQuiz.questions.length;
+  }
+
+  detailsFromLeftAnimationComplete() {
+    this.detailsAnimationState = 'leftPosition';
+  }
+
+  // Learning promises functions below...
+
+
+  learningPromises() {
+    console.log('learningPromises()');
+
+    const x = this.quizSvc.getNumberOfQuizzes(true);
+    console.log(x);
+
+    x.then(
+      n => {
+        console.log(n);
+
+        const y = this.quizSvc.getNumberOfQuizzes(false);
+        console.log(y);
+
+        y.then(
+          n2 => console.log(n2)
+        ).catch(
+          e => console.log(e)
+        );
+      }
+
+    ).catch(
+      e => console.log(e)
+    );
+
+
+  }
+
+  async learningPromisesWithAsyncAwait() {
+    console.log('learningPromisesWithAsyncAwait()');
+
+    try {
+      const x = await this.quizSvc.getNumberOfQuizzes(true);
+      console.log(x);
+
+      const y = await this.quizSvc.getNumberOfQuizzes(false);
+      console.log(y);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async learningPromisesWithAwaitAll() {
+    console.log('learningPromisesWithAsyncAwait()');
+
+    try {
+      const x = this.quizSvc.getNumberOfQuizzes(true);
+      console.log(x);
+
+      const y = this.quizSvc.getNumberOfQuizzes(true);
+      console.log(y);
+
+      // let results = await Promise.race([x, y]);
+      const results = await Promise.all([x, y]);
+      console.log(results);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  // imageWidth = '100px';
 
   increaseImageWidth = () => this.imageWidth *= 1.5;
 
