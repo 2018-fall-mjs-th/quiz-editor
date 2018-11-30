@@ -116,6 +116,15 @@ export class AppComponent implements OnInit {
     this.detailsAnimationState = 'finalPosition';
   }
 
+  saveQuizzes() {
+    //console.log("save quizzes");
+    const changedQuizzes = [];
+    this.quizSvc.saveQuizzes(changedQuizzes).subscribe(
+      data => console.log("Data: " + data)
+      , error => console.log("Error: " + error)
+    );
+  }
+
   addNewQuiz() {
     const q = {
       name: 'New Untitled Quiz'
