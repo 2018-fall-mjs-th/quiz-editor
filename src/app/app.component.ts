@@ -112,9 +112,17 @@ export class AppComponent implements OnInit {
 
 
   selectQuiz(q) {
-    // console.log(q);
     this.selectedQuiz = q;
     this.detailsAnimationState = 'finalPosition';
+  }
+
+  saveQuizzes() {
+    const changedQuizzes = [];
+
+    this.quizSvc.saveQuizzes(changedQuizzes).subscribe(
+      data => console.log(data)
+      , error => console.log(error)
+    );
   }
 
   addNewQuiz() {
