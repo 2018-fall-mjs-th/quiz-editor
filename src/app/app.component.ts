@@ -124,7 +124,16 @@ export class AppComponent implements OnInit {
         && (x.name !== x.originalName
         || x.naiveQuestionsChecksum !== x.questions.map(y => y.name).join('~'))
       );
-    this.quizSvc.saveQuizzes(changedQuizzes).subscribe(
+
+    const newQuizzes = this.quizzes
+      .filter(x => x.originalName === 'New Untitled Quiz')
+      .map(x => ({
+        quizName: x.name
+        , quizQuestions: x.questions
+      })
+
+      );
+    this.quizSvc.saveQuizzes(changedQuizzes, newQuizzes).subscribe(
       data => console.log("Data: " + data)
       , error => console.log("Error: " + error)
     );
