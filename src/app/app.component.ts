@@ -8,6 +8,7 @@ import {
   , keyframes
 } from '@angular/animations';
 import { LifecycleHooks } from '@angular/compiler/src/lifecycle_reflector';
+import { unsupported } from '@angular/compiler/src/render3/view/util';
 
 interface QuizDisplay {
 
@@ -22,6 +23,12 @@ interface QuizDisplay {
 
 interface QuestionDisplay {
   name: string;
+}
+
+interface newQuiz {
+  quizName: string;
+  quizQuestions: QuestionDisplay[];
+
 }
 
 @Component({
@@ -125,7 +132,30 @@ export class AppComponent implements OnInit {
       || x.naiveQuestionsChecksum !== x.questions.map(y => y.name).join('~'))
     );
 
-    this.quizSvc.saveQuizzes(changedQuizzes).subscribe(
+    console.log("changedQuizzes" + changedQuizzes);
+
+    
+    const unsavedQuizzes =  this.quizzes.filter(x =>
+      x.originalName === "New Untitled Quiz"
+      && (x.name !== x.originalName
+        //|| x.naiveQuestionsChecksum !== x.questions.map(y => y.name).join('~')
+        )
+    );
+
+    console.log("unsaves" + JSON.stringify(unsavedQuizzes));
+    
+    
+     const  newQuizzes = (unsavedQuizzes).map(x => ({
+      ...x,
+      quizName: x.name,
+      quizQuestions: x.questions}));
+    
+      //newQuizzes : newQuiz[];
+
+
+      console.log("new" + JSON.stringify(newQuizzes));
+      
+    this.quizSvc.saveQuizzes(changedQuizzes, newQuizzes).subscribe(
       data => console.log(data)
       , error => console.log(error)
     );
