@@ -56,10 +56,6 @@ export class AppComponent implements OnInit {
   constructor (private quizSvc: QuizService) {
   }
 
-
-  // numberOfChangedQuizzes = 2;
-
-  // TS readonly property...
   get numberOfChangedQuizzes() {
     const changedQuizzes = this.quizzes.filter(x =>
       x.name !== x.originalName
@@ -78,7 +74,7 @@ export class AppComponent implements OnInit {
 
   title = 'quiz-editor';
 
-  dumb = 'foo123';
+  dumb = 'foo1234';
 
   titleColorDanger = this.dumb === 'foo' ? true : false;
   titleBackgroundColorDanger = false;
@@ -88,16 +84,11 @@ export class AppComponent implements OnInit {
   imageWidth = 100;
 
   ngOnInit() {
-    // console.log(this.quizSvc.getQuizzes());
     this.loadQuizzes();
   }
 
   private loadQuizzes() {
     this.quizSvc.getQuizzes().subscribe(
-      // (data) => {
-      //   console.log(data);
-      //   this.quizzes = data
-      // }
       data => this.quizzes = (<QuizDisplay[]>data).map(x => ({
         ...x,
         originalName: x.name,
@@ -106,27 +97,31 @@ export class AppComponent implements OnInit {
   }
 
   reloadQuizzes() {
-    //console.log('Foo');
     this.selectedQuiz = undefined;
     this.loadQuizzes();
   }
 
   selectQuiz(q) {
-    // console.log(q);
     this.selectedQuiz = q;
     this.detailsAnimationState = 'finalPosition';
   }
 
   saveQuizzes() {
-    //console.log('saveQuizzes()');
     const changedQuizzes = this.quizzes
-    .filter(x =>
-      x.originalName !== 'New Untitled Quiz'
-      && (x.name !== x.originalName
-      || x.naiveQuestionsChecksum !== x.questions.map(y => y.name).join('~'))
-    );      
+      .filter(x =>
+        x.originalName !== 'New Untitled Quiz'
+        && (x.name !== x.originalName
+        || x.naiveQuestionsChecksum !== x.questions.map(y => y.name).join('~'))
+      );
+    const newQuizzes = this.quizzes
+      .filter(x => x.originalName === 'New Untitled Quiz')
+      .map(x => ({
+          quizName: x.name
+          , quizQuestions: x.questions.map( y => y.name)
+        })
+      );
 
-    this.quizSvc.saveQuizzes(changedQuizzes).subscribe(
+    this.quizSvc.saveQuizzes(changedQuizzes, newQuizzes).subscribe(
       data => console.log(data)
       , error => console.log(error)
     );
@@ -151,8 +146,6 @@ export class AppComponent implements OnInit {
     selectedQuiz.numberQuestions = selectedQuiz.questions.length;
 
     console.log(this.numberOfChangedQuizzes);
-    // this.numberOfChangedQuizzes = 75;
-
     console.log(this.selectedQuiz.naiveQuestionsChecksum);
   }
 
@@ -164,10 +157,6 @@ export class AppComponent implements OnInit {
   detailsFromLeftAnimationComplete() {
     this.detailsAnimationState = 'leftPosition';
   }
-
-  // Learning promises functions below...
-
-
   learningPromises() {
     console.log('learningPromises()');
 
@@ -219,15 +208,12 @@ export class AppComponent implements OnInit {
       const y = this.quizSvc.getNumberOfQuizzes(true);
       console.log(y);
 
-      // let results = await Promise.race([x, y]);
       const results = await Promise.all([x, y]);
       console.log(results);
     } catch (e) {
       console.log(e);
     }
   }
-  // imageWidth = '100px';
-
   increaseImageWidth = () => this.imageWidth *= 1.5;
 
 
