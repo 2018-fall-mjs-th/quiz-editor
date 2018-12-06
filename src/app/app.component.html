@@ -56,7 +56,13 @@
                         </div>
                     </div>
             </div>
-            <div>
+            <div *ngIf="!selectedQuiz">
+                <div class="card">
+                    <h2 class="card-header">Quiz master editor!</h2>
+                    <div class="card-body">
+                        <p class="card-text">Select a quiz on the left, or new quiz</p>
+                    </div>
+                </div>
 
             </div>
       
