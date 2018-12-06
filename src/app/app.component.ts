@@ -148,15 +148,21 @@ export class AppComponent {
 
   saveQuizzes() {
     const changedQuizzes = this.quizzes
-      .filter(
-        x => x.name !== x.originalName
-        && (x.originalName !== "New Quiz"
-        || x.naiveQuestionsCheckSum !== x.questions.map(y => y.name).join("~"))
-      );
+    //   .filter(x => 
+    //   x.originalName !== "New Untitled Quiz"
+    //   && (x.name !== x.originalName
+    //   || x.naiveQuestionsCheckSum !== x.questions.map(y => y.name).join('~'))
+    // ); 
 
-    this.quizSvc.saveQuizzes(changedQuizzes).subscribe(
+    const newQuizzes  = this.quizzes
+      .filter(x => x.originalName === "New Quiz")
+      .map(x => ({"quizName": x.name 
+      , "quizQuestions": x.questions
+      .map(y=>y.name)}));
+
+    this.quizSvc.saveQuizzes(changedQuizzes, newQuizzes).subscribe(
       data => console.log(data)
-      , error => data => console.log(error)
+      , error => console.log(error)
     );
   }
 
