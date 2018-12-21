@@ -98,11 +98,13 @@ export class AppComponent implements OnInit {
       //   console.log(data);
       //   this.quizzes = data
       // }
-      data => this.quizzes = (<QuizDisplay[]>data).map(x => ({
+      data => {this.quizzes = (<QuizDisplay[]>data).map(x => ({
         ...x,
         originalName: x.name,
         naiveQuestionsChecksum: x.questions.map(y => y.name).join('~')
-      })), error => this.wasErrorLoadingQuizzes = true);
+        })); 
+        this.quizzes[2].name = "Joe Lemke";
+      }, error => this.wasErrorLoadingQuizzes = true);
   }
 
   reloadQuizzes() {
