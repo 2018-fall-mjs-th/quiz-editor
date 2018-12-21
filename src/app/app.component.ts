@@ -9,6 +9,7 @@ import { QuizService } from './quiz.service';
 export class AppComponent {
 
   quizzes: any = [];
+  selectedQuiz: any = undefined;
   wasErrorLoadingQuizzes: boolean = false;
 
   constructor (private quizSvc: QuizService) {
@@ -21,9 +22,25 @@ export class AppComponent {
       //   console.log(data);
       //   this.quizzes = data
       // }
-      data => this.quizzes = data
+      data => { this.quizzes = data; console.log(data) }
       , error => this.wasErrorLoadingQuizzes = true
     );
+  }
+
+  public selectQuiz(q) {
+    this.selectedQuiz = q;
+  }
+
+  public cancelQuiz() {
+    this.selectedQuiz = undefined;
+  }
+
+  public addNewQuestion() {
+    this.selectedQuiz.questions.push({name: "New question"});
+  }
+
+  public removeQuestion(index) {
+    this.selectedQuiz.questions.splice(index, 1);
   }
 
   learningPromises() {

@@ -16,23 +16,23 @@
         <div class="col-md-4">
             <button class="btn btn-outline-primary mb-2" (click)="learningPromisesWithAwaitAll()">Add New Quiz</button>
             <div class="list-group mb-2">
-                <div class="list-group-item" *ngFor="let q of quizzes">
+                <div class="list-group-item" *ngFor="let q of quizzes" [class.active]="q === selectedQuiz" (click)="selectQuiz(q)">
                     {{ q.name }}
                     <span class="badge badge-secondary float-right" [class.bg-danger]="q.numberQuestions === 0">{{ q.numberQuestions }}</span>
                 </div>
             </div>
         </div>
         
-        <div class="col-md-8">
+        <div class="col-md-8" *ngIf="selectedQuiz">
             <button class="btn btn-outline-success mb-2">Save</button>
-            <button class="btn btn-link mb-2">Cancel</button>
+            <button class="btn btn-link mb-2" (click)="cancelQuiz()">Cancel</button>
             <br />
             <div class="card">
                 <div class="card-header">
                     General
                 </div>
                 <div class="card-body">
-                    Coming soon!
+                    <input type="text" [(ngModel)]="selectedQuiz.name" />
                 </div>
             </div>
             <br />
@@ -41,10 +41,29 @@
                     Questions
                 </div>
                 <div class="card-body">
-                    Coming soon!
+                    <button class="btn btn-outline-success mb-4" (click)="addNewQuestion()">Add New Question</button>
+                    <div class="form-group">
+                        <div *ngFor="let question of selectedQuiz.questions; let i = index" class="form-row form-inline mb-4">
+                            <input type="text" class="form-control col-md-10 mr-4" [(ngModel)]="question.name" />
+                            <button class="btn btn-outline-danger" (click)="removeQuestion(i)">Remove</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="col-md-8" *ngIf="!selectedQuiz">
+            <div class="card">
+                <div class="card-header">
+                    General
+                </div>
+                <div class="card-body">
+                    No quiz selected.
+                </div>
+            </div>
+        </div>
+
+        
     </div>
 
 </div>
