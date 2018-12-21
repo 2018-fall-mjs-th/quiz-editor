@@ -125,7 +125,7 @@ export class AppComponent implements OnInit {
         || aQuiz.naiveQuestionsChecksum !== aQuiz.questions.map(y => y.name).join('~'))
     );
 
-    /*
+    
     const newQuizzes = [
       { "quizName": "Test"
         , "quizQuestions": [
@@ -133,7 +133,7 @@ export class AppComponent implements OnInit {
             , "qTwo"
         ]
     }];
-    */
+    
 
 
 
