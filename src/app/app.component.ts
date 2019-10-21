@@ -132,6 +132,7 @@ export class AppComponent {
   // Learning promises functions below...
 
 
+
   
 
   learningPromises() {
